@@ -47,6 +47,9 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -70,7 +73,7 @@
     </ProjectReference>
     <ProjectReference Include="..\FireTower.Mailgun\FireTower.Mailgun.csproj">
       <Project>{490DD21F-A2EA-4C01-8A13-458428499EDE}</Project>
-      <Name>Replay20.Mailgun</Name>
+      <Name>FireTower.Mailgun</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

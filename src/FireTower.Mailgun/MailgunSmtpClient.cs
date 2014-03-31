@@ -11,15 +11,14 @@ namespace FireTower.Mailgun
 
         public MailgunSmtpClient()
         {
-            throw new NotImplementedException("Please add mailgun account info.");
-            _client = new MailgunClient("app17153.mailgun.org", "key-29d7lk4lmkbm45dm37s1mrsczzkcs0d1");
+            _client = new MailgunClient("app93dde6e95ec447a9b43da69fae655152.mailgun.org", "key-9-66abzuc7opdzxcsc0d9mdj6jdnig51");
         }
 
         #region ISmtpClient Members
 
         public void Send(string emailAddress, string subject, string body)
         {
-            var message = new MailMessage("FireTower <no-reply@FireTower.com>", emailAddress, subject, body);
+            var message = new MailMessage("FireTower <no-reply@firetower.com>", emailAddress, subject, body);
             _client.SendMail(message);
         }
 

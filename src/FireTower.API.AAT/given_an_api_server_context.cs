@@ -15,7 +15,7 @@ namespace FireTower.API.AAT
         {
             if (typeof (T) == typeof (DeployedToQA))
             {
-                throw new NotImplementedException("Please add thr url for the qa server.");
+                return "https://firetowerapidev.apphb.com";
             }
             if (typeof (T) == typeof (DeployedToQaWorker))
             {
