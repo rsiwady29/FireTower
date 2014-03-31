@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using NHibernate;
+using NHibernate.Linq;
+using FireTower.Domain;
+
+namespace FireTower.Data
+{
+    public class ReadOnlyRepository : IReadOnlyRepository
+    {
+        readonly ISession _session;
+
+        public ReadOnlyRepository(ISession session)
+        {
+            _session = session;
+        }
+
+        #region IRepository Members
+
+        public T First<T>(Expression<Func<T, bool>> query) where T:IEntity
+        {
+            T item = _session.Query<T>().FirstOrDefault(query);
+
+            if (item == null)
+            {
+                throw new ItemNotFoundException<T>();
+            }
+
+            return item;
+        }
+
+        public T GetById<T>(Guid id) where T : IEntity
+        {
+            var item = _session.Get<T>(id);
+
+            if (item == null)
+            {
+                throw new ItemNotFoundException<T>(id);
+            }
+
+            return item;
+        }
+
+        public IEnumerable<T> GetAll<T>() where T:IEntity
+        {
+            var items = _session.Query<T>();
+            return items;
+        }
+
+        public IQueryable<T> Query<T>(Expression<Func<T, bool>> expression) where T : IEntity
+        {
+            var session = _session;
+            return session.Query<T>().Where(expression);
+        }
+
+        #endregion
+    }
+}
