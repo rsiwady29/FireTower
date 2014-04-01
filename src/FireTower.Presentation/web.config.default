@@ -11,9 +11,15 @@
   </system.web>
   <appSettings>
     <add key="Roles" value="worker" />
+    <add key="Environment" value="local"/>
     <add key="current_session_context_class" value="web" />
-    <add key="PasswordExpirationDays" value="10" />    
-  <add key="blacksmith.projectId" value="your_project_id" /><add key="blacksmith.token" value="your_oauth_token" /><add key="blacksmith.optional.fixed.queuename" value="" /></appSettings>
+    <add key="PasswordExpirationDays" value="10" />
+    <add key="blacksmith.projectId" value="your_project_id" /><add key="blacksmith.token" value="your_oauth_token" /><add key="blacksmith.optional.fixed.queuename" value="" />
+  </appSettings>
+  <connectionStrings>
+    <add name="local" connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=FireTower;integrated security=true" providerName="System.Data.SqlClient" />
+    <add name="remote" connectionString="Server=d74a82c5-7b26-4e18-b80e-a2ff01357bd3.sqlserver.sequelizer.com;Database=dbd74a82c57b264e18b80ea2ff01357bd3;User ID=gjcjuajzyluzrjdz;Password=wtRoeis77HjpaPzYpKxMoaHQzjmjCvFZZv2WTHygegynXi3ra7Qe6DPvSbW35hBJ;" providerName="System.Data.SqlClient" />
+  </connectionStrings>
   <system.webServer>
     <validation validateIntegratedModeConfiguration="false" />
     <httpErrors existingResponse="PassThrough" />

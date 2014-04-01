@@ -105,7 +105,10 @@
     <Compile Include="UserSeeder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.config.default">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -122,8 +125,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>IF NOT EXIST "$(ProjectDir)app.config" COPY "$(ProjectDir)app.config.default" "$(ProjectDir)app.config"</PreBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
