@@ -60,7 +60,7 @@ namespace FireTower.Domain.Specs
                 };
 
         Because of =
-            () => _handler.Handle(_command);
+            () => _handler.Handle(new VisitorSession(), _command);
 
         It should_delete_the_verification =
             () => Mock.Get(_writeableRepository).Verify(x => x.Delete<Verification>(_verificationId));

@@ -29,7 +29,7 @@ namespace FireTower.Api.Specs.Users
         It should_not_mark_the_account_as_verified =
             () =>
             Mock.Get(CommandDispatcher).Verify(
-                x => x.Dispatch(WithExpected.Object(new ActivateUser(TestEmail))), Times.Never());
+                x => x.Dispatch(VisitorSession, WithExpected.Object(new ActivateUser(TestEmail))), Times.Never());
 
         It should_return_an_unauthorized_response =
             () => _result.StatusCode.ShouldEqual(HttpStatusCode.Unauthorized);

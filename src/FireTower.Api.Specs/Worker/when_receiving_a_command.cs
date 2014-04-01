@@ -29,7 +29,8 @@ namespace FireTower.Api.Specs.Worker
             () => _result = Browser.PostSecureJson("/work", _command);
 
         It should_process_the_work_item =
-            () => Mock.Get(CommandDispatcher).Verify(x => x.Dispatch(_command));
+            () => Mock.Get(CommandDispatcher).Verify(x => x.Dispatch(UserSession, _command));
+
 
         It should_return_a_successful_response =
             () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);

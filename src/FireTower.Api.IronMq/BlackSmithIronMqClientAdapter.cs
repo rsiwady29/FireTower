@@ -1,40 +1,63 @@
+using System;
+using System.Net;
 using Blacksmith.Core;
+using FireTower.Domain;
 using Newtonsoft.Json;
+using RestSharp;
 
 namespace FireTower.IronMq
 {
-    public class BlackSmithIronMqClientAdapter : IIronMqPusher
+    public class RestSharpIronMqClientAdapter : IIronMqPusher
     {
-        const string DevToken = "RchaMp7bPTv2VZ_tptENRwzGw7g";
-        const string ProjectId = "531779c7cf0dd7000900000e";
-        readonly Client _client;
+        const string DevToken = "Gi_V3JqWFJ6u4kghrrTs46sVAWk";
+        const string ProjectId = "533b4de5669fbf000900008c";
+        readonly RestClient _client;
         readonly string _queueName;
 
-        public BlackSmithIronMqClientAdapter(string queueName)
+        public RestSharpIronMqClientAdapter(string queueName)
         {
             _queueName = queueName;
-            _client = new Client(ProjectId, DevToken);
-
-            ConfigurationWrapper.JsonSettings =
-                new JsonSerializerSettings
-                    {
-                        TypeNameHandling = TypeNameHandling.All
-                    };
+            _client = new RestClient(string.Format("https://mq-aws-us-east-1.iron.io/1/projects/{0}", ProjectId));
         }
 
         #region IIronMqPusher Members
 
-        public void Push<T>(T command) where T : class
+        public void Push(Guid userSessionToken, object command)
         {
-            Queue<T>().Push(command);
+            IRestRequest request = GetRequest(userSessionToken, command);
+            IRestResponse response = _client.Execute(request);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Push into IronMQ failed. " + response.StatusCode);
+            }
+            if (response.ErrorException != null)
+            {
+                throw response.ErrorException;
+            }
         }
 
         #endregion
 
-        IQueueWrapper<T> Queue<T>() where T : class
+        RestRequest GetRequest(Guid userSessionId, object command)
         {
-            IQueueWrapper<T> queue = _client.Queue<T>(_queueName);
-            return queue;
+            string resource = string.Format("/queues/{0}/messages", _queueName);
+            var restRequest = new RestRequest(resource, Method.POST) { RequestFormat = DataFormat.Json };
+            restRequest.AddHeader("Authorization", "OAuth " + DevToken);
+            var type = command.GetType();
+            dynamic obj = command.ToDynamic();
+            obj.Token = userSessionId;
+            obj.Type = type.AssemblyQualifiedName;
+            var serializeObject = (string)JsonConvert.SerializeObject(obj);
+            var message = new
+            {
+                messages = new[]
+                                                 {
+                                                     new {body = serializeObject}
+                                                 }
+            };
+            restRequest.AddBody(message);
+            return restRequest;
         }
     }
 }

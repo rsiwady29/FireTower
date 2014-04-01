@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using RestSharp;
@@ -66,13 +67,18 @@ namespace AcklenAvenue.Testing.AAT
         static IRestResponse<T> ExecuteRequest<T>(RestClient browser, RestRequest request) where T : new()
         {
             IRestResponse<T> restResponse = browser.Execute<T>(request);
+            var corsHeader = restResponse.Headers.Where(x => x.Name == "Access-Control-Allow-Origin");
+            if (!corsHeader.Any() && restResponse.ErrorException == null)
+            {
+                throw new AATCORSException();
+            }
             if (restResponse.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new AATRestResponseException(HttpStatusCode.Unauthorized);
+                throw new AATUnauthorizedException();
             }
-            if (restResponse.StatusCode == HttpStatusCode.Forbidden)
+            if (restResponse.StatusCode != HttpStatusCode.OK)
             {
-                throw new AATRestResponseException(HttpStatusCode.Forbidden);
+                throw new AATRestResponseException(restResponse, request);
             }
             if (restResponse.ErrorException != null)
             {

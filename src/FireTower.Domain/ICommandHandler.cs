@@ -5,7 +5,7 @@ namespace FireTower.Domain
     public interface ICommandHandler
     {
         Type CommandType { get; }
-        void Handle(object command);
+        void Handle(IUserSession userSessionIssuingCommand, object command);
         event DomainEvent NotifyObservers;
     }
 }

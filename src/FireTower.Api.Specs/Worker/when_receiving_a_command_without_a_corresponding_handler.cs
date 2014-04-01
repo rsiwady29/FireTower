@@ -25,7 +25,7 @@ namespace FireTower.Api.Specs.Worker
 
                     Mock.Get(CommandDeserializer).Setup(x => x.Deserialize(Moq.It.IsAny<string>())).Returns(_command);
 
-                    Mock.Get(CommandDispatcher).Setup(x => x.Dispatch(_command)).Throws(
+                    Mock.Get(CommandDispatcher).Setup(x => x.Dispatch(UserSession, _command)).Throws(
                         new NoAvailableHandlerException(typeof (TestCommand)));
                 };
 

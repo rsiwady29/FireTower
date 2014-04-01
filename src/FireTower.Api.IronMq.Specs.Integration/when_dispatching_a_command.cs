@@ -1,7 +1,8 @@
-﻿using AcklenAvenue.Testing.Nancy;
+﻿using System;
+using AcklenAvenue.Testing.Nancy;
+using FireTower.Domain;
 using Machine.Specifications;
 using Moq;
-using FireTower.Domain;
 using It = Machine.Specifications.It;
 
 namespace FireTower.IronMq.Specs.Integration
@@ -11,6 +12,8 @@ namespace FireTower.IronMq.Specs.Integration
         static ICommandDispatcher _dispatcher;
         static IIronMqPusher _client;
         static object _command;
+        static IUserSession _userSession;
+        static readonly Guid _userSessionToken = Guid.NewGuid();
 
         Establish context =
             () =>
@@ -22,12 +25,15 @@ namespace FireTower.IronMq.Specs.Integration
                                    {
                                        Message = "cool!"
                                    };
+
+                    _userSession = Mock.Of<IUserSession>();
+                    Mock.Get(_userSession).Setup(x => x.Id).Returns(_userSessionToken);
                 };
 
         Because of =
-            () => _dispatcher.Dispatch(_command);
+            () => _dispatcher.Dispatch(_userSession, _command);
 
         It should_push_command_to_the_queue_as_a_message =
-            () => Mock.Get(_client).Verify(x => x.Push(_command));
+            () => Mock.Get(_client).Verify(x => x.Push(_userSessionToken, _command));
     }
 }
