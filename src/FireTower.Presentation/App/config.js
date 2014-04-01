@@ -3,10 +3,7 @@
 app.config(function ($routeProvider) {
     $routeProvider.
         when('/', {
-            templateUrl: 'App/Views/index.html',
-            controller: ''
-        })
-        otherwise({
-            templateUrl: ''
+            templateUrl: 'App/Views/login.html',
+            controller: 'LoginController'
         });
 });

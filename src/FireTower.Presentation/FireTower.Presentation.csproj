@@ -102,9 +102,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\config.js" />
+    <Content Include="App\controller\login.js" />
     <Content Include="App\js\angular\angular-route.js" />
     <Content Include="App\js\angular\angular.js" />
-    <Content Include="App\views\index.html" />
+    <Content Include="App\views\login.html" />
+    <Content Include="index.html" />
     <Content Include="EmailTemplates\verificationEmail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -152,7 +154,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\controller\" />
     <Folder Include="App\directives\" />
     <Folder Include="App\services\" />
     <Folder Include="Properties\" />

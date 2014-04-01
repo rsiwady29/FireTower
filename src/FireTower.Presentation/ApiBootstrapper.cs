@@ -6,6 +6,7 @@ using Nancy.Bootstrapper;
 using FireTower.Domain.Exceptions;
 using FireTower.Infrastructure;
 using FireTower.Presentation.Modules;
+using Nancy.Conventions;
 
 namespace FireTower.Presentation
 {
@@ -91,6 +92,13 @@ namespace FireTower.Presentation
                                                                       "Access-Control-Allow-Methods",
                                                                       "POST,GET,DELETE,PUT,OPTIONS");
                                                               });
+        }
+
+        protected override void ConfigureConventions(NancyConventions conventions)
+        {
+           base.ConfigureConventions(conventions);
+ 
+            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("App"));
         }
     }
 }
