@@ -1,5 +1,5 @@
 MSBUILD_PATH = "C:/Windows/Microsoft.NET/Framework/v4.0.30319/msbuild.exe"
-MSPEC_PATH = "lib/Machine.Specifications.0.7.0/tools/mspec-clr4.exe"
+MSPEC_PATH = "src/packages/Machine.Specifications.0.7.0/tools/mspec-clr4.exe"
 MSTEST_PATH = File.join(ENV['VS110COMNTOOLS'], '..', 'IDE', 'mstest.exe')
 BUILD_PATH = File.expand_path('build')
 DATABASE_DEPLOYMENT_PATH = File.expand_path('database_deployment')
@@ -52,9 +52,11 @@ task :specs do
     
     # Run the tests and give a message on failure
     # But we don't want to hear the chatter, so dump the console output to a file
+	
     sh "#{MSPEC_PATH} #{HTML_SWITCH} #{XML_SWITCH} #{TEST_DLL_LIST}"
     result = $?.to_i
     
+	puts 'error aqui?'
     raise "One or more tests failed.  Please see results in #{REPORTS_PATH}\\index.html" unless result == 0
 
     # If we get here, all's good
