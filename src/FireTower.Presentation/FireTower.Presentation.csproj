@@ -101,6 +101,12 @@
       <Link>AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="App\config.js" />
+    <Content Include="App\controller\login.js" />
+    <Content Include="App\js\angular\angular-route.js" />
+    <Content Include="App\js\angular\angular.js" />
+    <Content Include="App\views\login.html" />
+    <Content Include="index.html" />
     <Content Include="EmailTemplates\verificationEmail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -123,6 +129,7 @@
     <Compile Include="ICommandDeserializer.cs" />
     <Compile Include="InvalidCommandObjectException.cs" />
     <Compile Include="JsonCommandDeserializer.cs" />
+    <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
     <Compile Include="Modules\VerificationModule.cs" />
     <Compile Include="Modules\WorkModule.cs" />
@@ -147,6 +154,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\directives\" />
+    <Folder Include="App\services\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
