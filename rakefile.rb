@@ -56,7 +56,7 @@ task :specs do
     sh "#{MSPEC_PATH} #{HTML_SWITCH} #{XML_SWITCH} #{TEST_DLL_LIST}"
     result = $?.to_i
     
-	puts 'error aqui?'
+
     raise "One or more tests failed.  Please see results in #{REPORTS_PATH}\\index.html" unless result == 0
 
     # If we get here, all's good
