@@ -1,5 +1,31 @@
 ﻿<ion-view title="Reporte">
   <ion-content class="has-header">
-    <h1> pendiente... </h1>
+      <div class="list card">
+
+          <div class="item item-avatar" >
+              <img  src="{{reporte.photo}}">
+              <h2>{{reporte.title}}</h2>
+              <p>Hoy a las 12:00pm</p>
+          </div>
+
+          <div class="item item-body">
+              <img class="full-image card-image" src="{{reporte.photo}}">
+              
+              <p>
+                 <google-map center="map.center" zoom="map.zoom"></google-map> 
+              </p>
+              <p>
+                  {{reporte.description}}
+              </p>
+              
+               <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" href="#">
+                  <i class="icon ion-close-circled"></i>
+                  No Valido
+                </a>                
+              </div>
+          </div>
+
+      </div>
   </ion-content>
 </ion-view>

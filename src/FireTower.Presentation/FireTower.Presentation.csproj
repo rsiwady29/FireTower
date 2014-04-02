@@ -109,6 +109,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App\config.js" />
+    <Content Include="App\controller\reporte.js" />
     <Content Include="App\controller\reportes.js" />
     <Content Include="App\controller\login.js" />
     <Content Include="App\js\angular\angular-route.js" />
@@ -121,7 +122,9 @@
     <Content Include="App\views\inicio.html" />
     <Content Include="Content\css\ionic.css" />
     <Content Include="Content\css\ionic.min.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\js\angular-google-maps.min.js" />
     <Content Include="Content\js\angular-ui\angular-ui-router.js" />
     <Content Include="Content\js\angular-ui\angular-ui-router.min.js" />
     <Content Include="Content\js\angular\angular-animate.js" />
@@ -138,6 +141,7 @@
     <Content Include="Content\js\ionic.bundle.min.js" />
     <Content Include="Content\js\ionic.js" />
     <Content Include="Content\js\ionic.min.js" />
+    <Content Include="Content\js\underscore-min.js" />
     <Content Include="index.html" />
     <Content Include="EmailTemplates\verificationEmail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
