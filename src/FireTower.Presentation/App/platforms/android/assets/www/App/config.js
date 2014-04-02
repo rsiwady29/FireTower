@@ -1,4 +1,4 @@
-angular.module('firetower', ['ionic', 'google-maps'])
+﻿angular.module('firetower', ['ionic', 'starter.controllers', 'facebook', 'ngCookies', 'google-maps'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -8,17 +8,18 @@ angular.module('firetower', ['ionic', 'google-maps'])
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(['FacebookProvider', '$stateProvider', '$urlRouterProvider', function (FacebookProvider, $stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('app', {
             url: "/app",
             templateUrl: "App/views/menu.html"
         })
         .state('app.inicio', {
-            url: "/inicio",
+            url: "/",
             views: {
                 'menuContent': {
-                    templateUrl: "App/views/inicio.html"
+                    templateUrl: "App/views/login.html",
+                    controller: "LoginController"
                 }
             }
         })
@@ -35,11 +36,17 @@ angular.module('firetower', ['ionic', 'google-maps'])
             url: "/reporte/:reporteId",
             views: {
                 'menuContent': {
-                    templateUrl: "App/views/reporte.html",
-                    controller: 'ReporteController'
+                    templateUrl: "App/views/reporte.html"
                 }
             }
-        });
+        })
+        .state('otherwise', {
+            url: '*path',
+            templateUrl: 'App/views/404.html',
+            controller: 'ErrorController'
+        });;
      
-    $urlRouterProvider.otherwise('/app/inicio');
-});
+    var myAppId = '294203754077185';
+
+    FacebookProvider.init(myAppId);
+}]);

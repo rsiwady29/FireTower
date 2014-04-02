@@ -38,7 +38,10 @@
              */
             $scope.$apply(function () {
                 user.setUser(response);
+                
             });
+            //redirect to home
+            $location.path('/app/reportes');
 
         });
     };
@@ -60,7 +63,7 @@
                 //insert into database
                 
                 //redirect to home
-                $location.path("/home");
+                $location.path('/app/reportes');
             });
         } else {
             $scope.$apply(function () {
@@ -73,6 +76,7 @@
                 }, 2000);
             });
             //redirect to login
+            
             $location.path("/");
         }
 
