@@ -12,28 +12,30 @@ namespace FireTower.API.AAT
     {
         static readonly Random Rnd = new Random();
         static IRestResponse _result;
-        static string _email;
-        static string _password;
+        static long _facebookId;
 
         Establish context =
             () =>
                 {
-                    _email = Rnd.Next(99999) + "@test.com";
-                    _password = "some password";
+                    _facebookId = 1817134138;
                 };
 
         Because of =
             () =>
-            _result = Client.Post("/user", new NewUserRequest
-                                               {
-                                                   Email = _email,
-                                                   Password = _password,
-                                                   AgreementVersion = 1
-                                               });
+            _result = Client.Post("/login", new NewUserRequest
+                                        {
+                                            FirstName = "Byron",
+                                            LastName = "Sommardahl",
+                                            Name = "Byron Sommardahl",
+                                            FacebookId = 1817134138,
+                                            Locale = "es_ES",
+                                            Username = "bsommardahl",
+                                            Verified = true
+                                        });
 
         It should_exist =
             () =>
-            Client.Get<UserExistenceResponse>("/user/exists", new {email = _email}).Data.
+            Client.Get<UserExistenceResponse>("/user/exists", new {facebookId = _facebookId}).Data.
                 Exists.ShouldBeTrue();
 
         It should_success =

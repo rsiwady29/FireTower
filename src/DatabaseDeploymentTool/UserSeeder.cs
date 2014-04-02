@@ -18,22 +18,29 @@ namespace DatabaseDeploymentTool
 
         public void Seed()
         {
-            var encryptor = new HashPasswordEncryptor();
-
+            var location = new Location() {LocationId = 106781442691621, LocationName = "San Pedro Sula, Cortes"};
             _session.Save(new User
                               {
-                                  Name = "Byron",
-                                  Email = "byron@acklenavenue.com",
-                                  Activated = true,
-                                  EncryptedPassword = encryptor.Encrypt("yardsale").Password,
+                                  FirstName = "Byron",
+                                  LastName = "Sommardahl",
+                                  Name = "Byron Sommardahl",
+                                  FacebookId = 1817134138,
+                                  Locale = "es_ES",
+                                  Username = "bsommardahl",
+                                  Verified = true,
+                                  Location = location
                               });
 
             _session.Save(new User
                               {
-                                  Name = "Tester",
-                                  Email = "test@test.com",
-                                  Activated = true,
-                                  EncryptedPassword = encryptor.Encrypt("password").Password
+                                  FirstName = "Test",
+                                  LastName = "Test",
+                                  Name = "Test Test",
+                                  FacebookId = 1937134326,
+                                  Locale = "es_ES",
+                                  Username = "ttest",
+                                  Verified = true,
+                                  Location = location
                               });
         }
 

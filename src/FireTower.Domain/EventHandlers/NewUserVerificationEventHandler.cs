@@ -14,7 +14,7 @@ namespace FireTower.Domain.EventHandlers
 
         public void Handle(NewUserCreated @event)
         {
-            _sender.Send(@event.Email);
+            //_sender.Send(@event.FacebookId);
         }
     }
 }

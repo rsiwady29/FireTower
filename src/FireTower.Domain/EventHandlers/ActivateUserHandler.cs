@@ -27,8 +27,8 @@ namespace FireTower.Domain.EventHandlers
         {
             var c = (ActivateUser) command;
 
-            var user = _readOnlyRepository.First<User>(x => x.Email == c.Email);
-            user.Activated = true;
+            var user = _readOnlyRepository.First<User>(x => x.LastName == c.Email);
+            user.Verified = true;
             _writeableRepository.Update(user);
 
             var verification = _readOnlyRepository.First<Verification>(x => x.EmailAddress == c.Email);

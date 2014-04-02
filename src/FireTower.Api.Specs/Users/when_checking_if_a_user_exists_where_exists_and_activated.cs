@@ -11,7 +11,6 @@ namespace FireTower.Api.Specs.Users
 {
     public class when_checking_if_a_user_exists_where_exists_and_activated : given_a_user_module_context
     {
-        const string TestEmail = "someEmail@email.com";
         static BrowserResponse _result;
         static User _user;
         static UserExistenceResponse _expectedResponse;
@@ -21,8 +20,13 @@ namespace FireTower.Api.Specs.Users
                 {
                     _user = new User
                                 {
-                                    Email = TestEmail,
-                                    Activated = true,
+                                    FirstName = "Byron",
+                                    LastName = "Sommardahl",
+                                    Name = "Byron Sommardahl",
+                                    FacebookId = 123456,
+                                    Locale = "es_ES",
+                                    Username = "bsommardahl",
+                                    Verified = true
                                 };
                     Mock.Get(ReadOnlyRepository).Setup(
                         x =>
@@ -31,13 +35,13 @@ namespace FireTower.Api.Specs.Users
 
                     _expectedResponse = new UserExistenceResponse
                                             {
-                                                Activated = _user.Activated,
+                                                Activated = _user.Verified,
                                                 Exists = true
                                             };
                 };
 
         Because of =
-            () => _result = Browser.GetSecureJson("/user/exists", new {email = TestEmail});
+            () => _result = Browser.GetSecureJson("/user/exists", new { facebookId = 123456 });
 
         It should_return_the_expected_response =
             () => _result.Body<UserExistenceResponse>().ShouldBeLike(_expectedResponse);

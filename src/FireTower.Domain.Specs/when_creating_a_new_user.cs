@@ -25,14 +25,19 @@ namespace FireTower.Domain.Specs
 
                     _newUserCommand = new NewUserCommand
                                           {
-                                              Email = "email",
-                                              AgreementVersion = 1,
-                                              EncryptedPassword = new EncryptedPassword("password")
+                                              FirstName = "Byron",
+                                              LastName = "Sommardahl",
+                                              Name = "Byron Sommardahl",
+                                              FacebookId = 1817134138,
+                                              Locale = "es_ES",
+                                              Username = "bsommardahl",
+                                              Verified = true,
+                                              Location = new Location { LocationId = 106781442691621 }
                                           };
 
                     _handler.NotifyObservers += x => _event = x;
 
-                    _expectedEvent = new NewUserCreated(_newUserCommand.Email, _newUserCommand.AgreementVersion);
+                    _expectedEvent = new NewUserCreated(_newUserCommand.FacebookId);
                 };
 
         Because of =
@@ -43,10 +48,14 @@ namespace FireTower.Domain.Specs
                       .Verify(x =>
                               x.Create(WithExpected.Object(new User
                                                                {
-                                                                   EncryptedPassword =
-                                                                       _newUserCommand.EncryptedPassword.Password,
-                                                                   Email = _newUserCommand.Email,
-                                                                   AgreementVersion = _newUserCommand.AgreementVersion
+                                                                  FirstName = _newUserCommand.FirstName,
+                                                                  LastName =_newUserCommand.LastName,
+                                                                  Name = _newUserCommand.Name,
+                                                                  FacebookId = _newUserCommand.FacebookId,
+                                                                  Locale = _newUserCommand.Locale,
+                                                                  Username = _newUserCommand.Username,
+                                                                  Verified = _newUserCommand.Verified,
+                                                                  Location = _newUserCommand.Location
                                                                })));
 
         It should_handle_new_user_commands = () => _handler.CommandType.ShouldEqual(typeof (NewUserCommand));

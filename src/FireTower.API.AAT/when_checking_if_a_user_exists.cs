@@ -13,7 +13,7 @@ namespace FireTower.API.AAT
         Because of =
             () =>
             _result =
-            Client.Get<UserExistenceResponse>("/user/exists", new { email = "test@test.com" });
+            Client.Get<UserExistenceResponse>("/user/exists", new { facebookId = 1817134138 });
 
         It should_have_an_ok_response =
             () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);

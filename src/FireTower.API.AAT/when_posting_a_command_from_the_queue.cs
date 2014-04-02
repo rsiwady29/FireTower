@@ -31,7 +31,16 @@ namespace FireTower.API.AAT
                                 };
 
         Because of =
-            () => _result = Client.Post("/work", _commandFromQueue);
+            () => _result = Client.Post("/work", new NewUserCommand
+                                                     {
+                                                         FirstName = "Byron",
+                                                         LastName = "Sommardahl",
+                                                         Name = "Byron Sommardahl",
+                                                         FacebookId = 1817134138,
+                                                         Locale = "es_ES",
+                                                         Username = "bsommardahl",
+                                                         Verified = true
+                                                     });
 
         It should_process_the_command =
             () => _result.ShouldBeOk();

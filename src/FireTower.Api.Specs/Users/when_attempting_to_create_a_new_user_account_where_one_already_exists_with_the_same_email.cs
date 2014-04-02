@@ -23,12 +23,16 @@ namespace FireTower.Api.Specs.Users
                 {
                     _request = new NewUserRequest
                                    {
-                                       Email = "something@email.com",
-                                       Password = "some password",
-                                       AgreementVersion = 1
+                                       FirstName = "Byron",
+                                       LastName = "Sommardahl",
+                                       Name = "Byron Sommardahl",
+                                       FacebookId = 1817134138,
+                                       Locale = "es_ES",
+                                       Username = "bsommardahl",
+                                       Verified = true
                                    };
 
-                    _existingUser = new User {Email = _request.Email};
+                    _existingUser = new User {FacebookId = _request.FacebookId};
                     Mock.Get(ReadOnlyRepository).Setup(
                         x =>
                         x.First(

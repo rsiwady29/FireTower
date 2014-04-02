@@ -19,19 +19,7 @@ namespace FireTower.Infrastructure
 
         public string UserName
         {
-            get
-            {
-                if (UserSession is UserSession)
-                {
-                    User user = ((UserSession)UserSession).User;
-                    if (user == null)
-                    {
-                        throw new Exception("The user should not be null on the user session.");
-                    }
-                    return user.Email;
-                }
-                return null;
-            }
+            get { return (User ?? new User()).LastName; }
         }
 
         public IEnumerable<string> Claims
