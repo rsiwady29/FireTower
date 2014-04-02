@@ -1,4 +1,4 @@
-﻿angular.module('firetower').controller('LoginController', ['$scope', function($scope){
+﻿angular.module('firetower').controller('LoginController', [function ($scope) {
     
-
+ 
  }]);

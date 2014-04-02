@@ -2,15 +2,20 @@
 <html ng-app="firetower">
 <head>
     <title>Fire Tower</title>
-    <script type="text/javascript" src="App/js/angular/angular.js"></script>
-    
-    <script type="text/javascript" src="App/js/angular/angular-route.js"></script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link href="Content/css/ionic.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div ng-view></div>
+    <ion-nav-view></ion-nav-view>
+    
+    <!-- Angular -->
+    <script src="Content/js/ionic.bundle.min.js"></script>
     <script type="text/javascript" src="App/config.js"></script>
 
     <!--Controllers-->
     <script src="App/controller/login.js"></script>
+    <script src="App/controller/fuegos_reportados.js"></script>
+    
+    <script src="App/services/data.js"></script>
 </body>
 </html>
