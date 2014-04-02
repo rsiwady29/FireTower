@@ -1,18 +1,44 @@
-﻿var app = angular.module('firetower', ['ionic']);
+﻿angular.module('firetower', ['ionic', 'starter.controllers'])
 
+.run(function ($ionicPlatform) {
+    $ionicPlatform.ready(function () {
+        if (window.StatusBar) {
+            StatusBar.styleDefault();
+        }
+    });
+})
 
-app.config(function($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state('Login', {
-            url: "/login",
-            controller: 'LoginController',
-            templateUrl: "App/views/login.html"
+        .state('app', {
+            url: "/app",
+            templateUrl: "App/views/menu.html"
         })
-        .state('Fuegos Reportados', {
-            url: "/fuegos_reportados",
-            controller: 'FuegoReportadoController',
-            templateUrl: "App/views/fuegos_reportados.html"
+        .state('app.inicio', {
+            url: "/inicio",
+            views: {
+                'menuContent': {
+                    templateUrl: "App/views/inicio.html"
+                }
+            }
+        })
+        .state('app.reportes', {
+            url: "/reportes",
+            views: {
+                'menuContent': {
+                    templateUrl: "App/views/reportes.html",
+                    controller: 'ReportesController'
+                }
+            }
+        })
+        .state('app.reporte', {
+            url: "/reporte/:reporteId",
+            views: {
+                'menuContent': {
+                    templateUrl: "App/views/reporte.html"
+                }
+            }
         });
-
-    $urlRouterProvider.otherwise('/fuegos_reportados');
+     
+    $urlRouterProvider.otherwise('/app/inicio');
 });
