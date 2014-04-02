@@ -156,6 +156,7 @@
     <Compile Include="InvalidCommandObjectException.cs" />
     <Compile Include="JsonCommandDeserializer.cs" />
     <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Modules\DisasterModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
     <Compile Include="Modules\VerificationModule.cs" />
     <Compile Include="Modules\WorkModule.cs" />
@@ -170,9 +171,6 @@
     <Compile Include="Requests\NewUserRequest.cs" />
     <Compile Include="ResponseExtensions.cs" />
     <Compile Include="Responses\NewUserResponse.cs" />
-    <Compile Include="Responses\OneTimePaymentResponse.cs" />
-    <Compile Include="Responses\PaymentListResponse.cs" />
-    <Compile Include="Responses\RecurringPaymentResponse.cs" />
     <Compile Include="Responses\SuccessfulLoginResponse.cs" />
     <Compile Include="TokenExpirationProvider.cs" />
   </ItemGroup>

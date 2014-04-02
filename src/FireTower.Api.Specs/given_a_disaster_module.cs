@@ -14,26 +14,24 @@ namespace FireTower.Api.Specs
         protected static IMappingEngine Mapper;
         protected static ICommandDispatcher CommandDispatcher;
         protected static IReadOnlyRepository ReadOnlyRepo;
-
+        protected static UserSession UserSession;
 
         Establish master_context =
             () =>
-            {
-                Mapper = Mock.Of<IMappingEngine>();
-                CommandDispatcher = Mock.Of<ICommandDispatcher>();
-                ReadOnlyRepo = Mock.Of<IReadOnlyRepository>();
-
-                Browser = new Browser(x =>
                 {
-                    x.Module<DisasterModule>();
-                    x.Dependency(Mapper);
-                    x.Dependency(CommandDispatcher);
-                    x.Dependency(ReadOnlyRepo);
-                    _user = new User();
-                    x.WithUser(_user);
-                });
-            };
+                    Mapper = Mock.Of<IMappingEngine>();
+                    CommandDispatcher = Mock.Of<ICommandDispatcher>();
+                    ReadOnlyRepo = Mock.Of<IReadOnlyRepository>();
 
-        protected static User _user;
+                    Browser = new Browser(x =>
+                                              {
+                                                  x.Module<DisasterModule>();
+                                                  x.Dependency(Mapper);
+                                                  x.Dependency(CommandDispatcher);
+                                                  x.Dependency(ReadOnlyRepo);
+                                                  UserSession = UserSession.New(new User());
+                                                  x.WithUserSession(UserSession);
+                                              });
+                };
     }
 }

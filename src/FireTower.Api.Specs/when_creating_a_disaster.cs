@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AcklenAvenue.Testing.Moq.ExpectedObjects;
+﻿using AcklenAvenue.Testing.Moq.ExpectedObjects;
 using AcklenAvenue.Testing.Nancy;
 using FireTower.Domain.Commands;
 using Machine.Specifications;
@@ -16,21 +11,26 @@ namespace FireTower.Api.Specs
 {
     public class when_creating_a_disaster : given_a_disaster_module
     {
-        private static CreateNewDisaster _createNewDisaster = new CreateNewDisaster(123.11, 421.11, "http://www.thisisaphoto.com");
+        const double Latitude = 123.11;
+        const double Longitude = 421.11;
 
-        private Because of =
-            () => _result = Browser.PostSecureJson("/Disasters", _createNewDisaster);
+        static readonly CreateNewDisaster CreateNewDisaster =
+            new CreateNewDisaster(Latitude, Longitude,
+                                  "http://www.thisisaphoto.com");
 
-        private It should_dispatch_the_expected_command =
+        static BrowserResponse _result;
+
+        Because of =
+            () => _result = Browser.PostSecureJson("/Disasters", CreateNewDisaster);
+
+        It should_be_ok = () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
+
+        It should_dispatch_the_expected_command =
             () =>
-                Mock.Get(CommandDispatcher)
-                    .Verify(
-                        x =>
-                            x.Dispatch(
-                                WithExpected.Object(_createNewDisaster)));
-
-        private It should_be_ok = () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
-
-        private static BrowserResponse _result;
+            Mock.Get(CommandDispatcher)
+                .Verify(
+                    x =>
+                    x.Dispatch(UserSession,
+                               WithExpected.Object(CreateNewDisaster)));
     }
 }

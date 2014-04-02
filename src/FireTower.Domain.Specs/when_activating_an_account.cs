@@ -1,12 +1,12 @@
 using System;
 using AcklenAvenue.Testing.Moq;
 using AcklenAvenue.Testing.Moq.ExpectedObjects;
-using Machine.Specifications;
-using Moq;
 using FireTower.Domain.Commands;
 using FireTower.Domain.Entities;
 using FireTower.Domain.EventHandlers;
 using FireTower.Domain.Events;
+using Machine.Specifications;
+using Moq;
 using It = Machine.Specifications.It;
 
 namespace FireTower.Domain.Specs
