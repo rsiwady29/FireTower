@@ -15,7 +15,7 @@ namespace FireTower.ViewStore
         public T Create<T>(T viewModel) where T : IViewModel
         {
             MongoCollection<T> mongoCollection = _mongoDatabase.GetCollection<T>(typeof (T).Name);
-            WriteConcernResult writeConcernResult = mongoCollection.Insert(viewModel);
+            mongoCollection.Insert(viewModel);
             return viewModel;
         }
     }
