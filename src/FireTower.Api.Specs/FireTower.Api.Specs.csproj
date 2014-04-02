@@ -100,6 +100,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -126,7 +127,6 @@
     <Compile Include="Users\when_checking_if_a_user_exists_where_exists_and_activated.cs" />
     <Compile Include="Users\when_checking_if_a_user_exists_where_exists_and_not_activated.cs" />
     <Compile Include="when_deserializing_a_command.cs" />
-    <Compile Include="when_deserializing_a_command_with_invalid_json.cs" />
     <Compile Include="IdentityTestingExtensions.cs" />
     <Compile Include="when_getting_me.cs" />
     <Compile Include="when_instantiating_all_api_modules.cs" />
