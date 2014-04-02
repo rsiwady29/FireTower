@@ -117,6 +117,9 @@
     <Compile Include="Users\given_a_new_user_module_context.cs" />
     <Compile Include="Users\given_a_user_module_context.cs" />
     <Compile Include="Users\given_a_verification_module_context.cs" />
+    <Compile Include="when_deserializing_a_command_with_invalid_json.cs" />
+    <Compile Include="when_deserializing_a_command_with_invalid_type.cs" />
+    <Compile Include="when_deserializing_a_command_with_missing_type_property.cs" />
     <Compile Include="Worker\given_a_work_module_context.cs" />
     <Compile Include="MoqMappingExtensions.cs" />
     <Compile Include="TestingContextFactory.cs" />

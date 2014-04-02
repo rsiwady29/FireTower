@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackSmithIronMqClientAdapter.cs" />
+    <Compile Include="RestSharpIronMqClientAdapter.cs" />
     <Compile Include="IIronMqPusher.cs" />
     <Compile Include="IIronMqSubscriber.cs" />
     <Compile Include="IronMqCommandDispatcher.cs" />
