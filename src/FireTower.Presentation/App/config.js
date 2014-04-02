@@ -1,4 +1,4 @@
-﻿angular.module('firetower', ['ionic', 'starter.controllers'])
+﻿angular.module('firetower', ['ionic'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
