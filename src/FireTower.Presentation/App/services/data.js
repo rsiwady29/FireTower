@@ -1,35 +1,23 @@
 ﻿angular.module('firetower')
-    .factory('data', [function () {
+    .factory('data', ['$http', function ($http) {
     var factory = {};
 
-    factory.obtener_reportes = function () {
-        return [
-            {
-                id: 1,
-                title: 'Incendio en Comayagua',
-                description: 'Lleva aproximadamente 1 hora encendido',
-                location: { lat: 15.49, lng: -89.88 },
-                photo: "http://placehold.it/50x50",
-                rating: 1
-            },
-            {
-                id: 1,
-                title: 'Incendio en Villanueva',
-                description: 'Atras de la casa de Richard, URGENTE!',
-                location: { lat: 144.49, lng: -89.88 },
-                photo: "http://placehold.it/50x50",
-                rating: 4
-            },
-            {
-                id: 1,
-                title: 'Incendio en Sta Ana',
-                description: 'Cerca de la municipalidad',
-                location: { lat: 1.49, lng: -49.88 },
-                photo: "http://placehold.it/50x50",
-                rating: 2
-            }
-        ];
+    var apiKey = 'Edc1w2R7eTgTWs5fUOrbiI8-xkDkPznM';        
+    var baseUrl = 'https://api.mongolab.com/api/1/databases/';
+    var db = 'appharbor_ab50c767-930d-4b7d-9571-dd2a0b62d5a9';
+    var collection = 'DisasterViewModel';
+        
+    factory.getAllReports = function () {
+        var url = baseUrl + db + '/collections/' + collection + '?apiKey=' + apiKey;
+        console.log(url);
+        return $http.get(url);
+
     };
-    
+
+    factory.getReportById = function(id) {
+        var query = '?q={"_id":{"$oid": "' + id + '"}}';
+        return $http.get(baseUrl + db + '/collections/' + collection + query +'?apiKey=' + apiKey);
+    };
+
     return factory;
 }]);
