@@ -1,10 +1,10 @@
 using AutoMapper;
-using Machine.Specifications;
-using Moq;
-using Nancy.Testing;
 using FireTower.Domain;
 using FireTower.Domain.Entities;
 using FireTower.Presentation.Modules;
+using Machine.Specifications;
+using Moq;
+using Nancy.Testing;
 
 namespace FireTower.Api.Specs.Users
 {
@@ -13,8 +13,8 @@ namespace FireTower.Api.Specs.Users
         protected static Browser Browser;
         protected static IMappingEngine Mapper;
         protected static User LoggedInUser;
-
         protected static IReadOnlyRepository ReadOnlyRepository;
+        protected static UserSession UserSession;
 
         Establish master_context = () =>
                                        {
@@ -29,7 +29,8 @@ namespace FireTower.Api.Specs.Users
                                                                                             {
                                                                                                 Activated = true,
                                                                                             };
-                                                                         x.WithUser(LoggedInUser);
+                                                                         UserSession = UserSession.New(LoggedInUser);
+                                                                         x.WithUserSession(UserSession);
                                                                      });
                                        };
     }

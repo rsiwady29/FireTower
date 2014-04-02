@@ -76,6 +76,12 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ConfigureCommonDependencies.cs" />
     <Compile Include="ConfigureDatabaseWiring.cs" />
+    <Compile Include="Exceptions\ForbiddenRequestException.cs" />
+    <Compile Include="Exceptions\InvalidCommandObjectException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="Exceptions\UserAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\UserInputPropertyMissingException.cs" />
+    <Compile Include="Exceptions\UserInputPropertyValidationException.cs" />
     <Compile Include="IBootstrapperTask.cs" />
     <Compile Include="NoFireTowerUserException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

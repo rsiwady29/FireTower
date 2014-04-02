@@ -1,7 +1,9 @@
+using System;
+
 namespace FireTower.IronMq
 {
     public interface IIronMqPusher
     {
-        void Push<T>(T command) where T : class;
+        void Push(Guid userSessionToken, object command);
     }
 }

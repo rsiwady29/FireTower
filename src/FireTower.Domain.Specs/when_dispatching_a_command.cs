@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using BlingBag;
-using Machine.Specifications;
-using Moq;
 using FireTower.Domain.CommandDispatchers;
 using FireTower.Domain.Commands;
+using Machine.Specifications;
+using Moq;
 using It = Machine.Specifications.It;
 
 namespace FireTower.Domain.Specs
@@ -16,6 +16,7 @@ namespace FireTower.Domain.Specs
         static ICommandHandler _commandHandler1;
         static IBlingInitializer<DomainEvent> _blingInitializer;
         static ICommandHandler _commandHandler2;
+        static readonly IUserSession _userSession = Mock.Of<IUserSession>();
 
         Establish context =
             () =>
@@ -40,13 +41,13 @@ namespace FireTower.Domain.Specs
                 };
 
         Because of =
-            () => _commandDispatcher.Dispatch(_command);
+            () => _commandDispatcher.Dispatch(_userSession, (_command));
 
         It should_dispatch_to_the_first_handler =
-            () => Mock.Get(_commandHandler1).Verify(x => x.Handle(_command));
+            () => Mock.Get(_commandHandler1).Verify(x => x.Handle(_userSession, _command));
 
         It should_dispatch_to_the_second_handler =
-            () => Mock.Get(_commandHandler2).Verify(x => x.Handle(_command));
+            () => Mock.Get(_commandHandler2).Verify(x => x.Handle(_userSession, _command));
 
         It should_initialize_the_first_handlers_domain_events =
             () => Mock.Get(_blingInitializer).Verify(x => x.Initialize(_commandHandler1));

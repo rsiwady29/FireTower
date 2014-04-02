@@ -1,6 +1,6 @@
 using System;
-using Machine.Specifications;
 using FireTower.Presentation;
+using Machine.Specifications;
 
 namespace FireTower.Api.Specs
 {
@@ -14,7 +14,7 @@ namespace FireTower.Api.Specs
             () =>
                 {
                     _invalidJson =
-                        "{\"$type\":\"AcklenAvenue.Testing.Nancy.TestCommand2, AcklenAvenue.Testing.Nancy\",\"Message\":\"it worked\",\"Success\":true,\"Attempts\":1}";
+                        "{\"Type\":\"AcklenAvenue.Testing.Nancy.TestCommand, AcklenAvenue.Testing.Nancy\",-,\"Message\":\"it worked\",\"Success\":true,\"Attempts\":1}";
 
                     _deserializer = new JsonCommandDeserializer();
                 };

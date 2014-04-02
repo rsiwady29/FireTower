@@ -100,6 +100,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -111,11 +112,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BodyExtensions.cs" />
+    <Compile Include="given_a_disaster_module.cs" />
     <Compile Include="Users\given_an_api_user_mapper_context.cs" />
     <Compile Include="Users\given_a_login_module_context.cs" />
     <Compile Include="Users\given_a_new_user_module_context.cs" />
     <Compile Include="Users\given_a_user_module_context.cs" />
     <Compile Include="Users\given_a_verification_module_context.cs" />
+    <Compile Include="when_creating_a_disaster.cs" />
+    <Compile Include="when_deserializing_a_command_with_invalid_json.cs" />
+    <Compile Include="when_deserializing_a_command_with_invalid_type.cs" />
+    <Compile Include="when_deserializing_a_command_with_missing_type_property.cs" />
     <Compile Include="Worker\given_a_work_module_context.cs" />
     <Compile Include="MoqMappingExtensions.cs" />
     <Compile Include="TestingContextFactory.cs" />
@@ -126,7 +132,6 @@
     <Compile Include="Users\when_checking_if_a_user_exists_where_exists_and_activated.cs" />
     <Compile Include="Users\when_checking_if_a_user_exists_where_exists_and_not_activated.cs" />
     <Compile Include="when_deserializing_a_command.cs" />
-    <Compile Include="when_deserializing_a_command_with_invalid_json.cs" />
     <Compile Include="IdentityTestingExtensions.cs" />
     <Compile Include="when_getting_me.cs" />
     <Compile Include="when_instantiating_all_api_modules.cs" />

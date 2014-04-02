@@ -21,7 +21,7 @@ namespace FireTower.Domain.CommandHandlers
             get { return typeof (NewUserCommand); }
         }
 
-        public void Handle(object command)
+        public void Handle(IUserSession userSession, object command)
         {
             var c = (NewUserCommand) command;
             _writeableRepository.Create(new User

@@ -1,9 +1,10 @@
+using FireTower.Domain;
+using FireTower.Domain.Entities;
+using FireTower.Presentation;
+using FireTower.Presentation.Modules;
 using Machine.Specifications;
 using Moq;
 using Nancy.Testing;
-using FireTower.Domain;
-using FireTower.Presentation;
-using FireTower.Presentation.Modules;
 
 namespace FireTower.Api.Specs.Worker
 {
@@ -12,6 +13,7 @@ namespace FireTower.Api.Specs.Worker
         protected static Browser Browser;
         protected static ICommandDispatcher CommandDispatcher;
         protected static ICommandDeserializer CommandDeserializer;
+        protected static UserSession UserSession;
 
         Establish master_context =
             () =>
@@ -23,6 +25,8 @@ namespace FireTower.Api.Specs.Worker
                                                   x.Module<WorkModule>();
                                                   x.Dependency(CommandDispatcher);
                                                   x.Dependency(CommandDeserializer);
+                                                  UserSession = UserSession.New(new User());
+                                                  x.WithUserSession(UserSession);
                                               });
                 };
     }

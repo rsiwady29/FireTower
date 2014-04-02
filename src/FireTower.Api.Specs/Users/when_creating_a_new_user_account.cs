@@ -43,7 +43,7 @@ namespace FireTower.Api.Specs.Users
         It should_return_an_ok_response = () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
 
         It should_add_a_command_to_the_queue =
-            () => Mock.Get(CommandDispatcher).Verify(x => x.Dispatch(WithExpected.Object(new NewUserCommand
+            () => Mock.Get(CommandDispatcher).Verify(x => x.Dispatch(VisitorSession, WithExpected.Object(new NewUserCommand
                                                                                              {
                                                                                                  Email = _request.Email,
                                                                                                  EncryptedPassword =

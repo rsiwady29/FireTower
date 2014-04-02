@@ -7,6 +7,8 @@ using FireTower.Domain;
 using FireTower.Domain.CommandDispatchers;
 using FireTower.Infrastructure;
 using FireTower.IronMq;
+using FireTower.ViewStore;
+using MongoDB.Driver;
 
 namespace FireTower.Presentation
 {
@@ -26,6 +28,19 @@ namespace FireTower.Presentation
                                
                                ChooseCommandDispatcherBasedOnRoleType(builder);
                                SelfSubscribeWorkerToQueue();
+
+                               builder.RegisterAssemblyTypes(typeof (ViewModelRepository).Assembly).
+                                   AsImplementedInterfaces();
+
+                               builder.Register(context =>
+                                                    {
+                                                        var uri =
+                                                            new MongoUrl(
+                                                                @"mongodb://server:password@ds045137.mongolab.com:45137/appharbor_ab50c767-930d-4b7d-9571-dd2a0b62d5a9");
+
+                                                        var server = new MongoClient(uri).GetServer();
+                                                        return server.GetDatabase(uri.DatabaseName);
+                                                    }).As<MongoDatabase>();
                            };
             }
         }
