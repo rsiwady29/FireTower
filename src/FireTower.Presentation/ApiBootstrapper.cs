@@ -38,6 +38,8 @@ namespace FireTower.Presentation
         protected override void ConfigureConventions(NancyConventions nancyConventions)
         {
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Test"));
+            nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("App"));
+            nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("Content"));
             base.ConfigureConventions(nancyConventions);
         }
 
@@ -241,14 +243,7 @@ namespace FireTower.Presentation
                            x.Response.WithHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
                            x.Response.WithHeader("Access-Control-Max-Age", "1728000");
                            x.Response.WithHeader("Access-Control-Allow-Origin", "*");
-        }
-
-        protected override void ConfigureConventions(NancyConventions conventions)
-        {
-           base.ConfigureConventions(conventions);
- 
-            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("App"));
-            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("Content"));
+                       };
         }
 
         #region Nested type: BodyWithToken
