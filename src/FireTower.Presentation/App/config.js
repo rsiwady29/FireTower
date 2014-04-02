@@ -1,4 +1,4 @@
-﻿angular.module('firetower', ['ionic', 'starter.controllers'])
+﻿angular.module('firetower', ['ionic', 'google-maps'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -35,7 +35,8 @@
             url: "/reporte/:reporteId",
             views: {
                 'menuContent': {
-                    templateUrl: "App/views/reporte.html"
+                    templateUrl: "App/views/reporte.html",
+                    controller: 'ReporteController'
                 }
             }
         });
