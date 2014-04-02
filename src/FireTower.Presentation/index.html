@@ -1,16 +1,26 @@
-﻿<!DOCTYPE html>
-<html ng-app="firetower">
-<head>
-    <title>Fire Tower</title>
-    <script type="text/javascript" src="App/js/angular/angular.js"></script>
-    
-    <script type="text/javascript" src="App/js/angular/angular-route.js"></script>
-</head>
-<body>
-    <div ng-view></div>
-    <script type="text/javascript" src="App/config.js"></script>
+﻿<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
 
-    <!--Controllers-->
+    <link href="Content/css/ionic.min.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="Content/js/ionic.bundle.min.js"></script>
+
+    <!-- your app's js -->
+    <script src="App/config.js"></script>
+    <script src="App/controller/reportes.js"></script>
     <script src="App/controller/login.js"></script>
-</body>
+    <script src="App/services/data.js"></script>
+  </head>
+
+  <body ng-app="firetower">
+    <ion-nav-view></ion-nav-view>
+  </body>
 </html>

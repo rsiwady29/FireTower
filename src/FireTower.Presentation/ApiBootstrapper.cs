@@ -99,6 +99,7 @@ namespace FireTower.Presentation
            base.ConfigureConventions(conventions);
  
             conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("App"));
+            conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("Content"));
         }
     }
 }
