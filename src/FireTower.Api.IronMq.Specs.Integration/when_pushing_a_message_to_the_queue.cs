@@ -1,3 +1,4 @@
+using System;
 using AcklenAvenue.Testing.Nancy;
 using Machine.Specifications;
 
@@ -8,10 +9,10 @@ namespace FireTower.IronMq.Specs.Integration
         static IIronMqPusher _client;
 
         Establish context =
-            () => { _client = new BlackSmithIronMqClientAdapter("test_queue"); };
+            () => { _client = new RestSharpIronMqClientAdapter("test_queue"); };
 
         Because of =
-            () => _client.Push(new TestCommand
+            () => _client.Push(Guid.NewGuid(), new TestCommand
                                    {
                                        Message = "it worked",
                                        Success = true,

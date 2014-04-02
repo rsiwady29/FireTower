@@ -1,12 +1,12 @@
 using System;
 using AcklenAvenue.Testing.Moq;
 using AcklenAvenue.Testing.Moq.ExpectedObjects;
-using Machine.Specifications;
-using Moq;
 using FireTower.Domain.Commands;
 using FireTower.Domain.Entities;
 using FireTower.Domain.EventHandlers;
 using FireTower.Domain.Events;
+using Machine.Specifications;
+using Moq;
 using It = Machine.Specifications.It;
 
 namespace FireTower.Domain.Specs
@@ -60,7 +60,7 @@ namespace FireTower.Domain.Specs
                 };
 
         Because of =
-            () => _handler.Handle(_command);
+            () => _handler.Handle(new VisitorSession(), _command);
 
         It should_delete_the_verification =
             () => Mock.Get(_writeableRepository).Verify(x => x.Delete<Verification>(_verificationId));

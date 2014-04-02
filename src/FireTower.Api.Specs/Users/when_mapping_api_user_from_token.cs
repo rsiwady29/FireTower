@@ -14,24 +14,24 @@ namespace FireTower.Api.Specs.Users
         static readonly Guid AccessToken = Guid.NewGuid();
 
         static IUserIdentity _result;
-        static UserSession _validUserSession;
+        static UserSession _validClientLoginSession;
 
         Establish context =
             () =>
-                {
-                    _validUserSession = new UserSession {Id = AccessToken};
-                    Mock.Get(_readOnlyRepo).Setup(
-                        x => x.First(ThatHas.AnExpressionFor<UserSession>()
-                                         .ThatMatches(_validUserSession)
-                                         .ThatDoesNotMatch(new UserSession())
-                                         .Build()))
-                        .Returns(_validUserSession);
-                };
+            {
+                _validClientLoginSession = new UserSession { Id = AccessToken, User = new User { Email = "something@email.com" } };
+                Mock.Get(_readOnlyRepo).Setup(
+                    x => x.First(ThatHas.AnExpressionFor<UserSession>()
+                                     .ThatMatches(_validClientLoginSession)
+                                     .ThatDoesNotMatch(new UserSession())
+                                     .Build()))
+                    .Returns(_validClientLoginSession);
+            };
 
         Because of =
             () => _result = _mapper.GetUserFromAccessToken(AccessToken);
 
         It should_return_the_expected_user =
-            () => _result.ShouldBeLike(new FireTowerUserIdentity(_validUserSession.User));
+            () => _result.ShouldBeLike(new FireTowerUserIdentity(_validClientLoginSession));
     }
 }

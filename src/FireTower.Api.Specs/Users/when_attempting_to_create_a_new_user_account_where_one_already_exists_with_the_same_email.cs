@@ -42,7 +42,7 @@ namespace FireTower.Api.Specs.Users
 
         It should_not_add_a_command_to_the_queue =
             () => Mock.Get(CommandDispatcher).Verify(x =>
-                                                     x.Dispatch(Moq.It.IsAny<NewUserCommand>()), Times.Never());
+                                                     x.Dispatch(VisitorSession, Moq.It.IsAny<NewUserCommand>()), Times.Never());
 
         It should_throw_a_bad_request_exception =
             () => _exception.InnerException.InnerException.ShouldBeOfExactType<UserAlreadyExistsException>();

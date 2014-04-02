@@ -1,9 +1,10 @@
-using Nancy;
-using Nancy.ModelBinding;
 using FireTower.Domain;
 using FireTower.Domain.Commands;
 using FireTower.Domain.Entities;
+using FireTower.Infrastructure;
 using FireTower.Presentation.Requests;
+using Nancy;
+using Nancy.ModelBinding;
 
 namespace FireTower.Presentation.Modules
 {
@@ -16,31 +17,28 @@ namespace FireTower.Presentation.Modules
                                 {
                                     var newUserRequest = this.Bind<NewUserRequest>();
                                     CheckForExistingUser(readOnlyRepository, newUserRequest);
-                                    DispatchCommand(passwordEncryptor, commandDispatcher, newUserRequest);
+                                    commandDispatcher.Dispatch(this.VisitorSession(), new NewUserCommand
+                                                                                       {
+                                                                                           Email = newUserRequest.Email,
+                                                                                           EncryptedPassword =
+                                                                                               passwordEncryptor.Encrypt
+                                                                                               (
+                                                                                                   newUserRequest.
+                                                                                                       Password),
+                                                                                           AgreementVersion =
+                                                                                               newUserRequest.
+                                                                                               AgreementVersion
+                                                                                       });
                                     return new Response().WithStatusCode(HttpStatusCode.OK);
                                 };
         }
 
-        static void DispatchCommand(IPasswordEncryptor passwordEncryptor, ICommandDispatcher commandDispatcher,
-                                    NewUserRequest newUserRequest)
-        {
-            commandDispatcher.Dispatch(new NewUserCommand
-                                           {
-                                               Email = newUserRequest.Email,
-                                               EncryptedPassword =
-                                                   passwordEncryptor.Encrypt(
-                                                       newUserRequest.Password),
-                                               AgreementVersion =
-                                                   newUserRequest.AgreementVersion
-                                           });
-        }
-
         static void CheckForExistingUser(IReadOnlyRepository readOnlyRepository, NewUserRequest newUserRequest)
         {
-            var exists = true;
+            bool exists = true;
             try
             {
-                readOnlyRepository.First<User>(x => x.Email == newUserRequest.Email);                
+                readOnlyRepository.First<User>(x => x.Email == newUserRequest.Email);
             }
             catch
             {

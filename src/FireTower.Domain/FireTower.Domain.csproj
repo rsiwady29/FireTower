@@ -54,20 +54,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\NewDisasterCreator.cs" />
     <Compile Include="CommandHandlers\NewUserCreator.cs" />
     <Compile Include="Commands\ActivateUser.cs" />
+    <Compile Include="Commands\CreateNewDisaster.cs" />
     <Compile Include="Commands\NewUserCommand.cs" />
     <Compile Include="CommandDispatchers\SynchronousCommandDispatcher.cs" />
     <Compile Include="DefaultViewEngine.cs" />
     <Compile Include="DomainEvent.cs" />
+    <Compile Include="DynamicExtensions.cs" />
     <Compile Include="EmailBodyRenderer.cs" />
     <Compile Include="EmailSender.cs" />
     <Compile Include="EmailSubjectProvider.cs" />
     <Compile Include="EncryptedPassword.cs" />
+    <Compile Include="Entities\Disaster.cs" />
+    <Compile Include="Entities\DisasterImage.cs" />
     <Compile Include="Entities\UserSession.cs" />
     <Compile Include="Entities\Verification.cs" />
     <Compile Include="EventHandlers\ActivateUserHandler.cs" />
     <Compile Include="EventHandlers\NewUserVerificationEventHandler.cs" />
+    <Compile Include="Events\NewDisasterCreated.cs" />
     <Compile Include="Events\UserActivated.cs" />
     <Compile Include="Events\NewUserCreated.cs" />
     <Compile Include="Exceptions\NoAvailableHandlerException.cs" />
@@ -88,6 +94,7 @@
     <Compile Include="ITimeProvider.cs" />
     <Compile Include="ITokenExpirationProvider.cs" />
     <Compile Include="ITokenGenerator.cs" />
+    <Compile Include="IUserSession.cs" />
     <Compile Include="IUserSessionFactory.cs" />
     <Compile Include="IVerificationCodeGenerator.cs" />
     <Compile Include="IVerificationEmailSender.cs" />
@@ -102,6 +109,7 @@
     <Compile Include="Services\UserSessionFactory.cs" />
     <Compile Include="TemplateProvider.cs" />
     <Compile Include="VerificationEmailSender.cs" />
+    <Compile Include="VisitorSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

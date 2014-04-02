@@ -1,9 +1,9 @@
 using System;
 using System.Net;
 using AcklenAvenue.Testing.AAT;
-using Machine.Specifications;
 using FireTower.Presentation.Requests;
 using FireTower.Presentation.Responses;
+using Machine.Specifications;
 using RestSharp;
 
 namespace FireTower.API.AAT
@@ -25,11 +25,11 @@ namespace FireTower.API.AAT
         Because of =
             () =>
             _result = Client.Post("/user", new NewUserRequest
-                                        {
-                                            Email = _email,
-                                            Password = _password,
-                                            AgreementVersion = 1
-                                        });
+                                               {
+                                                   Email = _email,
+                                                   Password = _password,
+                                                   AgreementVersion = 1
+                                               });
 
         It should_exist =
             () =>

@@ -23,7 +23,7 @@ namespace FireTower.Domain.EventHandlers
             get { return typeof (ActivateUser); }
         }
 
-        public void Handle(object command)
+        public void Handle(IUserSession userSession, object command)
         {
             var c = (ActivateUser) command;
 

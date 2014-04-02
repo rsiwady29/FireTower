@@ -1,4 +1,5 @@
 using System;
+using System.IdentityModel;
 using AcklenAvenue.Testing.Nancy;
 using Machine.Specifications;
 using Moq;
@@ -13,25 +14,26 @@ namespace FireTower.Api.Specs.Worker
     {
         static BrowserResponse _result;
         static TestCommand _command;
-        
+        static Exception _exception;
+
         Establish context =
             () =>
+            {
+                _command = new TestCommand
                 {
-                    _command = new TestCommand
-                                   {
-                                       Message = "this is a test",
-                                       Attempts = 1,
-                                       Success = true
-                                   };
-
-                    Mock.Get(CommandDeserializer).Setup(x => x.Deserialize(Moq.It.IsAny<string>())).Throws(
-                        new InvalidCommandObjectException(new Exception()));
+                    Message = "this is a test",
+                    Attempts = 1,
+                    Success = true
                 };
 
-        Because of =
-            () => _result = Browser.PostSecureJson("/work", _command);
+                Mock.Get(CommandDeserializer).Setup(x => x.Deserialize(Moq.It.IsAny<string>())).Throws(
+                    new InvalidCommandObjectException(new Exception()));
+            };
 
-        It should_return_an_unsuccessful_response =
-            () => _result.StatusCode.ShouldEqual(HttpStatusCode.BadRequest);
+        Because of =
+            () => _exception = Catch.Exception(() => Browser.PostSecureJson("/work", _command));
+
+        It should_return_a_bad_request_response =
+            () => _exception.InnerException.InnerException.ShouldBeOfExactType<BadRequestException>();
     }
 }

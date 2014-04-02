@@ -1,6 +1,9 @@
 using System;
 using AcklenAvenue.Testing.AAT;
+using FireTower.Presentation.Requests;
+using FireTower.Presentation.Responses;
 using Machine.Specifications;
+using RestSharp;
 
 namespace FireTower.API.AAT
 {
@@ -26,5 +29,19 @@ namespace FireTower.API.AAT
                 return "http://localhost:38397/";
             }
         }
+
+        protected static SuccessfulLoginResponse<Guid> Login()
+        {
+            IRestResponse<SuccessfulLoginResponse<Guid>> restResponse =
+                Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
+                                                              new LoginRequest
+                                                              {
+                                                                  Email = "test@test.com",
+                                                                  Password = "password"
+                                                              });
+            return restResponse.Data;
+        }
+
+        
     }
 }

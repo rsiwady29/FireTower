@@ -11,9 +11,9 @@ namespace FireTower.IronMq
             _client = client;
         }
 
-        public void Dispatch(object command)
+        public void Dispatch(IUserSession userSession, object command)
         {
-            _client.Push(command);
+            _client.Push(userSession.Id, command);
         }
     }
 }

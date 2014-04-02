@@ -43,7 +43,7 @@ namespace FireTower.Api.Specs.Users
         It should_mark_the_account_as_verified =
             () =>
             Mock.Get(CommandDispatcher).Verify(
-                x => x.Dispatch(WithExpected.Object(new ActivateUser(TestEmail))));
+                x => x.Dispatch(VisitorSession, WithExpected.Object(new ActivateUser(TestEmail))));
 
         It should_return_a_successful_response =
             () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);

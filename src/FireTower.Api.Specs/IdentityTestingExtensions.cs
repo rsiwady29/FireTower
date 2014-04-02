@@ -1,18 +1,18 @@
+using FireTower.Domain;
+using FireTower.Infrastructure;
 using Nancy;
 using Nancy.Testing;
-using FireTower.Domain.Entities;
-using FireTower.Infrastructure;
-using FireTower.Presentation;
 
 namespace FireTower.Api.Specs
 {
     public static class IdentityTestingExtensions
     {
-        public static void WithUser(this ConfigurableBootstrapper.ConfigurableBootstrapperConfigurator config, User user)
+        public static void WithUserSession(this ConfigurableBootstrapper.ConfigurableBootstrapperConfigurator config,
+                                           IUserSession session)
         {
             var nancyContext = new NancyContext
                                    {
-                                       CurrentUser = new FireTowerUserIdentity(user)
+                                       CurrentUser = new FireTowerUserIdentity(session)
                                    };
 
             var contextFactory = new TestingContextFactory(nancyContext);

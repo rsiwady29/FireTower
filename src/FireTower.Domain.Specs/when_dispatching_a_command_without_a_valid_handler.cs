@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FireTower.Domain.Entities;
 using Machine.Specifications;
 using FireTower.Domain.CommandDispatchers;
 using FireTower.Domain.Commands;
@@ -27,7 +28,7 @@ namespace FireTower.Domain.Specs
                 };
 
         Because of =
-            () => _exception = Catch.Exception(() => _commandDispatcher.Dispatch(_command));
+            () => _exception = Catch.Exception(() => _commandDispatcher.Dispatch(new UserSession(), _command));
 
         It should_dispatch_to_the_correct_processor =
             () => _exception.ShouldBeOfExactType<NoAvailableHandlerException>();

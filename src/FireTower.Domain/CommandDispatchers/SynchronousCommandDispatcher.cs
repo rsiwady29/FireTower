@@ -16,7 +16,7 @@ namespace FireTower.Domain.CommandDispatchers
             _handlers = handlers;
         }
 
-        public void Dispatch(object command)
+        public void Dispatch(IUserSession userSession, object command)
         {
             var commandHandlers = _handlers.Where(commandHandler => commandHandler.CommandType == command.GetType()).ToList();
             if (!commandHandlers.Any()) throw new NoAvailableHandlerException(command.GetType());
@@ -24,7 +24,7 @@ namespace FireTower.Domain.CommandDispatchers
             foreach (var commandHandler in commandHandlers)
             {
                 _blingInitializer.Initialize(commandHandler);
-                commandHandler.Handle(command);
+                commandHandler.Handle(userSession, command);
             }
         }
     }

@@ -1,3 +1,4 @@
+using FireTower.Infrastructure;
 using Nancy;
 using Nancy.ModelBinding;
 using FireTower.Data;
@@ -22,7 +23,7 @@ namespace FireTower.Presentation.Modules
                                       {
                                           return new Response().WithStatusCode(HttpStatusCode.Unauthorized);
                                       }
-                                      commandDispatcher.Dispatch(new ActivateUser(input.Email));
+                                      commandDispatcher.Dispatch(this.VisitorSession(), new ActivateUser(input.Email));
                                       return new Response().WithStatusCode(HttpStatusCode.OK);
                                   };
         }

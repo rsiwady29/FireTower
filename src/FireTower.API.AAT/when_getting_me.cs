@@ -14,30 +14,20 @@ namespace FireTower.API.AAT
         static Guid _token;
 
         Establish context =
-            () =>
-                {
-                    IRestResponse<SuccessfulLoginResponse<Guid>> login =
-                        Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
-                                                                      new LoginRequest
-                                                                          {
-                                                                              Email = "test@test.com",
-                                                                              Password = "password"
-                                                                          });
-                    _token = login.Data.Token;
-                };
+            () => { _token = Login().Token; };
 
         Because of =
             () =>
             _result =
-            Client.Get<MeResponse>("/me", new {token = _token});
+            Client.Get<MeResponse>("/me", new { token = _token });
 
         It should_have_an_ok_response =
             () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
 
         It should_say_that_the_user_exists = () => _result.Data.ShouldBeLike(new MeResponse
-                                                                                 {
-                                                                                     Activated = true,
-                                                                                     Email = "test@test.com"
-                                                                                 });
+        {
+            Activated = true,
+            Email = "test@test.com"
+        });
     }
 }

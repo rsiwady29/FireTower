@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using RestSharp;
@@ -22,42 +23,59 @@ namespace AcklenAvenue.Testing.AAT
             return browser.Execute(request);
         }
 
-        public IRestResponse<T> Get<T>(string resource, object args)
-            where T : new()
+        public IRestResponse<T> Get<T>(string resource, object args = null) where T : new()
         {
             RestClient browser = GetRestClient();
 
             RestRequest request = BuildRestRequest(resource, Method.GET);
-            foreach (PropertyInfo property in args.GetType().GetProperties())
+            if (args != null)
             {
-                request.AddParameter(property.Name, property.GetValue(args));
+                foreach (PropertyInfo property in args.GetType().GetProperties())
+                {
+                    request.AddParameter(property.Name, property.GetValue(args));
+                }
             }
 
             return ExecuteRequest<T>(browser, request);
         }
 
-
-        public IRestResponse Post(string resource, object payload)
+        public IRestResponse Post(string resource, object payload, Guid? token = null)
         {
             RestClient browser = GetRestClient();
             RestRequest request = BuildRestRequest(resource, Method.POST, payload);
+            if (token.HasValue)
+            {
+                browser.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token.Value.ToString());
+            }
             return ExecuteRequest(browser, request);
         }
 
-        RestClient GetRestClient()
+        RestClient GetRestClient(Guid? token = null)
         {
             var restClient = new RestClient(_host);
+            if (token.HasValue)
+                restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token.ToString());
             return restClient;
         }
 
-        public IRestResponse Get(string resource, params KeyValuePair<string, string>[] keyValuePair)
+        public IRestResponse Delete(string resource, Guid token)
+        {
+            RestClient browser = GetRestClient(token);
+            RestRequest request = BuildRestRequest(resource, Method.DELETE);
+            return ExecuteRequest(browser, request);
+        }
+
+        public IRestResponse Get(string resource, object args = null)
         {
             RestClient browser = GetRestClient();
 
             RestRequest request = BuildRestRequest(resource, Method.GET);
-            foreach (var valuePair in keyValuePair)
+            if (args != null)
             {
-                request.AddParameter(valuePair.Key, valuePair.Value);
+                foreach (PropertyInfo prop in args.GetType().GetProperties())
+                {
+                    request.AddParameter(prop.Name, prop.GetValue(args));
+                }
             }
 
             return ExecuteRequest(browser, request);
@@ -66,13 +84,18 @@ namespace AcklenAvenue.Testing.AAT
         static IRestResponse<T> ExecuteRequest<T>(RestClient browser, RestRequest request) where T : new()
         {
             IRestResponse<T> restResponse = browser.Execute<T>(request);
+            IEnumerable<Parameter> corsHeader = restResponse.Headers.Where(x => x.Name == "Access-Control-Allow-Origin");
+            if (!corsHeader.Any() && restResponse.ErrorException == null)
+            {
+                throw new AATCORSException();
+            }
             if (restResponse.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new AATRestResponseException(HttpStatusCode.Unauthorized);
+                throw new AATUnauthorizedException();
             }
-            if (restResponse.StatusCode == HttpStatusCode.Forbidden)
+            if (restResponse.StatusCode != HttpStatusCode.OK)
             {
-                throw new AATRestResponseException(HttpStatusCode.Forbidden);
+                throw new AATRestResponseException(restResponse, request);
             }
             if (restResponse.ErrorException != null)
             {
@@ -110,10 +133,13 @@ namespace AcklenAvenue.Testing.AAT
                                   JsonSerializer = new RestSharpJsonNetSerializer(),
                                   RequestFormat = DataFormat.Json
                               };
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Accept", "application/json");
+            //request.AddHeader("Content-Type", "application/json");
+            //request.AddHeader("Accept", "application/json");
+
             if (payload != null)
+            {
                 request.AddBody(payload);
+            }
             return request;
         }
     }

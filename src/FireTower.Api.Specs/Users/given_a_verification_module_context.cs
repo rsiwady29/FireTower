@@ -1,8 +1,8 @@
+using FireTower.Domain;
+using FireTower.Presentation.Modules;
 using Machine.Specifications;
 using Moq;
 using Nancy.Testing;
-using FireTower.Domain;
-using FireTower.Presentation.Modules;
 
 namespace FireTower.Api.Specs.Users
 {
@@ -10,8 +10,8 @@ namespace FireTower.Api.Specs.Users
     {
         protected static Browser Browser;
         protected static IReadOnlyRepository ReadOnlyRepository;
-
         protected static ICommandDispatcher CommandDispatcher;
+        protected static VisitorSession VisitorSession;
 
         Establish master_context = () =>
                                        {
@@ -22,6 +22,8 @@ namespace FireTower.Api.Specs.Users
                                                                          x.Module<VerificationModule>();
                                                                          x.Dependency(ReadOnlyRepository);
                                                                          x.Dependency(CommandDispatcher);
+                                                                         VisitorSession = new VisitorSession();
+                                                                         x.WithUserSession(VisitorSession);
                                                                      });
                                        };
     }

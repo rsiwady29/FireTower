@@ -13,19 +13,19 @@ namespace FireTower.Api.Specs
 
         Establish context =
             () =>
+            {
+                _json =
+                    "{\"Message\":\"it worked\",\"Success\":true,\"Attempts\":1,\"Type\":\"AcklenAvenue.Testing.Nancy.TestCommand, AcklenAvenue.Testing.Nancy\"}";
+
+                _deserializer = new JsonCommandDeserializer();
+
+                _expectedObject = new TestCommand
                 {
-                    _json =
-                        "{\"$type\":\"AcklenAvenue.Testing.Nancy.TestCommand, AcklenAvenue.Testing.Nancy\",\"Message\":\"it worked\",\"Success\":true,\"Attempts\":1}";
-
-                    _deserializer = new JsonCommandDeserializer();
-
-                    _expectedObject = new TestCommand
-                                          {
-                                              Message = "it worked",
-                                              Attempts = 1,
-                                              Success = true
-                                          };
+                    Message = "it worked",
+                    Attempts = 1,
+                    Success = true
                 };
+            };
 
         Because of =
             () => _result = _deserializer.Deserialize(_json);

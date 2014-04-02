@@ -23,7 +23,7 @@ namespace FireTower.Presentation
         {
             var userSession = GetUserSessionFromToken(token);
             MakeSureTokenHasntExpiredYet(userSession);
-            return new FireTowerUserIdentity(userSession.User);
+            return new FireTowerUserIdentity(userSession);
         }
 
         UserSession GetUserSessionFromToken(Guid token)

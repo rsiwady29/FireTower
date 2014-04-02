@@ -1,8 +1,8 @@
 using BlingBag;
-using Machine.Specifications;
-using Moq;
 using FireTower.Domain.EventHandlers;
 using FireTower.Domain.Events;
+using Machine.Specifications;
+using Moq;
 using It = Machine.Specifications.It;
 
 namespace FireTower.Domain.Specs

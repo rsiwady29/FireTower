@@ -36,7 +36,7 @@ namespace FireTower.Domain.Specs
                 };
 
         Because of =
-            () => _handler.Handle(_newUserCommand);
+            () => _handler.Handle(new VisitorSession(), _newUserCommand);
 
         It should_create_the_new_user_in_the_repo =
             () => Mock.Get(_writeableRepository)
