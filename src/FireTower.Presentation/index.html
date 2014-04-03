@@ -7,9 +7,11 @@
     <link href="Content/css/ionic.min.css" rel="stylesheet">
     <link href="Content/css/style.css" rel="stylesheet" />
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-      
+        <link href="css/ionic.app.css" rel="stylesheet">
+        -->
+    
+    
+    <script src="App/www/App/js/cordova-2.0.0.js"></script>
       
     <!-- ionic/angularjs js -->
     <script src="Content/js/ionic.bundle.min.js"></script>     
@@ -18,6 +20,7 @@
     <script src="Content/js/angular-google-maps.min.js"></script>
 
     <!-- your app's js -->
+<<<<<<< HEAD
     <script src="App/www/App/config.js"></script>
     <script src="App/www/App/controller/login.js"></script>
     <script src="App/www/App/services/data.js"></script>
@@ -27,9 +30,30 @@
 
     <script src="App/www/App/services/userManagement.js"></script>
     
+=======
+    <script src="App/config.js"></script>
+    <script src="App/controller/login.js"></script>
+    <script src="App/services/data.js"></script>
+    <script src="App/controller/reporte.js"></script>
+    <script src="App/controller/reportes.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+        var pictureSource;
+        var destinationType;
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            pictureSource = navigator.camera.PictureSourceType;
+            destinationType = navigator.camera.DestinationType;
+        }
+    </script>
+
+>>>>>>> Adding pic
   </head>
 
   <body ng-app="firetower">
-    <ion-nav-view></ion-nav-view>
+      <ion-nav-view></ion-nav-view>
+      
   </body>
 </html>
