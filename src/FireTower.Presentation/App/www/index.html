@@ -10,7 +10,7 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
       
-      
+    <script src="App/www/App/js/cordova-2.0.0.js"></script>  
     <!-- ionic/angularjs js -->
     <script src="Content/js/ionic.bundle.min.js"></script>     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDs0raRSfeQTSWYwDgrnR4QmjOCf9fkf8&sensor=false"></script>
@@ -26,9 +26,21 @@
     <script src="App/services/data.js"></script>
     <script src="App/controller/reporte.js"></script>
     <script src="App/controller/reportes.js"></script>
-    <script src="App/controller/menu.js"></script>    
+     <script src="App/controller/menu.js"></script>    
     <script src="App/services/userManagement.js"></script>
     <script src="App/services/math.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+        var pictureSource;
+        var destinationType;
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            pictureSource = navigator.camera.PictureSourceType;
+            destinationType = navigator.camera.DestinationType;
+        }
+    </script>
   </head>
 
   <body ng-app="firetower">
