@@ -28,11 +28,11 @@
             return user;
         },
         logoutUser: function () {
-            $http.post('/logout', { FacebookId: parseInt(facebookUser.id) }).success(function (response) {
+            $http.post('/logout', { FacebookId: parseInt(user.id) }).success(function (response) {
                 user = {};
-                $location.path('/app/');
+                FB.api("/me/permissions", "delete", function (fResponse) { $location.path('/app/'); });
+                
             }).error(function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(errorThrown);
             });
             
         }

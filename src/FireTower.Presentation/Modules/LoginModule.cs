@@ -49,7 +49,7 @@ namespace FireTower.Presentation.Modules
 
                         return new Response().WithStatusCode(HttpStatusCode.OK);
                     }
-                    catch (ItemNotFoundException<User> ex)
+                    catch (ItemNotFoundException<UserSession> ex)
                     {
                         return new Response().WithStatusCode(HttpStatusCode.Unauthorized);
                     }

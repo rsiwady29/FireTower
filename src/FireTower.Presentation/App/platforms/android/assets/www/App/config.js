@@ -43,8 +43,8 @@
         })
         .state('otherwise', {
             url: '*path',
-            templateUrl: 'App/views/404.html',
-            controller: 'ErrorController'
+            templateUrl: 'App/views/login.html',
+            controller: 'LoginController'
         });;
      
     var myAppId = '294203754077185';

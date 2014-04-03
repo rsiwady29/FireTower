@@ -49,17 +49,8 @@
 
         });
     };
-    $scope.logout = function() {
-        Facebook.logout(function() {
-            $scope.$apply(function() {
-                user.setUser({});
-                $scope.logged = false;
-            });
-        });
-    };
     
     $scope.$on('Facebook:statusChange', function (ev, data) {
-        console.log('Status: ', data);
         if (data.status == 'connected') {
             $scope.$apply(function () {
                 $scope.salutation = true;
