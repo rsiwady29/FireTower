@@ -116,8 +116,6 @@
     <Content Include="App\www\App\controller\reportes.js" />
     <Content Include="App\www\App\js\angular\angular-route.js" />
     <Content Include="App\www\App\js\angular\angular.js" />
-    <Content Include="App\www\App\js\facebook\angular-facebook-phonegap.js" />
-    <Content Include="App\www\App\js\facebook\angular-facebook.js" />
     <Content Include="App\www\App\services\data.js" />
     <Content Include="App\www\App\services\userManagement.js" />
     <Content Include="App\www\App\views\inicio.html" />
@@ -222,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\services\" />
+    <Folder Include="App\www\App\js\facebook\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +231,7 @@
     <Content Include="App\www\Content\fonts\ionicons.eot" />
     <Content Include="App\www\Content\fonts\ionicons.ttf" />
     <Content Include="App\www\Content\fonts\ionicons.woff" />
+    <Content Include="Modules\NewUserModule.cs.orig" />
     <None Include="web.config.default" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

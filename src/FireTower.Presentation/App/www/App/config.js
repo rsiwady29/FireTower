@@ -1,4 +1,4 @@
-angular.module('firetower', ['ionic', 'starter.controllers', 'facebook', 'ngCookies', 'google-maps'])
+angular.module('firetower', ['ionic', 'facebook', 'google-maps'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
