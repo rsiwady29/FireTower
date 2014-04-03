@@ -1,0 +1,21 @@
+﻿<ion-view title="Reporte de Fuegos" class="slide-left-right">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        
+        <div class="list card" ng-repeat="reporte in reportes">
+            <div class="item item-avatar">
+                <!--<img src="avatar.jpg">-->
+                <h2>{{reporte.LocationDescription}}</h2>
+                <p>{{reporte.CreatedDate}}</p>
+            </div>
+            <div class="item item-image card-image">
+                <img src="{{reporte.Images[0]}}">
+            </div>
+            <a class="item item-icon-left positive" href="#/app/reporte/{{reporte._id.$oid}}" >
+                Detalles
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
