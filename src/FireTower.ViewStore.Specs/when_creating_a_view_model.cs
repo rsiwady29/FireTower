@@ -1,5 +1,6 @@
 using System;
 using AcklenAvenue.Testing.ExpectedObjects;
+using FireTower.Domain.Services;
 using Machine.Specifications;
 using MongoDB.Driver;
 
@@ -26,8 +27,8 @@ namespace FireTower.ViewStore.Specs
 
                     _random = new Random();
 
-                    _viewModel = new DisasterViewModel(Guid.NewGuid(), _random.NextDouble(), _random.NextDouble(),
-                                                       "http://static.ddmcdn.com/gif/wildfire-blm4.jpg");
+                    _viewModel = new DisasterViewModel(Guid.NewGuid(), DateTime.Today.ToLocalTime(), "Santa Ana", _random.NextDouble(), _random.NextDouble(),
+                                                       "http://static.ddmcdn.com/gif/wildfire-blm4.jpg",1);
                 };
 
         Because of =
@@ -36,8 +37,14 @@ namespace FireTower.ViewStore.Specs
             _repo.Create(_viewModel);
 
         It should_add_the_docuemnt_to_mongo =
-            () => _server.GetDatabase(_uri.DatabaseName).GetCollection<DisasterViewModel>(
-                typeof (DisasterViewModel).Name).FindOneById(_result.Id).IsExpectedToBeLike(_result);
+            () =>
+                {
+                    var resultFromMongoLab = _server.GetDatabase(_uri.DatabaseName)
+                           .GetCollection<DisasterViewModel>(typeof (DisasterViewModel).Name)
+                           .FindOneById(_result.Id);
+                    resultFromMongoLab.CreatedDate = resultFromMongoLab.CreatedDate.ToLocalTime();
+                    resultFromMongoLab.IsExpectedToBeLike(_result);
+                };
 
         It should_return_the_same_viewmodel = () => _result.ShouldEqual(_viewModel);
     }

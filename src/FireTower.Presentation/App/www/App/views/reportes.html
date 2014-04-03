@@ -8,7 +8,7 @@
             <div class="item item-avatar">
                 <!--<img src="avatar.jpg">-->
                 <h2>{{reporte.LocationDescription}}</h2>
-                <p>{{reporte.CreatedDate}}</p>
+                <p>{{reporte.CreatedDate.$date}}</p>
             </div>
             <div class="item item-image card-image">
                 <img src="{{reporte.Images[0]}}">
@@ -16,6 +16,12 @@
             <a class="item item-icon-left positive" href="#/app/reporte/{{reporte._id.$oid}}" >
                 Detalles
             </a>
+        </div>
+        
+        <div ng-show="reportes.length == 0" class="card">
+          <div class="item item-text-wrap">
+            <h1>No hay reportes</h1>
+          </div>
         </div>
     </ion-content>
 </ion-view>

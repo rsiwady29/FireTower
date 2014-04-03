@@ -23,12 +23,13 @@ namespace FireTower.Domain.CommandHandlers
 
             var c = (CreateNewDisaster) command;
 
-            var itemToCreate = new Disaster(c.Latitude, c.Longitude);
+            var itemToCreate = new Disaster(c.CreatedDate, c.LocationDescription, c.Latitude, c.Longitude);
 
             var newDisasterImage = itemToCreate.AddImage(c.FirstImageUrl);
+            var newSeverityVote = itemToCreate.AddSeverity(c.FirsSeverity);
             var newDisaster = _writeableRepository.Create(itemToCreate);
 
-            NotifyObservers(new NewDisasterCreated(newDisaster.Id, c.Latitude, c.Longitude, c.FirstImageUrl));
+            NotifyObservers(new NewDisasterCreated(newDisaster.Id, newDisaster.CreatedDate, c.LocationDescription, c.Latitude, c.Longitude, c.FirstImageUrl,c.FirsSeverity));
 
         }
 

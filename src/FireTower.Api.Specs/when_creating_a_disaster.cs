@@ -1,4 +1,5 @@
-﻿using AcklenAvenue.Testing.Moq.ExpectedObjects;
+﻿using System;
+using AcklenAvenue.Testing.Moq.ExpectedObjects;
 using AcklenAvenue.Testing.Nancy;
 using FireTower.Domain.Commands;
 using Machine.Specifications;
@@ -13,10 +14,12 @@ namespace FireTower.Api.Specs
     {
         const double Latitude = 123.11;
         const double Longitude = 421.11;
+        const string Location = "Santa Ana";
+        const int Severity = 1;
 
         static readonly CreateNewDisaster CreateNewDisaster =
-            new CreateNewDisaster(Latitude, Longitude,
-                                  "http://www.thisisaphoto.com");
+            new CreateNewDisaster(DateTime.Today.ToLocalTime(), Location, Latitude, Longitude,
+                                  "http://www.thisisaphoto.com", Severity);
 
         static BrowserResponse _result;
 

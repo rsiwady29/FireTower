@@ -7,12 +7,12 @@
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
-    <name>HelloCordova</name>
+    <name>FireTower</name>
     <description>
-        An Ionic Framework and Cordova project.
+        Fire Tower Description
     </description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+      Acklen Avenue
     </author>
     <content src="index.html" />
     <access origin="*" />

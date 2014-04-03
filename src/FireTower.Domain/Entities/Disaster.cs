@@ -6,16 +6,23 @@ namespace FireTower.Domain.Entities
     public class Disaster : IEntity
     {
         IEnumerable<DisasterImage> _images = new List<DisasterImage>();
+        IEnumerable<DisasterSeverity> _severities = new List<DisasterSeverity>();
 
         protected Disaster()
         {
         }
 
-        public Disaster(double latitude, double longitude)
+        public Disaster(DateTime createdDate, string locationDescription, double latitude, double longitude)
         {
+            CreatedDate = createdDate;
+            LocationDescription = locationDescription;
             Latitude = latitude;
             Longitude = longitude;
         }
+
+        public virtual DateTime CreatedDate { get; set; }
+
+        public virtual string LocationDescription { get; set; }
 
         public virtual double Latitude { get; set; }
 
@@ -25,6 +32,12 @@ namespace FireTower.Domain.Entities
         {
             get { return _images; }
             protected set { _images = value; }
+        }
+
+        public virtual IEnumerable<DisasterSeverity> Severities
+        {
+            get { return _severities; }
+            protected set { _severities = value; }
         }
 
         #region IEntity Members
@@ -39,6 +52,14 @@ namespace FireTower.Domain.Entities
             ((IList<DisasterImage>) Images).Add(disasterImage);
 
             return disasterImage;
+        }
+
+        public virtual DisasterSeverity AddSeverity(int severity)
+        {
+            var disasterSeverity = new DisasterSeverity(severity);
+            ((IList<DisasterSeverity>)Severities).Add(disasterSeverity);
+
+            return disasterSeverity;
         }
     }
 }

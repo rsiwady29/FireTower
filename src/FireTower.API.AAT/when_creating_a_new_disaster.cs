@@ -23,7 +23,7 @@ namespace FireTower.API.AAT
                 };
 
         Because of =
-            () => _result = Client.Post("/disasters", new CreateNewDisaster(123.45, 456.32, _url), _token);
+            () => _result = Client.Post("/disasters", new CreateNewDisaster(DateTime.Now, "Santa Ana", 123.45, 456.32, _url, 1), _token);
 
         It should_return_ok =
             () => _result.ShouldBeOk();
