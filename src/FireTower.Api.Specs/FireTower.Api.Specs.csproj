@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="BodyExtensions.cs" />
     <Compile Include="given_a_disaster_module.cs" />
+    <Compile Include="given_a_severity_module.cs" />
     <Compile Include="Users\given_an_api_user_mapper_context.cs" />
     <Compile Include="Users\given_a_login_module_context.cs" />
     <Compile Include="Users\given_a_new_user_module_context.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="when_deserializing_a_command_with_invalid_json.cs" />
     <Compile Include="when_deserializing_a_command_with_invalid_type.cs" />
     <Compile Include="when_deserializing_a_command_with_missing_type_property.cs" />
+    <Compile Include="when_voting_on_a_severity.cs" />
     <Compile Include="Worker\given_a_work_module_context.cs" />
     <Compile Include="MoqMappingExtensions.cs" />
     <Compile Include="TestingContextFactory.cs" />

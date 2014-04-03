@@ -56,10 +56,12 @@
   <ItemGroup>
     <Compile Include="CommandHandlers\NewDisasterCreator.cs" />
     <Compile Include="CommandHandlers\NewUserCreator.cs" />
+    <Compile Include="CommandHandlers\SeverityVoteAdder.cs" />
     <Compile Include="Commands\ActivateUser.cs" />
     <Compile Include="Commands\CreateNewDisaster.cs" />
     <Compile Include="Commands\NewUserCommand.cs" />
     <Compile Include="CommandDispatchers\SynchronousCommandDispatcher.cs" />
+    <Compile Include="Commands\VoteOnSeverity.cs" />
     <Compile Include="DefaultViewEngine.cs" />
     <Compile Include="DomainEvent.cs" />
     <Compile Include="DynamicExtensions.cs" />
@@ -69,12 +71,13 @@
     <Compile Include="EncryptedPassword.cs" />
     <Compile Include="Entities\Disaster.cs" />
     <Compile Include="Entities\DisasterImage.cs" />
-    <Compile Include="Entities\DisasterSeverity.cs" />
+    <Compile Include="Entities\SeverityVote.cs" />
     <Compile Include="Entities\UserSession.cs" />
     <Compile Include="Entities\Verification.cs" />
     <Compile Include="EventHandlers\ActivateUserHandler.cs" />
     <Compile Include="EventHandlers\NewUserVerificationEventHandler.cs" />
     <Compile Include="Events\NewDisasterCreated.cs" />
+    <Compile Include="Events\SeverityVoteAdded.cs" />
     <Compile Include="Events\UserActivated.cs" />
     <Compile Include="Events\NewUserCreated.cs" />
     <Compile Include="Exceptions\NoAvailableHandlerException.cs" />

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="DisasterViewModel.cs" />
     <Compile Include="DisasterViewModelCreator.cs" />
+    <Compile Include="DisasterViewModelSeverityVoteUpdater.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="IViewModelRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

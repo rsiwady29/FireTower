@@ -6,7 +6,7 @@ namespace FireTower.Domain.Entities
     public class Disaster : IEntity
     {
         IEnumerable<DisasterImage> _images = new List<DisasterImage>();
-        IEnumerable<DisasterSeverity> _severities = new List<DisasterSeverity>();
+        IEnumerable<SeverityVote> _severityVotes = new List<SeverityVote>();
 
         protected Disaster()
         {
@@ -28,16 +28,16 @@ namespace FireTower.Domain.Entities
 
         public virtual double Longitude { get; set; }
 
+        public virtual IEnumerable<SeverityVote> SeverityVotes
+        {
+            get { return _severityVotes; }
+            protected set { _severityVotes = value; }
+        }
+
         public virtual IEnumerable<DisasterImage> Images
         {
             get { return _images; }
             protected set { _images = value; }
-        }
-
-        public virtual IEnumerable<DisasterSeverity> Severities
-        {
-            get { return _severities; }
-            protected set { _severities = value; }
         }
 
         #region IEntity Members
@@ -54,12 +54,12 @@ namespace FireTower.Domain.Entities
             return disasterImage;
         }
 
-        public virtual DisasterSeverity AddSeverity(int severity)
+        public virtual SeverityVote AddSeverityVote(User user, int severity)
         {
-            var disasterSeverity = new DisasterSeverity(severity);
-            ((IList<DisasterSeverity>)Severities).Add(disasterSeverity);
+            var severityVote = new SeverityVote(user, severity);
+            ((IList<SeverityVote>) SeverityVotes).Add(severityVote);
 
-            return disasterSeverity;
+            return severityVote;
         }
     }
 }

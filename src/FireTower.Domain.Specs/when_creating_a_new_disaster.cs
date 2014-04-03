@@ -8,6 +8,7 @@ using FizzWare.NBuilder;
 using Machine.Specifications;
 using Moq;
 using It = Machine.Specifications.It;
+using System.Linq;
 
 namespace FireTower.Domain.Specs
 {
@@ -35,8 +36,8 @@ namespace FireTower.Domain.Specs
                             .With(disaster => disaster.Latitude, _command.Latitude)
                             .With(disaster => disaster.Longitude, _command.Longitude)
                             .With(disaster => disaster.Id, Guid.Empty)
-                            .With(disaster => disaster.Severities,
-                                  Builder<DisasterSeverity>.CreateListOfSize(1).All().With(severity => severity.Id, Guid.Empty)
+                            .With(disaster => disaster.SeverityVotes,
+                                  Builder<SeverityVote>.CreateListOfSize(1).All().With(severity => severity.Id, Guid.Empty)
                                       .With(s => s.Severity, _command.FirsSeverity)
                                       .Build())
                             .With(disaster => disaster.Images,
