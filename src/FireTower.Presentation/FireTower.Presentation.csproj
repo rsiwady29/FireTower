@@ -108,18 +108,6 @@
       <Link>AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="App2\config.js" />
-    <Content Include="App2\controller\reporte.js" />
-    <Content Include="App2\controller\reportes.js" />
-    <Content Include="App2\controller\login.js" />
-    <Content Include="App2\js\angular\angular-route.js" />
-    <Content Include="App2\js\angular\angular.js" />
-    <Content Include="App2\services\data.js" />
-    <Content Include="App2\views\reporte.html" />
-    <Content Include="App2\views\reportes.html" />
-    <Content Include="App2\views\login.html" />
-    <Content Include="App2\views\menu.html" />
-    <Content Include="App2\views\inicio.html" />
     <Content Include="App\config.xml" />
     <Content Include="App\www\App\config.js" />
     <Content Include="App\www\App\controller\login.js" />
@@ -224,7 +212,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App2\directives\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
