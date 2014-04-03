@@ -69,6 +69,7 @@
     <Compile Include="EncryptedPassword.cs" />
     <Compile Include="Entities\Disaster.cs" />
     <Compile Include="Entities\DisasterImage.cs" />
+    <Compile Include="Entities\DisasterSeverity.cs" />
     <Compile Include="Entities\UserSession.cs" />
     <Compile Include="Entities\Verification.cs" />
     <Compile Include="EventHandlers\ActivateUserHandler.cs" />

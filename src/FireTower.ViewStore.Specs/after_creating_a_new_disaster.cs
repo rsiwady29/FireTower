@@ -14,7 +14,7 @@ namespace FireTower.ViewStore.Specs
         static IViewModelRepository _viewModelRepository;
 
         static readonly NewDisasterCreated NewDisasterCreated =
-            new NewDisasterCreated(Guid.NewGuid(), 1234.43, 12321.43, "img.gif");
+            new NewDisasterCreated(Guid.NewGuid(),DateTime.Now, "Santa Ana", 1234.43, 12321.43, "img.gif",1);
 
         Establish context =
             () =>
@@ -31,8 +31,12 @@ namespace FireTower.ViewStore.Specs
                       .Verify(x =>
                               x.Create(
                                   WithExpected.Object(
-                                      new DisasterViewModel(NewDisasterCreated.DisasterId, NewDisasterCreated.Latitude,
+                                      new DisasterViewModel(NewDisasterCreated.DisasterId, 
+                                                            NewDisasterCreated.CreatedDate,
+                                                            NewDisasterCreated.LocationDescription,
+                                                            NewDisasterCreated.Latitude,
                                                             NewDisasterCreated.Longitude,
-                                                            NewDisasterCreated.FirstImageUrl))));
+                                                            NewDisasterCreated.FirstImageUrl,
+                                                            NewDisasterCreated.FirstSeverityVote))));
     }
 }

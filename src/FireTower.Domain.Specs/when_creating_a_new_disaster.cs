@@ -25,13 +25,20 @@ namespace FireTower.Domain.Specs
                 {
                     _writeableRepository = Mock.Of<IWriteableRepository>();
                     _commandHandler = new NewDisasterCreator(_writeableRepository);
-                     
-                    _command = new CreateNewDisaster(123.34, 456.32, "http://url.com");
+
+                    _command = new CreateNewDisaster(DateTime.Today.ToLocalTime(), "LocationDescription1", 123.34, 456.32, "http://url.com", 1);
 
                     _expectedDisaster =
-                        Builder<Disaster>.CreateNew().With(disaster => disaster.Latitude, _command.Latitude)
+                        Builder<Disaster>.CreateNew()
+                            .With(disaster => disaster.CreatedDate, _command.CreatedDate)
+                            .With(disaster => disaster.LocationDescription, _command.LocationDescription)
+                            .With(disaster => disaster.Latitude, _command.Latitude)
                             .With(disaster => disaster.Longitude, _command.Longitude)
                             .With(disaster => disaster.Id, Guid.Empty)
+                            .With(disaster => disaster.Severities,
+                                  Builder<DisasterSeverity>.CreateListOfSize(1).All().With(severity => severity.Id, Guid.Empty)
+                                      .With(s => s.Severity, _command.FirsSeverity)
+                                      .Build())
                             .With(disaster => disaster.Images,
                                   Builder<DisasterImage>.CreateListOfSize(1).All().With(image => image.Id, Guid.Empty)
                                       .With(image => image.Url, _command.FirstImageUrl)
@@ -42,7 +49,7 @@ namespace FireTower.Domain.Specs
                         .Returns(_expectedDisaster);
 
                     _commandHandler.NotifyObservers += x => _eventRaised = x;
-                    _expectedEvent = new NewDisasterCreated(_expectedDisaster.Id, _command.Latitude, _command.Longitude, _command.FirstImageUrl);                    
+                    _expectedEvent = new NewDisasterCreated(_expectedDisaster.Id, _command.CreatedDate, _command.LocationDescription, _command.Latitude, _command.Longitude, _command.FirstImageUrl, _command.FirsSeverity);
                 };
 
         Because of =
