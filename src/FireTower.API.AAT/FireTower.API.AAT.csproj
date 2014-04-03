@@ -53,6 +53,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Machine.Specifications.Should.0.7.1\lib\net45\Machine.Specifications.Should.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson, Version=1.8.3.9, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.8.3.9, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
@@ -77,6 +85,7 @@
     <Compile Include="when_logging_in_with_incorrect_credentials.cs" />
     <Compile Include="when_posting_a_command_from_the_queue.cs" />
     <Compile Include="when_verifying_an_account_with_invalid_code.cs" />
+    <Compile Include="when_voting_on_the_severity_of_a_fire.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -94,6 +103,10 @@
     <ProjectReference Include="..\FireTower.Domain\FireTower.Domain.csproj">
       <Project>{78E97BC9-A576-40C2-B018-59D22BF07E95}</Project>
       <Name>Replay20.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FireTower.ViewStore\FireTower.ViewStore.csproj">
+      <Project>{04d4ead0-0ad7-4a67-998a-ede597b8f877}</Project>
+      <Name>FireTower.ViewStore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

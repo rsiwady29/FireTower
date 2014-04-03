@@ -106,6 +106,7 @@
     <Compile Include="when_rendering_the_body_of_an_email_from_a_model.cs" />
     <Compile Include="when_sending_an_email.cs" />
     <Compile Include="when_sending_a_verification_email.cs" />
+    <Compile Include="when_voting_on_a_severity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
