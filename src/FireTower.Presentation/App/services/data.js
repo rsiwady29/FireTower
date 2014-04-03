@@ -17,7 +17,7 @@
                 "LocationDescription": "Near Comayagua",
                 "Location": [0.45234234, 0.01231234],
                 "SeverityNotes": [2],
-                "Images": ['http://placehold.it/350x150', 'http://ww4.hdnux.com/photos/12/72/01/2859127/13/628x471.jpg']
+                "Images": ['http://www.wildlandfire.com/pics/wall/davislg.jpg', 'http://placehold.it/350x150']
             },
             {
                 "_id": {
@@ -27,7 +27,7 @@
                 "LocationDescription": "Near Comayagua",
                 "Location": [0.45234234, 0.01231234],
                 "SeverityNotes": [2],
-                "Images": ['http://placehold.it/350x150', 'https://www.dosomething.org/files/styles/blog_landscape/public/pictures/wildfires8763.jpg?itok=VxL9mcG7']
+                "Images": ['http://www.thisfamilytree.org/wp-content/uploads/2012/07/forest_fire.jpg', 'http://placehold.it/350x150']
             },
             {
                 "_id": {
@@ -37,7 +37,7 @@
                 "LocationDescription": "Near Comayagua",
                 "Location": [0.45234234, 0.01231234],
                 "SeverityNotes": [2],
-                "Images": ['http://placehold.it/350x150', 'http://placehold.it/350x450']
+                "Images": ['http://www.uwec.edu/jolhm/EH3/Group9/wildfire_biscuit.jpg', 'http://placehold.it/350x450']
             }
         ];
         /*var url = baseUrl + db + '/collections/' + collection + '?apiKey=' + apiKey;
