@@ -108,18 +108,42 @@
       <Link>AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="App\config.js" />
-    <Content Include="App\controller\reporte.js" />
-    <Content Include="App\controller\reportes.js" />
-    <Content Include="App\controller\login.js" />
-    <Content Include="App\js\angular\angular-route.js" />
-    <Content Include="App\js\angular\angular.js" />
-    <Content Include="App\services\data.js" />
-    <Content Include="App\views\reporte.html" />
-    <Content Include="App\views\reportes.html" />
-    <Content Include="App\views\login.html" />
-    <Content Include="App\views\menu.html" />
-    <Content Include="App\views\inicio.html" />
+    <Content Include="App\config.xml" />
+    <Content Include="App\www\App\config.js" />
+    <Content Include="App\www\App\controller\login.js" />
+    <Content Include="App\www\App\controller\reporte.js" />
+    <Content Include="App\www\App\controller\reportes.js" />
+    <Content Include="App\www\App\js\angular\angular-route.js" />
+    <Content Include="App\www\App\js\angular\angular.js" />
+    <Content Include="App\www\App\services\data.js" />
+    <Content Include="App\www\App\views\inicio.html" />
+    <Content Include="App\www\App\views\login.html" />
+    <Content Include="App\www\App\views\menu.html" />
+    <Content Include="App\www\App\views\reporte.html" />
+    <Content Include="App\www\App\views\reportes.html" />
+    <Content Include="App\www\Content\css\ionic.css" />
+    <Content Include="App\www\Content\css\ionic.min.css" />
+    <Content Include="App\www\Content\css\style.css" />
+    <Content Include="App\www\Content\fonts\ionicons.svg" />
+    <Content Include="App\www\Content\js\angular-google-maps.min.js" />
+    <Content Include="App\www\Content\js\angular-ui\angular-ui-router.js" />
+    <Content Include="App\www\Content\js\angular-ui\angular-ui-router.min.js" />
+    <Content Include="App\www\Content\js\angular\angular-animate.js" />
+    <Content Include="App\www\Content\js\angular\angular-animate.min.js" />
+    <Content Include="App\www\Content\js\angular\angular-resource.js" />
+    <Content Include="App\www\Content\js\angular\angular-resource.min.js" />
+    <Content Include="App\www\Content\js\angular\angular-sanitize.js" />
+    <Content Include="App\www\Content\js\angular\angular-sanitize.min.js" />
+    <Content Include="App\www\Content\js\angular\angular.js" />
+    <Content Include="App\www\Content\js\angular\angular.min.js" />
+    <Content Include="App\www\Content\js\ionic-angular.js" />
+    <Content Include="App\www\Content\js\ionic-angular.min.js" />
+    <Content Include="App\www\Content\js\ionic.bundle.js" />
+    <Content Include="App\www\Content\js\ionic.bundle.min.js" />
+    <Content Include="App\www\Content\js\ionic.js" />
+    <Content Include="App\www\Content\js\ionic.min.js" />
+    <Content Include="App\www\Content\js\underscore-min.js" />
+    <Content Include="App\www\index.html" />
     <Content Include="Content\css\ionic.css" />
     <Content Include="Content\css\ionic.min.css" />
     <Content Include="Content\css\style.css" />
@@ -188,13 +212,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\directives\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="App\ionic.project" />
+    <Content Include="App\www\Content\.DS_Store" />
+    <Content Include="App\www\Content\fonts\ionicons.eot" />
+    <Content Include="App\www\Content\fonts\ionicons.ttf" />
+    <Content Include="App\www\Content\fonts\ionicons.woff" />
     <None Include="web.config.default" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
