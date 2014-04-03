@@ -37,6 +37,11 @@ namespace FireTower.Domain.Services
             return userSession;
         }
 
+        public void Delete(Guid sessionId)
+        {
+            _writeableRepository.Delete<UserSession>(sessionId);
+        }
+
         #endregion
     }
 }

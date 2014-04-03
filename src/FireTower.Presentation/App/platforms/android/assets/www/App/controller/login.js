@@ -8,6 +8,12 @@
         function(newVal) {
             if (newVal) {
                 $scope.facebookReady = true;
+                Facebook.getLoginStatus(function (response) {
+                    if (response.status == 'connected') {
+                        $scope.logged = true;
+                        $scope.me();
+                    }
+                });
             }
         });
     
@@ -40,8 +46,6 @@
                 user.setUser(response);
                 
             });
-            //redirect to home
-            $location.path('/app/reportes');
 
         });
     };
@@ -60,10 +64,6 @@
             $scope.$apply(function () {
                 $scope.salutation = true;
                 $scope.byebye = false;
-                //insert into database
-                
-                //redirect to home
-                $location.path('/app/reportes');
             });
         } else {
             $scope.$apply(function () {

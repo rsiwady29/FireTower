@@ -37,6 +37,23 @@ namespace FireTower.Presentation.Modules
                             return new Response().WithStatusCode(HttpStatusCode.Unauthorized);
                         }
                     };
+            Post["/logout"] =
+                r =>
+                {
+                    var loginInfo = this.Bind<LoginRequest>();
+                    try
+                    {
+                        var session = readOnlyRepository.First<UserSession>(x => x.User.FacebookId == loginInfo.FacebookId);
+
+                        userSessionFactory.Delete(session.Id);
+
+                        return new Response().WithStatusCode(HttpStatusCode.OK);
+                    }
+                    catch (ItemNotFoundException<User> ex)
+                    {
+                        return new Response().WithStatusCode(HttpStatusCode.Unauthorized);
+                    }
+                };
         }
 
     }

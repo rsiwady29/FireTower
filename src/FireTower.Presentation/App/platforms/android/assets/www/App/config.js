@@ -12,7 +12,8 @@
     $stateProvider
         .state('app', {
             url: "/app",
-            templateUrl: "App/views/menu.html"
+            templateUrl: "App/views/menu.html",
+            controller: "MenuController"
         })
         .state('app.inicio', {
             url: "/",
