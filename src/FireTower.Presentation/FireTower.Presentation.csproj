@@ -219,7 +219,6 @@
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="App\ionic.project" />
-    <Content Include="App\www\Content\.DS_Store" />
     <Content Include="App\www\Content\fonts\ionicons.eot" />
     <Content Include="App\www\Content\fonts\ionicons.ttf" />
     <Content Include="App\www\Content\fonts\ionicons.woff" />
