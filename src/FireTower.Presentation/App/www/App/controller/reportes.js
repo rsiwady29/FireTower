@@ -1,7 +1,5 @@
 angular.module('firetower')
-    .controller('ReportesController', ['$scope', 'data', function($scope, data) {
-
-        //$scope.reportes = data.getAllReports();
+    .controller('ReportesController', ['$scope', 'data', function($scope, data) {       
         data.getAllReports()
             .success(function (data) {
                 $scope.reportes = data;
