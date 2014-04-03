@@ -119,7 +119,6 @@
     <Compile Include="Users\given_a_new_user_module_context.cs" />
     <Compile Include="Users\given_a_user_module_context.cs" />
     <Compile Include="Users\given_a_verification_module_context.cs" />
-<<<<<<< HEAD
     <Compile Include="when_creating_a_disaster.cs" />
     <Compile Include="when_deserializing_a_command_with_invalid_json.cs" />
     <Compile Include="when_deserializing_a_command_with_invalid_type.cs" />

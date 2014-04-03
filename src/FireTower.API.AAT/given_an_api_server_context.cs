@@ -36,8 +36,7 @@ namespace FireTower.API.AAT
                 Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
                                                               new LoginRequest
                                                               {
-                                                                  Email = "test@test.com",
-                                                                  Password = "password"
+                                                                  FacebookId = 123456
                                                               });
             return restResponse.Data;
         }

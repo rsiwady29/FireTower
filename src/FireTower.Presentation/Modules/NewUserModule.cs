@@ -25,7 +25,7 @@ namespace FireTower.Presentation.Modules
         static void DispatchCommand(ICommandDispatcher commandDispatcher,
                                     NewUserRequest newUserRequest)
         {
-            commandDispatcher.Dispatch(new NewUserCommand
+            commandDispatcher.Dispatch(new UserSession(), new NewUserCommand
                                            {
                                                 FirstName = newUserRequest.FirstName,
                                                 LastName = newUserRequest.LastName,

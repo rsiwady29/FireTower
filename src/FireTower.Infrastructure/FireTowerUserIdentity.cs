@@ -19,7 +19,8 @@ namespace FireTower.Infrastructure
 
         public string UserName
         {
-            get { return (User ?? new User()).LastName; }
+            //get { return (User ?? new User()).LastName; }
+            get { return (new User()).LastName; }
         }
 
         public IEnumerable<string> Claims

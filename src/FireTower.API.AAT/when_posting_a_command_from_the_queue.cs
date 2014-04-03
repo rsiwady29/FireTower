@@ -17,12 +17,13 @@ namespace FireTower.API.AAT
                                     Guid token = Login().Token;
                                     var command = new NewUserCommand
                                                       {
-                                                          AgreementVersion = 1,
-                                                          Email =
-                                                              string.Format("sommardahl+{0}@gmail.com",
-                                                                            new Random().Next(99999)),
-                                                          EncryptedPassword =
-                                                              new EncryptedPassword("4565432345654321")
+                                                          FirstName = "Byron",
+                                                          LastName = "Sommardahl",
+                                                          Name = "Byron Sommardahl",
+                                                          FacebookId = 1817134138,
+                                                          Locale = "es_ES",
+                                                          Username = "bsommardahl",
+                                                          Verified = true
                                                       };
 
                                     _commandFromQueue = command.ToDynamic();
