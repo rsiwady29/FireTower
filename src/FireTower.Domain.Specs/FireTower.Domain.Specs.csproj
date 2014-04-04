@@ -106,6 +106,7 @@
     <Compile Include="when_sending_an_email.cs" />
     <Compile Include="when_sending_a_verification_email.cs" />
     <Compile Include="when_voting_on_a_severity.cs" />
+    <Compile Include="when_voting_that_a_fire_is_controlled.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

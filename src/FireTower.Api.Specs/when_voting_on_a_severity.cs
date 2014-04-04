@@ -2,6 +2,7 @@
 using AcklenAvenue.Testing.Moq.ExpectedObjects;
 using AcklenAvenue.Testing.Nancy;
 using FireTower.Domain.Commands;
+using FireTower.Domain.Entities;
 using FireTower.Presentation.Requests;
 using Machine.Specifications;
 using Moq;
