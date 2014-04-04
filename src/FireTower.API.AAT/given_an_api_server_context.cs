@@ -41,6 +41,21 @@ namespace FireTower.API.AAT
             return restResponse.Data;
         }
 
+        protected static void RegisterUser()
+        {
+                Client.Execute("/user", Method.POST,
+                                                               new NewUserRequest
+                                                                  {
+                                                                      FirstName = "Byron",
+                                                                      LastName = "Sommardahl",
+                                                                      Name = "Byron Sommardahl",
+                                                                      FacebookId = 123456,
+                                                                      Locale = "es_ES",
+                                                                      Username = "bsommardahl",
+                                                                      Verified = true
+                                                                  });
+        }
+
         
     }
 }

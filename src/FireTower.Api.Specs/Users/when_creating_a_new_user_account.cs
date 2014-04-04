@@ -36,25 +36,11 @@ namespace FireTower.Api.Specs.Users
 
                     Mock.Get(ReadOnlyRepository).Setup(x => x.First(ThatHas.AnExpressionFor<User>().Build()))
                         .Throws(new ItemNotFoundException<User>());
-
-                    _encryptedPassword = new EncryptedPassword("encrypted password");
                 };
 
         Because of =
             () => _result = Browser.PostSecureJson("/user", _request);
 
         It should_return_an_ok_response = () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
-
-        It should_add_a_command_to_the_queue =
-            () => Mock.Get(CommandDispatcher).Verify(x => x.Dispatch(VisitorSession, WithExpected.Object(new NewUserCommand
-                                                                                             {
-                                                                                                 FirstName = _request.FirstName,
-                                                                                                 LastName = _request.LastName,
-                                                                                                 Name = _request.Name,
-                                                                                                 FacebookId = _request.FacebookId,
-                                                                                                 Locale = _request.Locale,
-                                                                                                 Username = _request.Username,
-                                                                                                 Verified = _request.Verified
-                                                                                             })));
     }
 }

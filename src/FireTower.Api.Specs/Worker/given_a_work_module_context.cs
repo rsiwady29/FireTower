@@ -13,7 +13,7 @@ namespace FireTower.Api.Specs.Worker
         protected static Browser Browser;
         protected static ICommandDispatcher CommandDispatcher;
         protected static ICommandDeserializer CommandDeserializer;
-        protected static UserSession UserSession;
+        protected static VisitorSession UserSession;
 
         Establish master_context =
             () =>
@@ -25,7 +25,7 @@ namespace FireTower.Api.Specs.Worker
                                                   x.Module<WorkModule>();
                                                   x.Dependency(CommandDispatcher);
                                                   x.Dependency(CommandDeserializer);
-                                                  UserSession = UserSession.New(new User());
+                                                  UserSession = new VisitorSession();
                                                   x.WithUserSession(UserSession);
                                               });
                 };
