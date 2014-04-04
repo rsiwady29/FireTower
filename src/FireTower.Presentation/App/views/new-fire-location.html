@@ -1,12 +1,23 @@
-﻿<ion-view title="Denunciar">
+﻿<style>
+    .angular-google-map-container{
+        height: 100% !important
+    }
+</style>
+<ion-view title="Denunciar">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     
-    <p>
-        <google-map center="map.center" zoom="map.zoom"></google-map> 
-    </p>
+    <ion-content scroll="false">
+        <google-map center="map.center" zoom="map.zoom" draggable="true">
+            <markers>
+                <marker coords="marker.coords" options="marker.options" events="marker.events"></marker>
+            </markers>
+        </google-map> 
+    </ion-content>
     
-    <ion-footer-bar class="bar bar-stable">Fin</ion-footer-bar>
+    <ion-footer-bar class="bar bar-balanced">
+        <h1 class="title">Finalizar</h1>
+    </ion-footer-bar>
 
 </ion-view>
