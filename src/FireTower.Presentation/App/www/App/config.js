@@ -70,9 +70,7 @@ angular.module('firetower', ['ionic', 'google-maps'])
         }
     };
 
-    FB.Event.subscribe('auth.login', function (response) {
-        alert('auth.login event');
-    });
+    
     
     if (isMobile.any()) {
         FB.init({ appId: myAppId, nativeInterface: CDV.FB, useCachedDialogs: false });
