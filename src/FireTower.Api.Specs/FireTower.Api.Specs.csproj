@@ -161,6 +161,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Debug\EmailTemplates\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +169,6 @@
       <Link>AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="bin\Debug\EmailTemplates\disasterTemplate.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AcklenAvenue.Testing.Nancy\AcklenAvenue.Testing.Nancy.csproj">

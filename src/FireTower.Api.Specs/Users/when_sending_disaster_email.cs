@@ -39,6 +39,6 @@ namespace FireTower.Api.Specs.Users
             () => _result = Browser.PostSecureJson("/SendDisasterByEmail", new { Email = email, CreatedDate = date, LocationDescription = locationDescription, Latitude = latitude, Longitude = longitude });
 
         It should_send_the_email =
-            () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
+            () => _result.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
     }
 }
