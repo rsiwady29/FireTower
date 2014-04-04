@@ -7,17 +7,36 @@
               <p>{{reporte.CreatedDate.$date}}</p>
           </div>
 
-          <div class="item item-body">
+          <div class="item item-body">              
               <img class="full-image card-image" ng-src="{{reporte.Images[0]}}">
-              <p>
-                  <google-map center="map.center" zoom="map.zoom" refresh="map.refresh"></google-map> 
-                  lat: {{map.center.latitude}}   -  lng: {{map.center.longitude}}  - {{map.refresh}}
-              </p>
+
               <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item" href="#">
-                  <i class="icon ion-close-circled"></i>
-                  No Valido
-                </a>                
+                  <a class="tab-item" ng-click="" ng-repeat="value in filedStars"><i class="icon ion-ios7-star"></i></a>
+                  <a class="tab-item" ng-repeat="value in blankStars"><i class="icon ion-ios7-star-outline"></i></a>                               
+              </div>
+
+              <p>
+                  <google-map center="map.center" zoom="map.zoom" refresh="map.refresh"></google-map>                   
+              </p>
+                            
+              <p>
+                  
+              </p>
+
+              <!--<div class="item tabs tabs-secondary tabs-icon-left">
+                      <a class="tab-item" href="#">
+                          <i class="icon ion-close-circled"></i>
+                          No Valido
+                      </a>                
+                  </div>-->
+              
+              <div class="item item-divider">
+               ¿Qué tan Severo es el fuego?
+              </div>
+              <div class="item tabs tabs-secondary tabs-icon-left">
+                  <a class="tab-item" ng-repeat="value in Severities" ng-click="saveSeverity(value)">
+                      <i class="icon">{{value}}</i>
+                  </a>
               </div>
           </div>
           
@@ -26,7 +45,10 @@
             <h1>Error al cargar</h1>
           </div>
         </div>
-
+          <br/>
+          <br/>
+                    <br/>
+          <br/>
       </div>
   </ion-content>
 </ion-view>

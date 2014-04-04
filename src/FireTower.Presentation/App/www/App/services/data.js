@@ -14,7 +14,7 @@
     };
 
     factory.getReportById = function(id) {
-        var query = '?q={"_id":{"$oid": "' + id + '"}}';
+        var query = '?q={"DisasterId":{"$uuid": "' + id + '"}}';
         return $http.get(baseUrl + db + '/collections/' + collection + query +'&apiKey=' + apiKey);
     };
 

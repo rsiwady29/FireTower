@@ -16,11 +16,10 @@ angular.module('firetower', ['ionic', 'google-maps'])
             controller: "MenuController"
         })
         .state('app.inicio', {
-            url: "/",
+            url: "/inicio",
             views: {
                 'menuContent': {
-                    templateUrl: "App/views/login.html",
-                    controller: "LoginController"
+                    templateUrl: "App/views/inicio.html"
                 }
             }
         })
@@ -37,17 +36,18 @@ angular.module('firetower', ['ionic', 'google-maps'])
             url: "/reporte/:reporteId",
             views: {
                 'menuContent': {
-                    templateUrl: "App/views/reporte.html"
+                    templateUrl: "App/views/reporte.html",
+                    controller: 'ReporteController'
                 }
             }
-        })
-        .state('otherwise', {
-            url: '*path',
-            templateUrl: 'App/views/login.html',
-            controller: 'LoginController'
         });
+       /* .state('otherwise', {
+            url: '*path',
+            templateUrl: 'App/views/inicio.html'
+        });*/
+    $urlRouterProvider.otherwise('/app/inicio');
 
-    var myAppId = '294203754077185';
+    /*var myAppId = '294203754077185';
     
     var isMobile = {
         Android: function () {
@@ -76,5 +76,5 @@ angular.module('firetower', ['ionic', 'google-maps'])
         FB.init({ appId: myAppId, nativeInterface: CDV.FB, useCachedDialogs: false });
     } else {
         FB.init({ appId: myAppId});
-    }
+    }*/
 }]);
