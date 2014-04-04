@@ -116,6 +116,7 @@
     <Content Include="App\www\App\controller\reportes.js" />
     <Content Include="App\www\App\js\angular\angular-route.js" />
     <Content Include="App\www\App\js\angular\angular.js" />
+    <Content Include="App\www\App\js\require.js" />
     <Content Include="App\www\App\services\math.js" />
     <Content Include="App\www\App\js\cordova-2.0.0.js" />
     <Content Include="App\www\App\services\data.js" />
