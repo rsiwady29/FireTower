@@ -30,8 +30,8 @@
         logoutUser: function () {
             $http.post('/logout', { FacebookId: parseInt(user.id) }).success(function (response) {
                 user = {};
-                FB.api("/me/permissions", "delete", function (fResponse) { $location.path('/app/'); });
-                
+                //FB.api("/me/permissions", "delete", function (fResponse) {  });
+                $location.path('/app/');
             }).error(function (XMLHttpRequest, textStatus, errorThrown) {
             });
             

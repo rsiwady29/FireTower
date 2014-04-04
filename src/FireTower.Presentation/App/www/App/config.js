@@ -1,4 +1,4 @@
-angular.module('firetower', ['ionic', 'facebook', 'google-maps'])
+angular.module('firetower', ['ionic', 'facebook'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -45,7 +45,7 @@ angular.module('firetower', ['ionic', 'facebook', 'google-maps'])
             url: '*path',
             templateUrl: 'App/views/login.html',
             controller: 'LoginController'
-        });;
+        });
 
     var myAppId = '294203754077185';
 

@@ -11,7 +11,6 @@
                 Facebook.getLoginStatus(function (response) {
                     if (response.status == 'connected') {
                         $scope.logged = true;
-                        $scope.me();
                     }
                 });
             }
@@ -39,6 +38,7 @@
     };
     $scope.me = function () {
         Facebook.api('/me', function (response) {
+
             /**
              * Using $scope.$apply since this happens outside angular framework.
              */
@@ -50,7 +50,7 @@
         });
     };
 
-    $scope.$on('Facebook:statusChange', function (ev, data) {
+    /*$scope.$on('Facebook:statusChange', function (ev, data) {
         if (data.status == 'connected') {
             $scope.$apply(function () {
                 $scope.salutation = true;
@@ -72,6 +72,6 @@
         }
 
 
-    });
+    });*/
 
 }]);
