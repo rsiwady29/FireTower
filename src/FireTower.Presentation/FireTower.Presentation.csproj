@@ -203,6 +203,7 @@
     <Compile Include="Modules\WorkModule.cs" />
     <Compile Include="Requests\VerifyAccountRequest.cs" />
     <Compile Include="Requests\VoteOnControlledRequest.cs" />
+    <Compile Include="Requests\VoteOnPutOutRequest.cs" />
     <Compile Include="Requests\VoteOnSeverityRequest.cs" />
     <Compile Include="Responses\MeResponse.cs" />
     <Compile Include="Responses\UserExistenceResponse.cs" />

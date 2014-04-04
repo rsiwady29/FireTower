@@ -1,5 +1,4 @@
-﻿using System;
-using FireTower.Domain;
+﻿using FireTower.Domain;
 using FireTower.Domain.Commands;
 using FireTower.Infrastructure;
 using FireTower.Presentation.Requests;
@@ -31,12 +30,5 @@ namespace FireTower.Presentation.Modules
                     return null;
                 };
         }
-    }
-
-    public class VoteOnPutOutRequest
-    {
-        public bool IsPutOut { get; set; }
-
-        public Guid DisasterId { get; set; }
     }
 }
