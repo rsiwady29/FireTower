@@ -63,7 +63,7 @@
                 .error(function(error) {
                     console.log(error);
                 });
-
+            
             $scope.map = {
                 center: {
                     latitude: 0,
@@ -73,7 +73,12 @@
                 refresh: false
             };
         };
-
         $scope.reporte = null;
+        $scope.updateControlledFire = function () {
+            console.log("asd");
+        };
+        $scope.updatePutOutFire = function () {
+            console.log("asd");
+        };
         init();        
     }]);
