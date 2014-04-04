@@ -15,7 +15,7 @@
     <AssemblyName>FireTower.Presentation</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -116,6 +116,7 @@
     <Content Include="App\www\App\controller\reportes.js" />
     <Content Include="App\www\App\js\angular\angular-route.js" />
     <Content Include="App\www\App\js\angular\angular.js" />
+    <Content Include="App\www\App\js\require.js" />
     <Content Include="App\www\App\services\math.js" />
     <Content Include="App\www\App\js\cordova-2.0.0.js" />
     <Content Include="App\www\App\services\data.js" />
@@ -142,6 +143,8 @@
     <Content Include="App\www\Content\js\angular\angular-sanitize.min.js" />
     <Content Include="App\www\Content\js\angular\angular.js" />
     <Content Include="App\www\Content\js\angular\angular.min.js" />
+    <Content Include="App\www\Content\js\cdv-plugin-fb-connect.js" />
+    <Content Include="App\www\Content\js\facebook-js-sdk.js" />
     <Content Include="App\www\Content\js\ionic-angular.js" />
     <Content Include="App\www\Content\js\ionic-angular.min.js" />
     <Content Include="App\www\Content\js\ionic.bundle.js" />
@@ -151,28 +154,6 @@
     <Content Include="App\www\Content\js\moment.min.js" />
     <Content Include="App\www\Content\js\underscore-min.js" />
     <Content Include="App\www\index.html" />
-    <Content Include="Content\css\ionic.css" />
-    <Content Include="Content\css\ionic.min.css" />
-    <Content Include="Content\css\style.css" />
-    <Content Include="Content\fonts\ionicons.svg" />
-    <Content Include="Content\js\angular-google-maps.min.js" />
-    <Content Include="Content\js\angular-ui\angular-ui-router.js" />
-    <Content Include="Content\js\angular-ui\angular-ui-router.min.js" />
-    <Content Include="Content\js\angular\angular-animate.js" />
-    <Content Include="Content\js\angular\angular-animate.min.js" />
-    <Content Include="Content\js\angular\angular-resource.js" />
-    <Content Include="Content\js\angular\angular-resource.min.js" />
-    <Content Include="Content\js\angular\angular-sanitize.js" />
-    <Content Include="Content\js\angular\angular-sanitize.min.js" />
-    <Content Include="Content\js\angular\angular.js" />
-    <Content Include="Content\js\angular\angular.min.js" />
-    <Content Include="Content\js\ionic-angular.js" />
-    <Content Include="Content\js\ionic-angular.min.js" />
-    <Content Include="Content\js\ionic.bundle.js" />
-    <Content Include="Content\js\ionic.bundle.min.js" />
-    <Content Include="Content\js\ionic.js" />
-    <Content Include="Content\js\ionic.min.js" />
-    <Content Include="Content\js\underscore-min.js" />
     <Content Include="index.html" />
     <Content Include="EmailTemplates\verificationEmail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -226,9 +207,6 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\ionicons.eot" />
-    <Content Include="Content\fonts\ionicons.ttf" />
-    <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="App\ionic.project" />
     <Content Include="App\www\Content\fonts\ionicons.eot" />
     <Content Include="App\www\Content\fonts\ionicons.ttf" />

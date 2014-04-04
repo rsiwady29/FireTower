@@ -1,4 +1,4 @@
-﻿angular.module('firetower').controller('MenuController', ['$scope', 'Facebook', '$location', 'userManagement', function ($scope, Facebook, $location, user) {
+﻿angular.module('firetower').controller('MenuController', ['$scope', '$location', 'userManagement', function ($scope, $location, user) {
     
     $scope.logout = function () {
        user.logoutUser();

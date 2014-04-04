@@ -1,4 +1,4 @@
-angular.module('firetower', ['ionic', 'facebook', 'google-maps'])
+angular.module('firetower', ['ionic', 'google-maps'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -8,7 +8,7 @@ angular.module('firetower', ['ionic', 'facebook', 'google-maps'])
     });
 })
 
-.config(['FacebookProvider', '$stateProvider', '$urlRouterProvider', function (FacebookProvider, $stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('app', {
             url: "/app",
@@ -48,6 +48,33 @@ angular.module('firetower', ['ionic', 'facebook', 'google-maps'])
         });
 
     var myAppId = '294203754077185';
+    
+    var isMobile = {
+        Android: function () {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function () {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function () {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function () {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function () {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function () {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
 
-    FacebookProvider.init(myAppId);
+    
+    
+    if (isMobile.any()) {
+        FB.init({ appId: myAppId, nativeInterface: CDV.FB, useCachedDialogs: false });
+    } else {
+        FB.init({ appId: myAppId});
+    }
 }]);

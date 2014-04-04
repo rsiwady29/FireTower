@@ -1,77 +1,34 @@
-﻿angular.module('firetower').controller('LoginController', ['$scope', '$timeout', 'Facebook', '$location', 'userManagement', function ($scope, $timeout, Facebook, $location, user) {
+﻿angular.module('firetower').controller('LoginController', ['$scope', '$timeout', '$location', 'userManagement', function ($scope, $timeout, $location, user) {
     $scope.logged = false;
     $scope.salutation = false;
     $scope.byebye = false;
-    $scope.$watch(function () {
-        return Facebook.isReady();
-    },
-        function (newVal) {
-            if (newVal) {
-                $scope.facebookReady = true;
-                Facebook.getLoginStatus(function (response) {
-                    if (response.status == 'connected') {
-                        $scope.logged = true;
-                    }
-                });
-            }
-        });
-
-    $scope.IntentLogin = function () {
-
-        Facebook.getLoginStatus(function (response) {
-            if (response.status == 'connected') {
+    $scope.facebookReady = false;
+    
+    FB.Event.subscribe('auth.login', function (response) {
+        $scope.facebookReady = true;
+        FB.getLoginStatus(function (response2) {
+            if (response2.status == 'connected') {
                 $scope.logged = true;
-                $scope.me();
             }
-            else
-                $scope.login();
         });
-    };
+    });
+
     $scope.login = function () {
-        Facebook.login(function (response) {
-            if (response.status == 'connected') {
-                $scope.logged = true;
-                $scope.me();
-            }
-
-        });
+        FB.login(
+            function (response) {
+                if (response.status == 'connected') {
+                    $scope.me();
+                } else {
+                    $scope.login();
+                }
+            });
     };
     $scope.me = function () {
-        Facebook.api('/me', function (response) {
-
-            /**
-             * Using $scope.$apply since this happens outside angular framework.
-             */
+        FB.api('/me', function (response) {
             $scope.$apply(function () {
                 user.setUser(response);
-
             });
 
         });
     };
-
-    /*$scope.$on('Facebook:statusChange', function (ev, data) {
-        if (data.status == 'connected') {
-            $scope.$apply(function () {
-                $scope.salutation = true;
-                $scope.byebye = false;
-            });
-        } else {
-            $scope.$apply(function () {
-                $scope.salutation = false;
-                $scope.byebye = true;
-
-                // Dismiss byebye message after two seconds
-                $timeout(function () {
-                    $scope.byebye = false;
-                }, 2000);
-            });
-            //redirect to login
-
-            $location.path("/");
-        }
-
-
-    });*/
-
 }]);
