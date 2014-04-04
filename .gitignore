@@ -62,3 +62,5 @@ database_deployment
 # Office Temp Files
 ~$*
 
+#Cordova Platforms
+src/FireTower.Presentation/App/platforms/
