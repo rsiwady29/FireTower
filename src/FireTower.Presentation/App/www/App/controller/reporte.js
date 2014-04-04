@@ -1,6 +1,5 @@
 ﻿angular.module('firetower')
-    .controller('ReporteController', ['$scope', '$stateParams', '$ionicLoading', 'data', 'Math', 'DisasterService',
-        function ($scope, $stateParams, $ionicLoading, data, Math, DisasterService) {
+    .controller('ReporteController', ['$scope', '$stateParams', '$ionicLoading', 'data', 'Math', 'DisasterService', '$ionicPopup', '$http', function ($scope, $stateParams, $ionicLoading, data, Math, DisasterService, $ionicPopup, $http) {
 
         $scope.startCount = 5;
 
