@@ -3,27 +3,29 @@
       <div class="list card">
 
           <div class="item item-avatar" >
-              <img  src="{{reporte.photo}}">
-              <h2>{{reporte.title}}</h2>
-              <p>Hoy a las 12:00pm</p>
+              <h2>{{reporte.LocationDescription}}</h2>
+              <p>{{reporte.CreatedDate.$date}}</p>
           </div>
 
           <div class="item item-body">
-              <img class="full-image card-image" src="{{reporte.Images[0]}}">
+              <img class="full-image card-image" ng-src="{{reporte.Images[0]}}">
               <p>
-                 <google-map center="map.center" zoom="map.zoom"></google-map> 
+                  <google-map center="map.center" zoom="map.zoom" refresh="map.refresh"></google-map> 
+                  lat: {{map.center.latitude}}   -  lng: {{map.center.longitude}}  - {{map.refresh}}
               </p>
-              <p>
-                  {{reporte.description}}
-              </p>
-              
-               <div class="item tabs tabs-secondary tabs-icon-left">
+              <div class="item tabs tabs-secondary tabs-icon-left">
                 <a class="tab-item" href="#">
                   <i class="icon ion-close-circled"></i>
                   No Valido
                 </a>                
               </div>
           </div>
+          
+          <div ng-show="reportes != null && reportes != undefined" class="card">
+          <div class="item item-text-wrap assertive">
+            <h1>Error al cargar</h1>
+          </div>
+        </div>
 
       </div>
   </ion-content>

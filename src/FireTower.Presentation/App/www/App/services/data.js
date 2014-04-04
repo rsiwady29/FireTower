@@ -15,7 +15,7 @@
 
     factory.getReportById = function(id) {
         var query = '?q={"_id":{"$oid": "' + id + '"}}';
-        return $http.get(baseUrl + db + '/collections/' + collection + query +'?apiKey=' + apiKey);
+        return $http.get(baseUrl + db + '/collections/' + collection + query +'&apiKey=' + apiKey);
     };
 
     return factory;

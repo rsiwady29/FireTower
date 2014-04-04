@@ -1,12 +1,45 @@
 ﻿angular.module('firetower')
-    .controller('ReporteController', ['$scope', '$stateParams', 'data', function($scope, $stateParams, data) {
-        $scope.reporte = data.getReportById($stateParams.reporteId);
+    .controller('ReporteController', ['$scope', '$stateParams', '$ionicLoading', 'data', 'Math', function($scope, $stateParams, $ionicLoading, data, Math) {
 
-        $scope.map = {
-            center: {
-                latitude: 0.4,//$scope.reporte.Location[0],
-                longitude: 4.4// $scope.reporte.Location[1]
-            },
-            zoom: 12
+        var init = function () {
+            $scope.loading = $ionicLoading.show({
+                content: 'Cargando datos del incendio...',
+                showBackdrop: false
+            });
+            
+            data.getReportById($stateParams.reporteId)
+                .success(function(data) {
+                    data = data[0];
+                    var formattedDate = data.CreatedDate.$date;
+                    formattedDate = moment((new Date()).toLocaleDateString()).fromNow();
+                    data.CreatedDate.$date = formattedDate;
+                    data.SeverityAverage = Math.Average(data.SeverityVotes);
+                    $scope.reporte = data;
+
+                    $scope.map = {
+                        center: {
+                            latitude: data.Location[0],
+                            longitude: data.Location[1]
+                        },
+                        zoom: 12,
+                        refresh: true
+                    };
+                    $scope.loading.hide();
+                })
+                .error(function(error) {
+                    console.log(error);
+                });
+
+            $scope.map = {
+                center: {
+                    latitude: 0,
+                    longitude: 1
+                },
+                zoom: 12,
+                refresh: false
+            };
         };
+
+        $scope.reporte = null;
+        init();        
     }]);
