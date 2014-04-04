@@ -20,21 +20,12 @@ angular.module('firetower')
                 })
                 .error(function(error) {
 
-<<<<<<< HEAD
                 });
         };
         
         $scope.reportes = null;
         getAllReports();
-=======
-        $scope.reportes = data.getAllReports();
-/*        data.getAllReports()
-            .success(function (data) {
-                $scope.reportes = data;
-            })
-            .error(function(error) {
-                alert(error);
-            });*/
+        
         $scope.takePicture = function () {
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 50,
@@ -49,5 +40,4 @@ angular.module('firetower')
                 alert('Failed because: ' + message);
             }
         };
->>>>>>> Adding pic
     }]);
