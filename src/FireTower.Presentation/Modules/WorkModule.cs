@@ -14,7 +14,7 @@ namespace FireTower.Presentation.Modules
         {
             Post["/work"] = r =>
                                 {
-                                    IUserSession userSession = this.UserSession();
+                                    IUserSession userSession = this.VisitorSession();
 
                                     object command;
                                     try

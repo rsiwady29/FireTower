@@ -21,8 +21,13 @@ namespace FireTower.Api.Specs.Users
                 {
                     _user = new User
                                 {
-                                    Email = TestEmail,
-                                    Activated = false,
+                                    FirstName = "Byron",
+                                    LastName = "Sommardahl",
+                                    Name = "Byron Sommardahl",
+                                    FacebookId = 123456,
+                                    Locale = "es_ES",
+                                    Username = "bsommardahl",
+                                    Verified = false
                                 };
                     Mock.Get(ReadOnlyRepository).Setup(
                         x =>
@@ -37,7 +42,7 @@ namespace FireTower.Api.Specs.Users
                 };
 
         Because of =
-            () => _result = Browser.GetSecureJson("/user/exists", new { email = TestEmail });
+            () => _result = Browser.GetSecureJson("/user/exists", new { facebookId = 123456 });
 
         It should_return_the_expected_response =
             () => _result.Body<UserExistenceResponse>().ShouldBeLike(_expectedResponse);

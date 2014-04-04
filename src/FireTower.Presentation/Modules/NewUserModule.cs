@@ -17,20 +17,24 @@ namespace FireTower.Presentation.Modules
                                 {
                                     var newUserRequest = this.Bind<NewUserRequest>();
                                     CheckForExistingUser(readOnlyRepository, newUserRequest);
-                                    commandDispatcher.Dispatch(this.VisitorSession(), new NewUserCommand
-                                                                                       {
-                                                                                           Email = newUserRequest.Email,
-                                                                                           EncryptedPassword =
-                                                                                               passwordEncryptor.Encrypt
-                                                                                               (
-                                                                                                   newUserRequest.
-                                                                                                       Password),
-                                                                                           AgreementVersion =
-                                                                                               newUserRequest.
-                                                                                               AgreementVersion
-                                                                                       });
+                                    DispatchCommand(commandDispatcher, newUserRequest);
                                     return new Response().WithStatusCode(HttpStatusCode.OK);
                                 };
+        }
+
+        static void DispatchCommand(ICommandDispatcher commandDispatcher,
+                                    NewUserRequest newUserRequest)
+        {
+            commandDispatcher.Dispatch(new UserSession(), new NewUserCommand
+                                           {
+                                                FirstName = newUserRequest.FirstName,
+                                                LastName = newUserRequest.LastName,
+                                                Name = newUserRequest.Name,
+                                                FacebookId = newUserRequest.FacebookId,
+                                                Locale = newUserRequest.Locale,
+                                                Username = newUserRequest.Username,
+                                                Verified = newUserRequest.Verified,
+                                           });
         }
 
         static void CheckForExistingUser(IReadOnlyRepository readOnlyRepository, NewUserRequest newUserRequest)
@@ -38,7 +42,7 @@ namespace FireTower.Presentation.Modules
             bool exists = true;
             try
             {
-                readOnlyRepository.First<User>(x => x.Email == newUserRequest.Email);
+                readOnlyRepository.First<User>(x => x.FacebookId == newUserRequest.FacebookId);                
             }
             catch
             {

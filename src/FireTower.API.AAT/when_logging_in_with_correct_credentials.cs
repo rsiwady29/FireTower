@@ -15,7 +15,7 @@ namespace FireTower.API.AAT
             () =>
             _result =
             Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
-                                                   new LoginRequest {Email = "test@test.com", Password = "password"});
+                                                   new LoginRequest { FacebookId = 1817134138 });
 
         It should_return_a_token =
             () => (_result.Data ?? new SuccessfulLoginResponse<Guid>()).Token.ShouldNotEqual(Guid.Empty);

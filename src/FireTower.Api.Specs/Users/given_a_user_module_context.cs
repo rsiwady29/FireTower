@@ -27,7 +27,7 @@ namespace FireTower.Api.Specs.Users
                                                                          x.Dependency(ReadOnlyRepository);
                                                                          LoggedInUser = new User
                                                                                             {
-                                                                                                Activated = true,
+                                                                                                Verified = true,
                                                                                             };
                                                                          UserSession = UserSession.New(LoggedInUser);
                                                                          x.WithUserSession(UserSession);

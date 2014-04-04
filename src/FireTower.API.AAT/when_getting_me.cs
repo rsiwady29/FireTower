@@ -14,7 +14,16 @@ namespace FireTower.API.AAT
         static Guid _token;
 
         Establish context =
-            () => { _token = Login().Token; };
+            () =>
+                {
+                    IRestResponse<SuccessfulLoginResponse<Guid>> login =
+                        Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
+                                                                      new LoginRequest
+                                                                          {
+                                                                              FacebookId = 1817134138
+                                                                          });
+                    _token = login.Data.Token;
+                };
 
         Because of =
             () =>
@@ -25,9 +34,8 @@ namespace FireTower.API.AAT
             () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
 
         It should_say_that_the_user_exists = () => _result.Data.ShouldBeLike(new MeResponse
-        {
-            Activated = true,
-            Email = "test@test.com"
-        });
+                                                                                 {
+                                                                                     FacebookId = 1817134138
+                                                                                 });
     }
 }

@@ -13,8 +13,7 @@ namespace FireTower.Api.Specs.Users
 {
     public class when_logging_in_with_correct_credentials : given_a_login_module_context
     {
-        const string EmailAddress = "some@email.com";
-        const string Password = "password";
+        const long FacebookId = 123456;
         static readonly Guid Token = Guid.NewGuid();
         static BrowserResponse _result;
         static User _matching;
@@ -24,14 +23,15 @@ namespace FireTower.Api.Specs.Users
         Establish context =
             () =>
                 {
-                    var encryptedPassword = new EncryptedPassword("encrypted password");
-                    Mock.Get(PasswordEncryptor).Setup(x => x.Encrypt(Password)).Returns(encryptedPassword);
-
                     _matching = new User
                                     {
-                                        Email = EmailAddress,
-                                        EncryptedPassword = encryptedPassword.Password,
-                                        Activated = true
+                                        FirstName = "Byron",
+                                        LastName = "Sommardahl",
+                                        Name = "Byron Sommardahl",
+                                        FacebookId = 123456,
+                                        Locale = "es_ES",
+                                        Username = "bsommardahl",
+                                        Verified = true
                                     };
 
                     Mock.Get(ReadOnlyRepository).Setup(
@@ -50,7 +50,7 @@ namespace FireTower.Api.Specs.Users
                 };
 
         Because of =
-            () => _result = Browser.PostSecureJson("/login", new {email = EmailAddress, password = Password});
+            () => _result = Browser.PostSecureJson("/login", new { facebookId = FacebookId });
 
         It should_return_a_token =
             () => _result.Body<SuccessfulLoginResponse<Guid>>().Token.ShouldEqual(Token);

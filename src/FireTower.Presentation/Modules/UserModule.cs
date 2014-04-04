@@ -16,26 +16,30 @@ namespace FireTower.Presentation.Modules
 
             Get["/user/exists"] =
                 r =>
+                {
+                    bool exists = false;
+                    bool activated = false;
+                    var facebookid = (long)Request.Query.facebookid;
+                    try
                     {
-                        bool exists = false;
-                        bool activated = false;
-                        var email = (string) Request.Query.email;
-                        try
+                        var user =
+                            readOnlyRepository.First<User>(x => x.FacebookId == facebookid);
+                        if (user != null)
                         {
-                            var user =
-                                readOnlyRepository.First<User>(x => x.Email == email);
                             exists = true;
-                            activated = user.Activated;
+                            activated = user.Verified;
                         }
-                        catch (ItemNotFoundException<User>)
-                        {
-                        }
-                        return new UserExistenceResponse
-                                   {
-                                       Exists = exists,
-                                       Activated = activated,
-                                   };
+
+                    }
+                    catch (ItemNotFoundException<User>)
+                    {
+                    }
+                    return new UserExistenceResponse
+                    {
+                        Exists = exists,
+                        Activated = activated,
                     };
+                };
         }
     }
 }

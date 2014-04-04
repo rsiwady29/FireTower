@@ -1,10 +1,16 @@
-﻿<ion-view title="Search">
-    <ion-nav-buttons side="left">
-        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    </ion-nav-buttons>
-
+﻿<ion-view title="FireTower">
     <ion-content class="has-header">
-        <h1>Login</h1>
+        <div class="row row-center" style="height:100%">
+           <div class="col">
+            <div class="card">
+             <div class="item item-divider" style="text-align: center;">
+              Login using Facebook!
+             </div>
+             <div class="item item-text-wrap" style="text-align: center;">
+                 <button class="button button-block button-positive" type="button" data-ng-show="!logged" data-ng-disabled="!facebookReady" data-ng-click="IntentLogin()">Login with Facebook</button>
+               </div>
+            </div>
+           </div>
+          </div>
     </ion-content>
-
 </ion-view>

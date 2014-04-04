@@ -91,7 +91,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="after_creating_a_new_user.cs" />
     <Compile Include="when_activating_an_account.cs" />
     <Compile Include="when_creating_a_new_disaster.cs" />
     <Compile Include="when_creating_a_new_user.cs" />

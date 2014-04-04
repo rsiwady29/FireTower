@@ -13,7 +13,7 @@ namespace FireTower.Mailgun.Specs
                 };
 
         Because of =
-            () => _mailgunSender.Send("byron+mailgun_test@acklenavenue.com", "Test Email", "This is a test.");
+            () => _mailgunSender.Send("byron+mailgun_test@acklenavenue.com", "Test LastName", "This is a test.");
 
         It should_send_it =
             () => { };

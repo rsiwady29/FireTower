@@ -13,11 +13,12 @@ namespace FireTower.Data
         {
             get
             {
-                var autoPersistenceModel = AutoMap.Assemblies(typeof(IEntity).Assembly)
-                    .Where(t => typeof(IEntity).IsAssignableFrom(t))
-                    .UseOverridesFromAssemblyOf<UserSessionAutoMappingOverride>()
+                var autoPersistenceModel = AutoMap.Assemblies(typeof (IEntity).Assembly)
+                                                  .Where(t => typeof (IEntity).IsAssignableFrom(t))
+                                                  .UseOverridesFromAssemblyOf<UserSessionAutoMappingOverride>()
+                                                  
                     //.IncludeBase<LessonActionBase>()
-                    .Conventions.Add(DefaultCascade.All());
+                                                  .Conventions.Add(DefaultCascade.SaveUpdate());
 
                 return x => x.AutoMappings.Add(autoPersistenceModel);
             }

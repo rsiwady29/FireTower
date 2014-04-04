@@ -1,4 +1,5 @@
 using System;
+using FireTower.Domain.Commands;
 using Nancy;
 using Nancy.ModelBinding;
 using FireTower.Data;
@@ -13,7 +14,6 @@ namespace FireTower.Presentation.Modules
     {
         public LoginModule(
             IReadOnlyRepository readOnlyRepository, 
-            IPasswordEncryptor passwordEncryptor,
             IUserSessionFactory userSessionFactory)
         {
             
@@ -21,16 +21,12 @@ namespace FireTower.Presentation.Modules
                 r =>
                     {
                         var loginInfo = this.Bind<LoginRequest>();
-
-                        EncryptedPassword encryptedPassword = passwordEncryptor.Encrypt(loginInfo.Password);
-
                         try
                         {
                             var user =
-                            readOnlyRepository.First<User>(
-                                x => x.Email == loginInfo.Email && x.EncryptedPassword == encryptedPassword.Password);
+                            readOnlyRepository.First<User>(x => x.FacebookId == loginInfo.FacebookId);
 
-                            if (!user.Activated) return new Response().WithStatusCode(HttpStatusCode.Forbidden);
+                            if (!user.Verified) return new Response().WithStatusCode(HttpStatusCode.Forbidden);
 
                             var userSession = userSessionFactory.Create(user);
 
@@ -41,6 +37,24 @@ namespace FireTower.Presentation.Modules
                             return new Response().WithStatusCode(HttpStatusCode.Unauthorized);
                         }
                     };
+            Post["/logout"] =
+                r =>
+                {
+                    var loginInfo = this.Bind<LoginRequest>();
+                    try
+                    {
+                        var session = readOnlyRepository.First<UserSession>(x => x.User.FacebookId == loginInfo.FacebookId);
+
+                        userSessionFactory.Delete(session.Id);
+
+                        return new Response().WithStatusCode(HttpStatusCode.OK);
+                    }
+                    catch (ItemNotFoundException<UserSession> ex)
+                    {
+                        return new Response().WithStatusCode(HttpStatusCode.Unauthorized);
+                    }
+                };
         }
+
     }
 }

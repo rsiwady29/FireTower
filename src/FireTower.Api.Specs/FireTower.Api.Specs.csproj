@@ -124,6 +124,7 @@
     <Compile Include="when_deserializing_a_command_with_invalid_type.cs" />
     <Compile Include="when_deserializing_a_command_with_missing_type_property.cs" />
     <Compile Include="when_voting_on_a_severity.cs" />
+    <Compile Include="Users\when_logging_out_user.cs" />
     <Compile Include="Worker\given_a_work_module_context.cs" />
     <Compile Include="MoqMappingExtensions.cs" />
     <Compile Include="TestingContextFactory.cs" />

@@ -26,11 +26,16 @@ namespace FireTower.Domain.CommandHandlers
             var c = (NewUserCommand) command;
             _writeableRepository.Create(new User
                                             {
-                                                Email = c.Email,
-                                                EncryptedPassword = c.EncryptedPassword.Password,
-                                                AgreementVersion = c.AgreementVersion
+                                               FirstName = c.FirstName,
+                                               LastName = c.LastName,
+                                               Name = c.Name,
+                                               FacebookId = c.FacebookId,
+                                               Locale = c.Locale,
+                                               Username = c.Username,
+                                               Verified = c.Verified,
+                                               Location = c.Location
                                             });
-            NotifyObservers(new NewUserCreated(c.Email, c.AgreementVersion));
+            NotifyObservers(new NewUserCreated(c.FacebookId));
         }
 
         public event DomainEvent NotifyObservers;

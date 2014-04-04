@@ -35,8 +35,8 @@ namespace FireTower.Domain.Specs
                     _user = new User
                                 {
                                     Id = Guid.NewGuid(),
-                                    Email = TestEmail,
-                                    Activated = false,
+                                    LastName = TestEmail,
+                                    Verified = false,
                                 };
                     Mock.Get(_readOnlyRepository).Setup(
                         x =>
@@ -75,8 +75,8 @@ namespace FireTower.Domain.Specs
                 x => x.Update(WithExpected.Object(new User
                                                       {
                                                           Id = _user.Id,
-                                                          Email = TestEmail,
-                                                          Activated = true
+                                                          LastName = TestEmail,
+                                                          Verified = true
                                                       })));
     }
 }

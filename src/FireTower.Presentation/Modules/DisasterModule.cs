@@ -14,7 +14,7 @@ namespace FireTower.Presentation.Modules
                 Request =>
                     {
                         commandDispatcher.Dispatch(this.UserSession(), this.Bind<CreateNewDisaster>());
-                        return null;
+                        return new Response().WithStatusCode(HttpStatusCode.OK);
                     };
         }
     }

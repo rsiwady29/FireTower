@@ -111,11 +111,13 @@
     <Content Include="App\config.xml" />
     <Content Include="App\www\App\config.js" />
     <Content Include="App\www\App\controller\login.js" />
+    <Content Include="App\www\App\controller\menu.js" />
     <Content Include="App\www\App\controller\reporte.js" />
     <Content Include="App\www\App\controller\reportes.js" />
     <Content Include="App\www\App\js\angular\angular-route.js" />
     <Content Include="App\www\App\js\angular\angular.js" />
     <Content Include="App\www\App\services\data.js" />
+    <Content Include="App\www\App\services\userManagement.js" />
     <Content Include="App\www\App\views\inicio.html" />
     <Content Include="App\www\App\views\login.html" />
     <Content Include="App\www\App\views\menu.html" />
@@ -125,6 +127,8 @@
     <Content Include="App\www\Content\css\ionic.min.css" />
     <Content Include="App\www\Content\css\style.css" />
     <Content Include="App\www\Content\fonts\ionicons.svg" />
+    <Content Include="App\www\Content\js\angular-facebook-phonegap.js" />
+    <Content Include="App\www\Content\js\angular-facebook.js" />
     <Content Include="App\www\Content\js\angular-google-maps.min.js" />
     <Content Include="App\www\Content\js\angular-ui\angular-ui-router.js" />
     <Content Include="App\www\Content\js\angular-ui\angular-ui-router.min.js" />
@@ -215,6 +219,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\services\" />
+    <Folder Include="App\www\App\js\facebook\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

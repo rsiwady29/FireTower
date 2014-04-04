@@ -69,6 +69,7 @@
     <Compile Include="EmailSender.cs" />
     <Compile Include="EmailSubjectProvider.cs" />
     <Compile Include="EncryptedPassword.cs" />
+    <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Disaster.cs" />
     <Compile Include="Entities\DisasterImage.cs" />
     <Compile Include="Entities\SeverityVote.cs" />
