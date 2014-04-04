@@ -1,6 +1,7 @@
 using System;
 using DomainDrivenDatabaseDeployer;
 using FireTower.Domain.Entities;
+using FireTower.Domain.Services;
 using NHibernate;
 
 namespace DatabaseDeploymentTool
@@ -36,6 +37,8 @@ namespace DatabaseDeploymentTool
                     FirstName = "Test",
                     LastName = "Test",
                     Name = "Test Test",
+                    Email = "test@test.com",
+                    EncryptedPassword = new HashPasswordEncryptor().Encrypt("password").Password,
                     FacebookId = 1937134326,
                     Locale = "es_ES",
                     Username = "ttest",

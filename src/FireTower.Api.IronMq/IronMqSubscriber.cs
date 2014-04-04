@@ -1,3 +1,4 @@
+using System;
 using Blacksmith.Core;
 
 namespace FireTower.IronMq
@@ -17,7 +18,13 @@ namespace FireTower.IronMq
 
         public void Subscribe(string queueName, string postUrl)
         {
-            _client.Queue<object>(queueName).Subscribe(postUrl);
+            try
+            {
+                _client.Queue<object>(queueName).Subscribe(postUrl);
+            }
+            catch
+            {                
+            }
         }
 
         #endregion

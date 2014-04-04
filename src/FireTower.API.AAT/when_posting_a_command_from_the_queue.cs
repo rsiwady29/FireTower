@@ -25,8 +25,7 @@ namespace FireTower.API.AAT
                                                           Name = "Byron Sommardahl",
                                                           FacebookId = 123456,
                                                           Locale = "es_ES",
-                                                          Username = "bsommardahl",
-                                                          Verified = true
+                                                          Username = "bsommardahl",                                                          
                                                       };
 
                                     _commandFromQueue = command.ToDynamic();
@@ -43,7 +42,6 @@ namespace FireTower.API.AAT
                                                          FacebookId = 123456,
                                                          Locale = "es_ES",
                                                          Username = "bsommardahl",
-                                                         Verified = true
                                                      });
 
         //It should_process_the_command =

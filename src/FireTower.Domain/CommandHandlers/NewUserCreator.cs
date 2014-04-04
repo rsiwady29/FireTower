@@ -32,7 +32,7 @@ namespace FireTower.Domain.CommandHandlers
                                                FacebookId = c.FacebookId,
                                                Locale = c.Locale,
                                                Username = c.Username,
-                                               Verified = c.Verified,
+                                               Verified = false,
                                                Location = c.Location
                                             });
             NotifyObservers(new NewUserCreated(c.FacebookId));

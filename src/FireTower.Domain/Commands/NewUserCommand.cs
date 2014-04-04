@@ -16,8 +16,10 @@ namespace FireTower.Domain.Commands
 
         public string Username { get; set; }
 
-        public bool Verified { get; set; }
-
         public Location Location { get; set; }
+
+        public string Email { get; set; }
+
+        public EncryptedPassword EncryptedPassword { get; set; }
     }
 }
