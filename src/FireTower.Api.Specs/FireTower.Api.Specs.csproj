@@ -115,10 +115,12 @@
     <Compile Include="given_a_disaster_module.cs" />
     <Compile Include="given_a_vote_module.cs" />
     <Compile Include="Users\given_an_api_user_mapper_context.cs" />
+    <Compile Include="Users\given_a_Disaster_module_context.cs" />
     <Compile Include="Users\given_a_login_module_context.cs" />
     <Compile Include="Users\given_a_new_user_module_context.cs" />
     <Compile Include="Users\given_a_user_module_context.cs" />
     <Compile Include="Users\given_a_verification_module_context.cs" />
+    <Compile Include="Users\when_sending_disaster_email.cs" />
     <Compile Include="when_creating_a_disaster.cs" />
     <Compile Include="when_deserializing_a_command_with_invalid_json.cs" />
     <Compile Include="when_deserializing_a_command_with_invalid_type.cs" />

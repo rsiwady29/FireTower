@@ -19,6 +19,7 @@ namespace FireTower.Mailgun
         public void Send(string emailAddress, string subject, string body)
         {
             var message = new MailMessage("FireTower <no-reply@firetower.com>", emailAddress, subject, body);
+            message.IsBodyHtml = true;
             _client.SendMail(message);
         }
 

@@ -156,6 +156,7 @@
     <Content Include="App\www\Content\js\moment.min.js" />
     <Content Include="App\www\Content\js\underscore-min.js" />
     <Content Include="App\www\index.html" />
+    <Content Include="EmailTemplates\disasterTemplate.html" />
     <Content Include="index.html" />
     <Content Include="EmailTemplates\verificationEmail.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -174,7 +175,9 @@
     <Compile Include="ConfigureEventHandlerDependencies.cs" />
     <Compile Include="ConfigureNotificationEmails.cs" />
     <Compile Include="ConfigureWorkerDependencies.cs" />
+    <Compile Include="EmailSubjects\DisasterEmailSubject.cs" />
     <Compile Include="EmailSubjects\VerificationEmailSubject.cs" />
+    <Compile Include="EmailTemplates\DisasterEmailTemplate.cs" />
     <Compile Include="EmailTemplates\VerificationEmailTemplate.cs" />
     <Compile Include="ICommandDeserializer.cs" />
     <Compile Include="InvalidCommandObjectException.cs" />
@@ -185,6 +188,8 @@
     <Compile Include="Modules\VerificationModule.cs" />
     <Compile Include="Modules\VoteModule.cs" />
     <Compile Include="Modules\WorkModule.cs" />
+
+    <Compile Include="Requests\SendDisasterByEmailRequest.cs" />
     <Compile Include="Requests\BasicLoginRequest.cs" />
     <Compile Include="Requests\VerifyAccountRequest.cs" />
     <Compile Include="Requests\VoteOnControlledRequest.cs" />

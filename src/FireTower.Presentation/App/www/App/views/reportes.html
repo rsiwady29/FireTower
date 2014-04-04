@@ -8,7 +8,7 @@
             <div class="item item-avatar">
                 <!--<img src="avatar.jpg">-->
                 <h2>{{reporte.LocationDescription}}</h2>
-                <p>{{reporte.CreatedDate.$date}}</p>
+                <p>{{reporte.CreatedDate.$dateformatted}}</p>
                 <p><span>Severidad: </span>{{reporte.SeverityAverage}}</p>
             </div>
             <div class="item item-image card-image">
@@ -16,6 +16,9 @@
             </div>
             <a class="item item-icon-left positive" href="#/app/reporte/{{reporte.DisasterId.$uuid}}" >
                 Detalles
+            </a>
+            <a class="item item-icon-left positive" ng-click="sendEmail(reporte.CreatedDate.$date, reporte.LocationDescription, reporte.Location[0], reporte.Location[1])">
+                Email this disaster
             </a>
         </div>
         
