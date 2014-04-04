@@ -10,5 +10,9 @@
             return $http.post('/votes/controlled', isControlled);
         };
         
+        factory.VotePutOut = function (putOutRequest) {
+            return $http.post('/votes/putout', putOutRequest);
+        };
+        
         return factory;
 }]);
