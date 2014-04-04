@@ -1,5 +1,6 @@
 ﻿angular.module('firetower')
-    .controller('ReporteController', ['$scope', '$stateParams', '$ionicLoading', 'data', 'Math', 'DisasterService', function ($scope, $stateParams, $ionicLoading, data, Math, DisasterService) {
+    .controller('ReporteController', ['$scope', '$stateParams', '$ionicLoading', 'data', 'Math', 'DisasterService',
+        function ($scope, $stateParams, $ionicLoading, data, Math, DisasterService) {
 
         $scope.startCount = 5;
 
@@ -74,8 +75,23 @@
             };
         };
         $scope.reporte = null;
+        $scope.isControlled = false;
         $scope.updateControlledFire = function () {
-            console.log("asd");
+            if ($scope.isControlled)
+                $scope.isControlled = false;
+            else
+                $scope.isControlled = true;
+
+            DisasterService.VoteControlled({ DisasterId: $stateParams.reporteId, IsControlled: $scope.isControlled })
+                .success(function(response) {
+                    console.log(response);
+                })
+                .error(function(response) {
+                    console.log(response);
+                });
+            
+            console.log($scope.isControlled);
+
         };
         $scope.updatePutOutFire = function () {
             console.log("asd");

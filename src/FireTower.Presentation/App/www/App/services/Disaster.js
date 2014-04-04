@@ -3,8 +3,12 @@
         var factory = {};
 
         factory.SaveSeverity = function (severity) {
-            return $http.post('/severity', severity);
+            return $http.post('/votes/severity', severity);
         };
 
+        factory.VoteControlled = function (isControlled) {
+            return $http.post('/votes/controlled', isControlled);
+        };
+        
         return factory;
 }]);
