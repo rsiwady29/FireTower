@@ -22,7 +22,7 @@ namespace FireTower.Api.Specs
                         DisasterId = Guid.Empty,
                         IsControlled = true
                     };
-            };
+            }; 
 
         Because of =
             () => _result = Browser.PostSecureJson("/isControlled", _voteOnControlled);
