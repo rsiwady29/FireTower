@@ -142,6 +142,8 @@
     <Content Include="App\www\Content\js\angular\angular-sanitize.min.js" />
     <Content Include="App\www\Content\js\angular\angular.js" />
     <Content Include="App\www\Content\js\angular\angular.min.js" />
+    <Content Include="App\www\Content\js\cdv-plugin-fb-connect.js" />
+    <Content Include="App\www\Content\js\facebook-js-sdk.js" />
     <Content Include="App\www\Content\js\ionic-angular.js" />
     <Content Include="App\www\Content\js\ionic-angular.min.js" />
     <Content Include="App\www\Content\js\ionic.bundle.js" />
