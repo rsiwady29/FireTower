@@ -9,6 +9,7 @@
                 <!--<img src="avatar.jpg">-->
                 <h2>{{reporte.LocationDescription}}</h2>
                 <p>{{reporte.CreatedDate.$date}}</p>
+                <p><span>Severidad: </span>{{reporte.SeverityAverage}}</p>
             </div>
             <div class="item item-image card-image">
                 <img src="{{reporte.Images[0]}}">
@@ -18,7 +19,7 @@
             </a>
         </div>
         
-        <div ng-show="reportes.length == 0" class="card">
+        <div ng-show="reportes != null && reportes != undefined && reportes.length == 0" class="card">
           <div class="item item-text-wrap">
             <h1>No hay reportes</h1>
           </div>
