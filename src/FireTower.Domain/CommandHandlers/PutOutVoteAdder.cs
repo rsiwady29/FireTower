@@ -5,27 +5,25 @@ using FireTower.Domain.Events;
 
 namespace FireTower.Domain.CommandHandlers
 {
-    public class ControlledVoteAdder : ICommandHandler
+    public class PutOutVoteAdder : ICommandHandler
     {
         private readonly IReadOnlyRepository _readOnlyRepository;
 
-        public ControlledVoteAdder(IReadOnlyRepository readOnlyRepository)
+        public PutOutVoteAdder(IReadOnlyRepository readOnlyRepository)
         {
             _readOnlyRepository = readOnlyRepository;
         }
 
-        public Type CommandType { get { return typeof (VoteOnControlled); } }
+        public Type CommandType { get { return typeof (VoteOnPutOut); } }
 
         public void Handle(IUserSession userSessionIssuingCommand, object command)
         {
-            var c = (VoteOnControlled) command;
             var u = (UserSession) userSessionIssuingCommand;
+            var c = (VoteOnPutOut) command;
 
             var disasterToUpdate = _readOnlyRepository.GetById<Disaster>(c.DisasterId);
-
-            disasterToUpdate.AddControlledVote(u.User, c.DisasterId, c.IsControlled);
-
-            NotifyObservers(new ControlledVoteAdded(u.User.Id, c.DisasterId, c.IsControlled));
+            disasterToUpdate.addPutOutVote(u.User, c.DisasterId, c.IsPutOut);
+            NotifyObservers.Invoke(new PutOutVoteAdded(u.User.Id, c.DisasterId, c.IsPutOut));
         }
 
         public event DomainEvent NotifyObservers;

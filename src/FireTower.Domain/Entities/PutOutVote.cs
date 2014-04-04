@@ -2,19 +2,19 @@ using System;
 
 namespace FireTower.Domain.Entities
 {
-    public class ControlledVote : IEntity
+    public class PutOutVote : IEntity
     {
-        protected ControlledVote()
+        public PutOutVote()
         {
         }
 
-        public ControlledVote(User user, bool isControlled)
+        public PutOutVote(User user, bool isPutOut)
         {
             User = user;
-            IsControlled = isControlled;
+            IsPutOut = isPutOut;
         }
 
-        public virtual bool IsControlled { get; protected set; }
+        public virtual bool IsPutOut { get; set; }
 
         public virtual User User { get; protected set; }
         public virtual Guid Id { get; protected set; }

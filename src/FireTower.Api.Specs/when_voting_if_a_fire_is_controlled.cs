@@ -14,6 +14,7 @@ namespace FireTower.Api.Specs
     public class when_voting_if_a_fire_is_controlled : given_a_vote_module
     {
         private static VoteOnControlledRequest _voteOnControlled;
+        private static BrowserResponse _result;
 
         private Establish context = () =>
             {
@@ -22,14 +23,14 @@ namespace FireTower.Api.Specs
                         DisasterId = Guid.Empty,
                         IsControlled = true
                     };
-            }; 
+            };
 
-        Because of =
-            () => _result = Browser.PostSecureJson("/isControlled", _voteOnControlled);
+        private Because of =
+            () => _result = Browser.PostSecureJson("votes/controlled", _voteOnControlled);
 
-        It should_be_ok = () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
+        private It should_be_ok = () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
 
-        It should_update_the_severity =
+        private It should_send_the_command_to_add_vote_if_is_controlled =
             () =>
             Mock.Get(CommandDispatcher)
                 .Verify(
@@ -37,7 +38,5 @@ namespace FireTower.Api.Specs
                     x.Dispatch(UserSession,
                                WithExpected.Object(new VoteOnControlled(_voteOnControlled.DisasterId,
                                                                         _voteOnControlled.IsControlled))));
-
-        private static BrowserResponse _result;
     }
 }

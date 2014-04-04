@@ -7,7 +7,8 @@ namespace FireTower.Domain.Entities
     {
         IEnumerable<DisasterImage> _images = new List<DisasterImage>();
         IEnumerable<SeverityVote> _severityVotes = new List<SeverityVote>();
-        IEnumerable<ControlledVote> _controlledVotes =  new List<ControlledVote>(); 
+        IEnumerable<ControlledVote> _controlledVotes =  new List<ControlledVote>();
+        private IEnumerable<PutOutVote> _putOutVotes = new List<PutOutVote>();
 
         protected Disaster()
         {
@@ -51,6 +52,12 @@ namespace FireTower.Domain.Entities
             protected set { _controlledVotes = value; }
         }
 
+        public virtual IEnumerable<PutOutVote> PutOutVotes   
+        {
+            get { return _putOutVotes; }
+            protected set { _putOutVotes = value; }
+        }
+
         #endregion
 
         public virtual DisasterImage AddImage(string imageUrl)
@@ -69,10 +76,16 @@ namespace FireTower.Domain.Entities
             return severityVote;
         }
 
-        public void addControlledVote(User user, Guid disasterId, bool isControlled)
+        public virtual void AddControlledVote(User user, Guid disasterId, bool isControlled)
         {
             var controlledVote = new ControlledVote(user, isControlled);
             ((IList<ControlledVote>) ControlledVotes).Add(controlledVote);
+        }
+
+        public virtual void addPutOutVote(User user, Guid disasterId, bool isPutOut)
+        {
+            var putOutVote = new PutOutVote(user, isPutOut);
+            ((IList<PutOutVote>) PutOutVotes).Add(putOutVote);
         }
     }
 }
