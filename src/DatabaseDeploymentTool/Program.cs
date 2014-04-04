@@ -20,7 +20,15 @@ namespace DatabaseDeploymentTool
             ISessionFactory sessionFactory = new SessionFactoryBuilder(new MappingScheme(), databaseConfiguration)
                 .Build(cfg => { dd = new DatabaseDeployer(cfg); });
 
-            dd.Drop();
+            using (ISession sess = sessionFactory.OpenSession())
+            {
+                using (var cmd = sess.Connection.CreateCommand())
+                {
+                    cmd.ExecuteSqlFile("dropForeignKeys.sql");
+                    cmd.ExecuteSqlFile("dropPrimaryKeys.sql");
+                    cmd.ExecuteSqlFile("dropTables.sql");
+                }
+            }
             Console.WriteLine("");
             Console.WriteLine("Database dropped.");
             Thread.Sleep(1000);

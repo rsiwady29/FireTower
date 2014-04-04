@@ -18,7 +18,7 @@ namespace FireTower.API.AAT
                 {
                     IRestResponse<SuccessfulLoginResponse<Guid>> login =
                         Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
-                                                                      new LoginRequest
+                                                                      new FacebookLoginRequest
                                                                           {
                                                                               FacebookId = 1817134138
                                                                           });

@@ -72,10 +72,5 @@ angular.module('firetower', ['ionic', 'google-maps'])
     };
 
     
-    
-    if (isMobile.any()) {
-        FB.init({ appId: myAppId, nativeInterface: CDV.FB, useCachedDialogs: false });
-    } else {
-        FB.init({ appId: myAppId});
-    }
+  
 }]);

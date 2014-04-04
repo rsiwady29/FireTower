@@ -30,8 +30,7 @@ namespace FireTower.Domain.Specs
                                               Name = "Byron Sommardahl",
                                               FacebookId = 1817134138,
                                               Locale = "es_ES",
-                                              Username = "bsommardahl",
-                                              Verified = true,
+                                              Username = "bsommardahl",                                              
                                               Location = new Location { LocationId = 106781442691621 }
                                           };
 
@@ -54,7 +53,7 @@ namespace FireTower.Domain.Specs
                                                                   FacebookId = _newUserCommand.FacebookId,
                                                                   Locale = _newUserCommand.Locale,
                                                                   Username = _newUserCommand.Username,
-                                                                  Verified = _newUserCommand.Verified,
+                                                                  Verified = false,
                                                                   Location = _newUserCommand.Location
                                                                })));
 

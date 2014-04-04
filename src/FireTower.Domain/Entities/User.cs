@@ -17,6 +17,12 @@ namespace FireTower.Domain.Entities
 
         public virtual Guid Id { get; set; }
 
+        public virtual string Email { get; set; }
+
+        public virtual string EncryptedPassword { get; set; }
+
+        public virtual bool Activated { get; set; }
+
         #endregion
     }
 }

@@ -116,8 +116,9 @@
     <Content Include="App\www\App\controller\reportes.js" />
     <Content Include="App\www\App\js\angular\angular-route.js" />
     <Content Include="App\www\App\js\angular\angular.js" />
-<Content Include="App\www\App\services\Disaster.js" />
+    <Content Include="App\www\App\services\Disaster.js" />
     <Content Include="App\www\App\js\cordova.js" />
+    <Content Include="App\www\App\services\loginService.js" />
     <Content Include="App\www\App\services\math.js" />
     <Content Include="App\www\App\js\cordova-2.0.0.js" />
     <Content Include="App\www\App\services\data.js" />
@@ -184,6 +185,7 @@
     <Compile Include="Modules\VerificationModule.cs" />
     <Compile Include="Modules\VoteModule.cs" />
     <Compile Include="Modules\WorkModule.cs" />
+    <Compile Include="Requests\BasicLoginRequest.cs" />
     <Compile Include="Requests\VerifyAccountRequest.cs" />
     <Compile Include="Requests\VoteOnControlledRequest.cs" />
     <Compile Include="Requests\VoteOnPutOutRequest.cs" />
@@ -194,7 +196,7 @@
     <Compile Include="IApiUserMapper.cs" />
     <Compile Include="Modules\LoginModule.cs" />
     <Compile Include="Modules\NewUserModule.cs" />
-    <Compile Include="Requests\LoginRequest.cs" />
+    <Compile Include="Requests\FacebookLoginRequest.cs" />
     <Compile Include="Requests\NewUserRequest.cs" />
     <Compile Include="ResponseExtensions.cs" />
     <Compile Include="Responses\NewUserResponse.cs" />
