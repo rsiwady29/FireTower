@@ -77,7 +77,7 @@
         $scope.updateControlledFire = function () {
             console.log("asd");
         };
-        $scope.updatePuttedOutFire = function () {
+        $scope.updatePutOutFire = function () {
             console.log("asd");
         };
         init();        
