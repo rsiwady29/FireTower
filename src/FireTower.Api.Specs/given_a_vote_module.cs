@@ -8,7 +8,7 @@ using Nancy.Testing;
 
 namespace FireTower.Api.Specs
 {
-    public class given_a_severity_module
+    public class given_a_vote_module
     {
         protected static Browser Browser;
         protected static IMappingEngine Mapper;
@@ -25,7 +25,7 @@ namespace FireTower.Api.Specs
 
                     Browser = new Browser(x =>
                         {
-                            x.Module<SeverityModule>();
+                            x.Module<VoteModule>();
                             x.Dependency(Mapper);
                             x.Dependency(CommandDispatcher);
                             x.Dependency(ReadOnlyRepo);

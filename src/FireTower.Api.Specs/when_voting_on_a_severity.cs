@@ -2,6 +2,7 @@
 using AcklenAvenue.Testing.Moq.ExpectedObjects;
 using AcklenAvenue.Testing.Nancy;
 using FireTower.Domain.Commands;
+using FireTower.Domain.Entities;
 using FireTower.Presentation.Requests;
 using Machine.Specifications;
 using Moq;
@@ -11,7 +12,7 @@ using It = Machine.Specifications.It;
 
 namespace FireTower.Api.Specs
 {
-    public class when_voting_on_a_severity : given_a_severity_module
+    public class when_voting_on_a_severity : given_a_vote_module 
     {
         static VoteOnSeverityRequest _voteOnSeverity;
         static BrowserResponse _result;
@@ -27,7 +28,7 @@ namespace FireTower.Api.Specs
                 };
 
         Because of =
-            () => _result = Browser.PostSecureJson("/severity", _voteOnSeverity);
+            () => _result = Browser.PostSecureJson("votes/severity", _voteOnSeverity);
 
         It should_be_ok = () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
 

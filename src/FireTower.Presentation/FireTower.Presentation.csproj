@@ -180,11 +180,13 @@
     <Compile Include="JsonCommandDeserializer.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\DisasterModule.cs" />
-    <Compile Include="Modules\SeverityModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
     <Compile Include="Modules\VerificationModule.cs" />
+    <Compile Include="Modules\VoteModule.cs" />
     <Compile Include="Modules\WorkModule.cs" />
     <Compile Include="Requests\VerifyAccountRequest.cs" />
+    <Compile Include="Requests\VoteOnControlledRequest.cs" />
+    <Compile Include="Requests\VoteOnPutOutRequest.cs" />
     <Compile Include="Requests\VoteOnSeverityRequest.cs" />
     <Compile Include="Responses\MeResponse.cs" />
     <Compile Include="Responses\UserExistenceResponse.cs" />

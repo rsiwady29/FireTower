@@ -42,7 +42,7 @@ namespace FireTower.API.AAT
                 };
 
         Because of =
-            () => _result = Client.Post("/severity", new {disasterId = _disasterId, severity = 3}, _token);
+            () => _result = Client.Post("votes/severity", new {disasterId = _disasterId, severity = 3}, _token);
 
         It should_add_the_severity_vote_to_the_severity_votes_list =
             () =>
