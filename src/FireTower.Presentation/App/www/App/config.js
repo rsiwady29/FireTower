@@ -40,14 +40,15 @@ angular.module('firetower', ['ionic', 'google-maps'])
                     controller: 'ReporteController'
                 }
             }
-        });
-       /* .state('otherwise', {
+        })
+        .state('otherwise', {
             url: '*path',
-            templateUrl: 'App/views/inicio.html'
-        });*/
-    $urlRouterProvider.otherwise('/app/inicio');
+            templateUrl: 'App/views/login.html',
+            controller: 'LoginController'
+        });
+    //$urlRouterProvider.otherwise('/app/inicio');
 
-    /*var myAppId = '294203754077185';
+    var myAppId = '294203754077185';
     
     var isMobile = {
         Android: function () {
@@ -76,5 +77,5 @@ angular.module('firetower', ['ionic', 'google-maps'])
         FB.init({ appId: myAppId, nativeInterface: CDV.FB, useCachedDialogs: false });
     } else {
         FB.init({ appId: myAppId});
-    }*/
+    }
 }]);
