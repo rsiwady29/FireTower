@@ -49,7 +49,7 @@ namespace FireTower.Presentation.Modules
                         }
                         catch (Exception ex)
                         {
-                            return new Response().WithStatusCode(HttpStatusCode.NoResponse);
+                            return new Response().WithStatusCode(HttpStatusCode.NotFound);
                         }
                     };
         }

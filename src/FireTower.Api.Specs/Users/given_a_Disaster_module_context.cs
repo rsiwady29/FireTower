@@ -11,18 +11,16 @@ namespace FireTower.Api.Specs.Users
 
     
         protected static Browser Browser;
-        protected static IReadOnlyRepository ReadOnlyRepository;
+        protected static ICommandDispatcher CommandDispatcher;
         protected static IUserSessionFactory UserSessionFactory;
         
         Establish master_context = () =>
             {
-                ReadOnlyRepository = Mock.Of<IReadOnlyRepository>();
-                UserSessionFactory = Mock.Of<IUserSessionFactory>();
+                CommandDispatcher = Mock.Of<ICommandDispatcher>();
                 Browser = new Browser(x =>
                     {
                         x.Module<DisasterModule>();
-                        x.Dependency(ReadOnlyRepository);
-                        x.Dependency(UserSessionFactory);                                                                         
+                        x.Dependency(CommandDispatcher);                                                                        
                     });
             };
     

@@ -36,9 +36,9 @@ namespace FireTower.Api.Specs.Users
         
 
         Because of =
-            () => _result = Browser.PostSecureJson("/SendDisasterByEmail", new { EmailAddress = email, CreatedDate = date, LocationDescription = locationDescription, Latitude = latitude, Longitude= longitude });
+            () => _result = Browser.PostSecureJson("/SendDisasterByEmail", new { Email = email, CreatedDate = date, LocationDescription = locationDescription, Latitude = latitude, Longitude = longitude });
 
-        It should_remove_the_user_session =
+        It should_send_the_email =
             () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);
     }
 }
