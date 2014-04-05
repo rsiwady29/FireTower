@@ -4,7 +4,7 @@
 
           <div class="item item-avatar" >
               <h2>{{reporte.LocationDescription}}</h2>
-              <p>{{reporte.CreatedDate.$date}}</p>
+              <p>{{reporte.CreatedDate.$dateformatted}}</p>
           </div>
 
           <div class="item item-body">              
@@ -48,7 +48,9 @@
                       <i class="icon">{{value}}</i>
                   </a>
               </div>
-              
+              <a class="item item-icon-left positive" ng-click="sendEmail(reporte.CreatedDate.$date, reporte.LocationDescription, reporte.Location[0], reporte.Location[1])">
+                  Email this disaster
+              </a>
           </div>
           
           <div ng-show="reportes != null && reportes != undefined" class="card">
