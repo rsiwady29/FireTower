@@ -43,8 +43,8 @@ angular.module('firetower', ['ionic', 'google-maps'])
         })
         .state('otherwise', {
             url: '*path',
-            templateUrl: 'App/views/reportes.html',
-            controller: 'ReportesController'
+            templateUrl: 'App/views/login.html',
+            controller: 'LoginController'
         });
     //$urlRouterProvider.otherwise('/app/inicio');
 
