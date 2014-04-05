@@ -93,8 +93,24 @@
             console.log($scope.isControlled);
 
         };
+            
+        $scope.hasBeenPutOut = false;
         $scope.updatePutOutFire = function () {
-            console.log("asd");
+
+            if ($scope.hasBeenPutOut)
+                $scope.hasBeenPutOut = false;
+            else
+                $scope.hasBeenPutOut = true;
+
+            DisasterService.VotePutOut({ DisasterId: $stateParams.reporteId, IsPutOut: $scope.hasBeenPutOut })
+                .success(function (response) {
+                    console.log(response);
+                })
+                .error(function (response) {
+                    console.log(response);
+                });
+
+            console.log($scope.hasBeenPutOut);
         };
         init();        
     }]);
