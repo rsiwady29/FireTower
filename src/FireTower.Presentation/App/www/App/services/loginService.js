@@ -3,8 +3,6 @@
 
         return {
             authenticate: function (email, password) {
-
-                debugger;
                 return $http.post("/login", { email: email, password: password });
             }
         };
