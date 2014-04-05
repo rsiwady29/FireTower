@@ -85,6 +85,10 @@ namespace AcklenAvenue.Testing.AAT
         {
             IRestResponse<T> restResponse = browser.Execute<T>(request);
             IEnumerable<Parameter> corsHeader = restResponse.Headers.Where(x => x.Name == "Access-Control-Allow-Origin");
+            if(restResponse.StatusCode==0)
+            {
+                throw new AATServerUnreachableException(browser, request);
+            }
             if (!corsHeader.Any() && restResponse.ErrorException == null)
             {
                 throw new AATCORSException();

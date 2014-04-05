@@ -10,32 +10,28 @@ namespace FireTower.API.AAT
 {
     public class when_creating_an_account : given_an_api_server_context<CurrentlyDeveloping>
     {
-        static readonly Random Rnd = new Random();
         static IRestResponse _result;
-        static long _facebookId;
+        static Guid _token;
 
         Establish context =
-            () =>
-                {
-                    _facebookId = 1817134138;
-                };
+            () => { _token = Login().Token; };
 
         Because of =
             () =>
             _result = Client.Post("/login", new NewUserRequest
-                                        {
-                                            FirstName = "Byron",
-                                            LastName = "Sommardahl",
-                                            Name = "Byron Sommardahl",
-                                            FacebookId = 1817134138,
-                                            Locale = "es_ES",
-                                            Username = "bsommardahl",
-                                            Verified = true
-                                        });
+                                                {
+                                                    FirstName = "Byron",
+                                                    LastName = "Sommardahl",
+                                                    Name = "Byron Sommardahl",
+                                                    FacebookId = 1817134138,
+                                                    Locale = "es_ES",
+                                                    Username = "bsommardahl",
+                                                    Verified = true
+                                                });
 
         It should_exist =
             () =>
-            Client.Get<UserExistenceResponse>("/user/exists", new {facebookId = _facebookId}).Data.
+            Client.Get<UserExistenceResponse>("/user/exists", new {token = _token}).Data.
                 Exists.ShouldBeTrue();
 
         It should_success =

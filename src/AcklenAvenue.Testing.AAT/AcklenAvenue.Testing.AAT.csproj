@@ -52,6 +52,7 @@
     <Compile Include="AATClient.cs" />
     <Compile Include="AATCORSException.cs" />
     <Compile Include="AATRestResponseException.cs" />
+    <Compile Include="AATServerUnreachableException.cs" />
     <Compile Include="AATUnauthorizedException.cs" />
     <Compile Include="CurrentlyDeveloping.cs" />
     <Compile Include="DeployedToProduction.cs" />
