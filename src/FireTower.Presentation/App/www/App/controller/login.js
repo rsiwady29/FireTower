@@ -45,9 +45,8 @@ angular.module('firetower').controller('LoginController', ['$scope', '$timeout',
         loginService.authenticate(email, password).success(function (response) {
             var token = response.token;
             localStorage.setItem("firetowertoken", token);
-            $location.path("/reportes");
+            $location.path("/app/reportes");
         }).error(function () {
-            debugger;
             $location.path("/error");
         });
     };
