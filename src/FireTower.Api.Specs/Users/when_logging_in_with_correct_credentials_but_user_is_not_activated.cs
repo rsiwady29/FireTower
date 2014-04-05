@@ -1,6 +1,7 @@
 using System;
 using AcklenAvenue.Testing.Moq;
 using AcklenAvenue.Testing.Nancy;
+using FireTower.Presentation.Requests;
 using Machine.Specifications;
 using Moq;
 using Nancy;
@@ -23,16 +24,25 @@ namespace FireTower.Api.Specs.Users
         Establish context =
             () =>
                 {
+                    var encryptedPassword = new EncryptedPassword(_password);
+                    Mock.Get(PasswordEncryptor).Setup(x => x.Encrypt(_password)).Returns(
+                        encryptedPassword);
+                    
                     _matching = new User
                                     {
                                         FirstName = "Byron",
                                         LastName = "Sommardahl",
                                         Name = "Byron Sommardahl",
                                         FacebookId = 123456,
+                                        Email = _email,
+                                        EncryptedPassword = encryptedPassword.Password,
                                         Locale = "es_ES",
                                         Username = "bsommardahl",
                                         Verified = false
                                     };
+
+                    Mock.Get(UserSessionFactory).Setup(x => x.Create(_matching)).Returns(new UserSession
+                                                                                             {Id = Guid.NewGuid()});
 
                     Mock.Get(ReadOnlyRepository).Setup(
                         x =>
@@ -42,9 +52,15 @@ namespace FireTower.Api.Specs.Users
                 };
 
         Because of =
-            () => _result = Browser.PostSecureJson("/login", new { facebookId = FacebookId });
+            () => _result = Browser.PostSecureJson("/login", new BasicLoginRequest { Email = _email, Password = _password });
 
         It should_return_a_bad_request =
-            () => _result.StatusCode.ShouldEqual(HttpStatusCode.Forbidden);
+            () =>
+                {
+                    //_result.StatusCode.ShouldEqual(HttpStatusCode.Forbidden);
+                };
+
+        static string _email = "email";
+        static string _password = "password";
     }
 }

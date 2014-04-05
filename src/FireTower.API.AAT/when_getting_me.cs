@@ -1,9 +1,8 @@
 using System;
 using System.Net;
 using AcklenAvenue.Testing.AAT;
-using Machine.Specifications;
-using FireTower.Presentation.Requests;
 using FireTower.Presentation.Responses;
+using Machine.Specifications;
 using RestSharp;
 
 namespace FireTower.API.AAT
@@ -14,21 +13,12 @@ namespace FireTower.API.AAT
         static Guid _token;
 
         Establish context =
-            () =>
-                {
-                    IRestResponse<SuccessfulLoginResponse<Guid>> login =
-                        Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
-                                                                      new FacebookLoginRequest
-                                                                          {
-                                                                              FacebookId = 1817134138
-                                                                          });
-                    _token = login.Data.Token;
-                };
+            () => { _token = Login().Token; };
 
         Because of =
             () =>
             _result =
-            Client.Get<MeResponse>("/me", new { token = _token });
+            Client.Get<MeResponse>("/me", new {token = _token});
 
         It should_have_an_ok_response =
             () => _result.StatusCode.ShouldEqual(HttpStatusCode.OK);

@@ -1,8 +1,8 @@
+using FireTower.Domain;
+using FireTower.Presentation.Modules;
 using Machine.Specifications;
 using Moq;
 using Nancy.Testing;
-using FireTower.Domain;
-using FireTower.Presentation.Modules;
 
 namespace FireTower.Api.Specs.Users
 {
@@ -11,7 +11,8 @@ namespace FireTower.Api.Specs.Users
         protected static Browser Browser;
         protected static IReadOnlyRepository ReadOnlyRepository;
         protected static IUserSessionFactory UserSessionFactory;
-        
+        protected static IPasswordEncryptor PasswordEncryptor;
+
         Establish master_context = () =>
                                        {
                                            ReadOnlyRepository = Mock.Of<IReadOnlyRepository>();
@@ -20,7 +21,10 @@ namespace FireTower.Api.Specs.Users
                                                                      {
                                                                          x.Module<LoginModule>();
                                                                          x.Dependency(ReadOnlyRepository);
-                                                                         x.Dependency(UserSessionFactory);                                                                         
+                                                                         x.Dependency(UserSessionFactory);
+                                                                         PasswordEncryptor =
+                                                                             Mock.Of<IPasswordEncryptor>();
+                                                                         x.Dependency(PasswordEncryptor);
                                                                      });
                                        };
     }

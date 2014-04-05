@@ -1,6 +1,7 @@
 using System;
 using AcklenAvenue.Testing.Moq;
 using AcklenAvenue.Testing.Nancy;
+using FireTower.Presentation.Requests;
 using Machine.Specifications;
 using Moq;
 using Nancy.Testing;
@@ -23,11 +24,16 @@ namespace FireTower.Api.Specs.Users
         Establish context =
             () =>
                 {
+                    var encryptedPassword = new EncryptedPassword("password");
+                    Mock.Get(PasswordEncryptor).Setup(x => x.Encrypt(_password)).Returns(
+                        encryptedPassword);
                     _matching = new User
                                     {
                                         FirstName = "Byron",
                                         LastName = "Sommardahl",
                                         Name = "Byron Sommardahl",
+                                        Email = _emailEmcilCom,
+                                        EncryptedPassword = encryptedPassword.Password,
                                         FacebookId = 123456,
                                         Locale = "es_ES",
                                         Username = "bsommardahl",
@@ -50,12 +56,15 @@ namespace FireTower.Api.Specs.Users
                 };
 
         Because of =
-            () => _result = Browser.PostSecureJson("/login", new { facebookId = FacebookId });
+            () => _result = Browser.PostSecureJson("/login", new BasicLoginRequest { Email = _emailEmcilCom, Password = _password});
 
         It should_return_a_token =
             () => _result.Body<SuccessfulLoginResponse<Guid>>().Token.ShouldEqual(Token);
 
         It should_return_an_expiration_date =
             () => _result.Body<SuccessfulLoginResponse<Guid>>().Expires.ShouldEqual(_expires);
+
+        static string _password = "password";
+        static string _emailEmcilCom = "email@emcil.com";
     }
 }
