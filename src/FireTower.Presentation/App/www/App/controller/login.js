@@ -7,7 +7,7 @@ angular.module('firetower').controller('LoginController', ['$scope', '$timeout',
     
     //if the user is logged in, send them to home
     if (localStorage.getItem("firetowertoken"))
-        $location.path("/reportes");
+        $location.path("/app/reportes");
 
     //FB.Event.subscribe('auth.login', function (response) {
     //    $scope.facebookReady = true;
