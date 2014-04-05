@@ -110,7 +110,7 @@
     </Content>
     <Content Include="App\config.xml" />
     <Content Include="App\www\App\config.js" />
-    <Content Include="App\controller\new-fire-location.js" />
+    <Content Include="App\www\App\controller\new-fire-location.js" />
     <Content Include="App\www\App\controller\login.js" />
     <Content Include="App\www\App\controller\menu.js" />
     <Content Include="App\www\App\controller\reporte.js" />
@@ -118,7 +118,7 @@
     <Content Include="App\www\App\js\angular\angular-route.js" />
     <Content Include="App\www\App\js\angular\angular.js" />
     <Content Include="App\www\App\services\Disaster.js" />
-    <Content Include="App\views\new-fire-location.html" />
+    <Content Include="App\www\App\views\new-fire-location.html" />
     <Content Include="App\www\App\js\cordova.js" />
     <Content Include="App\www\App\services\loginService.js" />
     <Content Include="App\www\App\services\math.js" />
@@ -190,7 +190,6 @@
     <Compile Include="Modules\VerificationModule.cs" />
     <Compile Include="Modules\VoteModule.cs" />
     <Compile Include="Modules\WorkModule.cs" />
-
     <Compile Include="Requests\SendDisasterByEmailRequest.cs" />
     <Compile Include="Requests\BasicLoginRequest.cs" />
     <Compile Include="Requests\VerifyAccountRequest.cs" />

@@ -41,6 +41,15 @@ angular.module('firetower', ['ionic', 'google-maps'])
                 }
             }
         })
+        .state('app.newfirelocation', {
+            url: "/newfirelocation",
+            views: {
+                'menuContent': {
+                    templateUrl: "App/views/new-fire-location.html",
+                    controller: 'NewFireLocationController'
+                }
+            }
+        })
         .state('otherwise', {
             url: '*path',
             templateUrl: 'App/views/login.html',
