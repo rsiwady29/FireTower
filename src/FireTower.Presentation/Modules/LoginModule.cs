@@ -25,7 +25,7 @@ namespace FireTower.Presentation.Modules
                             var user =
                                 readOnlyRepository.First<User>(x => x.FacebookId == loginInfo.FacebookId);
 
-                            if (!user.Verified) return new Response().WithStatusCode(HttpStatusCode.Forbidden);
+                            //if (!user.Verified) return new Response().WithStatusCode(HttpStatusCode.Forbidden);
 
                             UserSession userSession = userSessionFactory.Create(user);
 
