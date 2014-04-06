@@ -8,34 +8,14 @@ angular.module('firetower').controller('LoginController', ['$scope', '$timeout',
     //if the user is logged in, send them to home
     if (localStorage.getItem("firetowertoken"))
         $location.path("/app/reportes");
-
-    //FB.Event.subscribe('auth.login', function (response) {
-    //    $scope.facebookReady = true;
-    //    FB.getLoginStatus(function (response2) {
-    //        if (response2.status == 'connected') {
-    //            $scope.logged = true;
-    //        }
-    //    });
-    //});
-
-    //$scope.login = function () {
-    //    FB.login(
-    //        function (response) {
-    //            if (response.status == 'connected') {
-    //                $scope.me();
-    //            } else {
-    //                $scope.login();
-    //            }
-    //        });
-    //};
-    //$scope.me = function () {
-    //    FB.api('/me', function (response) {
-    //        $scope.$apply(function () {
-    //            user.setUser(response);
-    //        });
-
-    //    });
-    //};
+    
+    $scope.login = function () {
+        OAuth.popup('facebook', function (err, result) {
+            result.get('/me').done(function (data) {
+                user.setUser(data);
+            });
+        });
+    };
 
     // BASIC LOGIN
     $scope.data = { };

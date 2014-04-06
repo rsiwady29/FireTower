@@ -1,8 +1,8 @@
-﻿<ion-view title="Reporte de Fuegos" class="slide-left-right">
+﻿<ion-view title="Reporte de Incendios" class="slide-left-right">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
-    <ion-content class="has-header">
+    <ion-content>
         
         <div class="list card" ng-repeat="reporte in reportes">
             <div class="item item-avatar">
@@ -15,22 +15,22 @@
                 <img ng-src="{{reporte.Images[0]}}">
             </div>
             <a class="item item-icon-left positive" href="#/app/reporte/{{reporte.DisasterId.$uuid}}" >
-                Detalles
+                Detalle del incendio
             </a>
             <a class="item item-icon-left positive" ng-click="sendEmail(reporte.CreatedDate.$date, reporte.LocationDescription, reporte.Location[0], reporte.Location[1])">
-                Email this disaster
+                Enviar por correo este incendio
             </a>
         </div>
         
         <div ng-show="reportes != null && reportes != undefined && reportes.length == 0" class="card">
           <div class="item item-text-wrap">
-            <h1>No hay reportes</h1>
+            <h1>No hay incendios</h1>
           </div>
         </div>
     </ion-content>
     <div class="bar bar-footer" style="padding: 0;margin: 0">
         <button ng-click="takePicture()" class="button button-full button-positive">
-            Denunciar
+            Denunciar un nuevo incendio
         </button>
     </div>
 </ion-view>

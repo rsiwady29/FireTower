@@ -64,7 +64,7 @@ namespace FireTower.Presentation.Modules
                                                                   Name = newUserRequest.Name,
                                                                   FacebookId = newUserRequest.FacebookId,
                                                                   Locale = newUserRequest.Locale,
-                                                                  Username = newUserRequest.Username,
+                                                                  Username = newUserRequest.Username                                                                  
                                                               });
         }
 

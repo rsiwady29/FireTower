@@ -33,7 +33,7 @@ namespace FireTower.API.AAT
         protected static SuccessfulLoginResponse<Guid> Login()
         {
             IRestResponse<SuccessfulLoginResponse<Guid>> restResponse =
-                Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
+                Client.Execute<SuccessfulLoginResponse<Guid>>("/login/facebook", Method.POST,
                                                               new FacebookLoginRequest
                                                               {
                                                                   FacebookId = 123456
@@ -43,7 +43,7 @@ namespace FireTower.API.AAT
 
         protected static void RegisterUser()
         {
-                Client.Execute("/user", Method.POST,
+                Client.Execute("/user/facebook", Method.POST,
                                                                new NewUserRequest
                                                                   {
                                                                       FirstName = "Byron",

@@ -31,32 +31,32 @@ angular.module('firetower')
         
         $scope.sendEmail = function (date, locationDescription, latitude, longitude) {
             $ionicPopup.prompt({
-                title: 'Send Email',
-                subTitle: 'Enter email to send disaster information',
+                title: 'Enviar Correo',
+                subTitle: 'Ingrese un correo para enviar la información del incendio',
                 inputType: 'email',
-                inputPlaceholder: 'Email Address'
+                inputPlaceholder: 'Correo'
             }).then(function (res) {
                 if (res) {
                     if ($scope.isValidEmail(res)) {
                         $http.post('/SendDisasterByEmail', { Email: res, CreatedDate: date, LocationDescription: locationDescription, Latitude: latitude, Longitude: longitude }).success(function(response) {
                             $ionicPopup.alert({
                                 title: 'Hey!',
-                                content: 'Your message was successfully send.'
+                                content: 'El mensaje fue enviado.'
                             }).then(function(res) {
 
                             });
                         }).error(function(XMLHttpRequest, textStatus, errorThrown) {
                             $ionicPopup.alert({
                                 title: 'Oh no!',
-                                content: 'Your message could not be sent, try again later.'
+                                content: 'El mensaje no puede ser enviado, pruebe mas tarde.'
                             }).then(function(res) {
 
                             });
                         });
                     } else {
                         $ionicPopup.alert({
-                            title: 'Email error',
-                            content: 'The email address you entered is invalid.'
+                            title: 'Error de correo',
+                            content: 'La direccion de correo no es valida.'
                         }).then(function(res) {
 
                         });
