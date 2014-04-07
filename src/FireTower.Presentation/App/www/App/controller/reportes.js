@@ -1,5 +1,5 @@
 angular.module('firetower')
-    .controller('ReportesController', ['$scope', '$ionicLoading', 'data', 'Math', '$ionicPopup', '$http', function ($scope, $ionicLoading, data, Math, $ionicPopup, $http) {
+    .controller('ReportesController', ['$scope', '$ionicLoading', 'data', 'Math', '$ionicPopup', '$http', '$location', function ($scope, $ionicLoading, data, Math, $ionicPopup, $http, $location) {
         
         var getAllReports = function () {
             $scope.loading = $ionicLoading.show({
@@ -68,40 +68,8 @@ angular.module('firetower')
         $scope.reportes = null;
         getAllReports();
 
-        $scope.data = {};
-        $scope.obj;
-        var pictureSource;   
-        var destinationType; 
-        var url;
-
-        ionic.Platform.ready(function () {
-            console.log("ready get camera types");
-            if (!navigator.camera) {
-                return;
-            }
-            pictureSource = navigator.camera.PictureSourceType.CAMERA;
-            destinationType = navigator.camera.DestinationType.FILE_URI;
-        });
-
-        $scope.takePicture = function () {
-            console.log("got camera button click");
-            var options = {
-                quality: 50,
-                destinationType: destinationType,
-                sourceType: pictureSource,
-                encodingType: 0
-            };
-            if (!navigator.camera) {
-                return;
-            }
-            navigator.camera.getPicture(
-                function (imageURI) {
-                    console.log("got camera success ", imageURI);
-                    $scope.mypicture = imageURI;                    
-                },
-                function (err) {
-                    console.log("got camera error ", err);
-                },
-                options);
+        $scope.crearReporte = function () {
+            $location.path('/app/crear-reporte');
+            //$scope.$apply();
         };
     }]);

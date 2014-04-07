@@ -1,0 +1,29 @@
+<ion-view title="Inicio">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+       
+        <h1> Crear Reporte </h1> 
+        <div class="list card">
+            <div class="item item-image">
+                <img src="{{mypicture}}">
+            </div>
+            
+            <google-map center="map.center" zoom="map.zoom" draggable="true">
+                <markers>
+                    <marker coords="marker.coords" options="marker.options" events="marker.events"></marker>
+                </markers>
+            </google-map> 
+
+            <a class="item item-icon-left assertive" ng-click="takePicture()">
+                <i class="icon ion-camera"></i>              
+                Tomar Foto de nuevo 
+            </a>
+            <a class="item item-icon-left assertive" ng-click="createDisaster()">
+                <i class="icon ion-checkmark"></i>              
+                Crear Reporte 
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

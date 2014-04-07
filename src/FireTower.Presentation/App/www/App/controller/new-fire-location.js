@@ -36,7 +36,7 @@
 
         $scope.map = {
             center: $scope.location,
-            zoom: 12
+            zoom: 5
         };
 
         if (navigator.geolocation) {

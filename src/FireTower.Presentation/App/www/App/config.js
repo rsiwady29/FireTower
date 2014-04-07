@@ -50,10 +50,19 @@ angular.module('firetower', ['ionic', 'google-maps'])
                 }
             }
         })
+        .state('app.crearReporte', {
+            url: "/crear-reporte",
+            views: {
+                'menuContent': {
+                    templateUrl: "App/views/crear-reporte.html",
+                    controller: 'NewReportController'
+                }
+            }
+        })
         .state('otherwise', {
             url: '*path',
             templateUrl: 'App/views/reportes.html',
             controller: 'ReportesController'
         });
-    OAuth.initialize('qZ4UVmAtk2MBWw1E5M4W1ru8QhA');
+    //OAuth.initialize('qZ4UVmAtk2MBWw1E5M4W1ru8QhA');
 }]);
