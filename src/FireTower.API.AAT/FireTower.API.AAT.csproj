@@ -74,7 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cosa.cs" />
     <Compile Include="DisasterId.cs" />
     <Compile Include="given_an_api_server_context.cs" />
     <Compile Include="ResultShouldExtensions.cs" />
