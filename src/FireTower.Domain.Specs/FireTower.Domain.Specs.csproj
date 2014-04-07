@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="when_activating_an_account.cs" />
+    <Compile Include="when_adding_an_image_to_a_disaster.cs" />
     <Compile Include="when_creating_a_new_disaster.cs" />
     <Compile Include="when_creating_a_new_user.cs" />
     <Compile Include="when_dispatching_a_command.cs" />

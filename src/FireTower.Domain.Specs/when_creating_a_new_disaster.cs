@@ -8,7 +8,6 @@ using FizzWare.NBuilder;
 using Machine.Specifications;
 using Moq;
 using It = Machine.Specifications.It;
-using System.Linq;
 
 namespace FireTower.Domain.Specs
 {
@@ -21,28 +20,34 @@ namespace FireTower.Domain.Specs
         static NewDisasterCreated _expectedEvent;
         static Disaster _expectedDisaster;
 
+        static ITimeProvider _timeProvider;
+        static DateTime _now;
+        static readonly User _user = new User();
+
         Establish context =
             () =>
                 {
                     _writeableRepository = Mock.Of<IWriteableRepository>();
-                    _commandHandler = new NewDisasterCreator(_writeableRepository);
+                    _timeProvider = Mock.Of<ITimeProvider>();
+                    _commandHandler = new NewDisasterCreator(_writeableRepository, _timeProvider);
 
-                    _command = new CreateNewDisaster(DateTime.Today.ToLocalTime(), "LocationDescription1", 123.34, 456.32, "http://url.com", 1);
+                    _now = DateTime.Now;
+                    Mock.Get(_timeProvider).Setup(x => x.Now()).Returns(_now);
+
+                    _command = new CreateNewDisaster("LocationDescription1", 123.34, 456.32, 1);
 
                     _expectedDisaster =
                         Builder<Disaster>.CreateNew()
-                            .With(disaster => disaster.CreatedDate, _command.CreatedDate)
+                            .With(x => x.Id, Guid.Empty)
+                            .With(disaster => disaster.CreatedDate, _now)
                             .With(disaster => disaster.LocationDescription, _command.LocationDescription)
                             .With(disaster => disaster.Latitude, _command.Latitude)
                             .With(disaster => disaster.Longitude, _command.Longitude)
-                            .With(disaster => disaster.Id, Guid.Empty)
                             .With(disaster => disaster.SeverityVotes,
-                                  Builder<SeverityVote>.CreateListOfSize(1).All().With(severity => severity.Id, Guid.Empty)
-                                      .With(s => s.Severity, _command.FirsSeverity)
-                                      .Build())
-                            .With(disaster => disaster.Images,
-                                  Builder<DisasterImage>.CreateListOfSize(1).All().With(image => image.Id, Guid.Empty)
-                                      .With(image => image.Url, _command.FirstImageUrl)
+                                  Builder<SeverityVote>.CreateListOfSize(1).All()
+                                      .With(x => x.Id, Guid.Empty)
+                                      .And(sev => sev.User, _user)
+                                      .With(s => s.Severity, _command.FirstSeverity)
                                       .Build())
                             .Build();
 
@@ -50,17 +55,19 @@ namespace FireTower.Domain.Specs
                         .Returns(_expectedDisaster);
 
                     _commandHandler.NotifyObservers += x => _eventRaised = x;
-                    _expectedEvent = new NewDisasterCreated(_expectedDisaster.Id, _command.CreatedDate, _command.LocationDescription, _command.Latitude, _command.Longitude, _command.FirstImageUrl, _command.FirsSeverity);
+                    _expectedEvent = new NewDisasterCreated(_expectedDisaster.Id, _now, _command.LocationDescription,
+                                                            _command.Latitude, _command.Longitude,
+                                                            _command.FirstSeverity);
                 };
 
         Because of =
             () =>
-            _commandHandler.Handle(UserSession.New(new User()), _command);
+            _commandHandler.Handle(UserSession.New(_user), _command);
 
-        //It should_handle_the_expected_command_type =
-        //    () => _commandHandler.CommandType.ShouldEqual(typeof (CreateNewDisaster));
+        It should_handle_the_expected_command_type =
+            () => _commandHandler.CommandType.ShouldEqual(typeof (CreateNewDisaster));
 
-        //It should_raise_the_expected_event =
-        //    () => _eventRaised.ShouldBeLike(_expectedEvent);
+        It should_raise_the_expected_event =
+            () => _eventRaised.ShouldBeLike(_expectedEvent);
     }
 }

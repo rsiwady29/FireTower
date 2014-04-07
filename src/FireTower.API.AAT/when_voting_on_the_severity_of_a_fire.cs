@@ -17,7 +17,7 @@ namespace FireTower.API.AAT
         static Guid _disasterId;
         static IRestResponse _result;
         static Guid _token;
-        static string _url;
+        static string _locationName;
         static MongoCollection<DisasterViewModel> _disasterViewModelCollection;
         static DisasterViewModel _disaster;
 
@@ -25,20 +25,16 @@ namespace FireTower.API.AAT
             () =>
                 {
                     _token = Login().Token;
-                    _url = string.Format("http://{0}.url.com", new Random().Next(9999999));
-                    Client.Post("/disasters", new CreateNewDisaster(DateTime.Now, "Santa Ana2", 123.45, 456.32, _url, 1),
+                    _locationName = "Santa Ana"+ new Random().Next(9999999);
+                    Client.Post("/disasters", new CreateNewDisaster(_locationName, 123.45, 456.32, 1),
                                 _token);
 
-                    var uri =
-                        new MongoUrl(
-                            @"mongodb://client:password@ds045137.mongolab.com:45137/appharbor_ab50c767-930d-4b7d-9571-dd2a0b62d5a9");
-
-                    MongoServer server = new MongoClient(uri).GetServer();
-
-                    MongoDatabase db = server.GetDatabase(uri.DatabaseName);
+                    var db = MongoDatabase();
                     _disasterViewModelCollection = db.GetCollection<DisasterViewModel>("DisasterViewModel");
-                    _disaster = _disasterViewModelCollection.AsQueryable().FirstOrDefault(x => x.Images.Contains(_url));
-                    _disasterId = _disaster != null ? _disaster.DisasterId : Guid.Empty;
+                    var disasterViewModels =
+                        _disasterViewModelCollection.AsQueryable().ToList();
+                    _disaster = disasterViewModels.First(x => x.LocationDescription==_locationName);
+                    _disasterId = _disaster.DisasterId;
                 };
 
         Because of =
@@ -48,7 +44,8 @@ namespace FireTower.API.AAT
             () =>
                 {
                     var disasterViewModel =
-                        _disasterViewModelCollection.AsQueryable().FirstOrDefault(x => x.Images.Contains(_url));
+                        _disasterViewModelCollection.AsQueryable().FirstOrDefault(
+                            x => x.LocationDescription == _locationName);
                     disasterViewModel.SeverityVotes.Count().ShouldEqual(2);
                 };
 
@@ -63,16 +60,5 @@ namespace FireTower.API.AAT
                         _disasterViewModelCollection.Remove(Query<DisasterViewModel>.EQ(x => x.DisasterId, _disaster.DisasterId));
                     }*/
                 };
-    }
-
-    public class cosa
-    {
-        public DisasterId DisasterId { get; set; }
-        public string[] Images { get; set; }
-    }
-
-    public class DisasterId
-    {
-        public Guid uuid { get; set; }
     }
 }

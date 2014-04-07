@@ -3,6 +3,7 @@ using AcklenAvenue.Testing.AAT;
 using FireTower.Presentation.Requests;
 using FireTower.Presentation.Responses;
 using Machine.Specifications;
+using MongoDB.Driver;
 using RestSharp;
 
 namespace FireTower.API.AAT
@@ -33,10 +34,11 @@ namespace FireTower.API.AAT
         protected static SuccessfulLoginResponse<Guid> Login()
         {
             IRestResponse<SuccessfulLoginResponse<Guid>> restResponse =
-                Client.Execute<SuccessfulLoginResponse<Guid>>("/login/facebook", Method.POST,
-                                                              new FacebookLoginRequest
+                Client.Execute<SuccessfulLoginResponse<Guid>>("/login", Method.POST,
+                                                              new BasicLoginRequest
                                                               {
-                                                                  FacebookId = 123456
+                                                                  Email = "test@test.com",
+                                                                  Password = "password"
                                                               });
             return restResponse.Data;
         }
@@ -56,6 +58,17 @@ namespace FireTower.API.AAT
                                                                   });
         }
 
-        
+
+        protected static MongoDatabase MongoDatabase()
+        {
+            var uri =
+                new MongoUrl(
+                    @"mongodb://client:password@ds045137.mongolab.com:45137/appharbor_ab50c767-930d-4b7d-9571-dd2a0b62d5a9");
+
+            MongoServer server = new MongoClient(uri).GetServer();
+
+            MongoDatabase db = server.GetDatabase(uri.DatabaseName);
+            return db;
+        }
     }
 }

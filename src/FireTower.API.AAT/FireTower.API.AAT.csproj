@@ -74,8 +74,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisasterId.cs" />
     <Compile Include="given_an_api_server_context.cs" />
     <Compile Include="ResultShouldExtensions.cs" />
+    <Compile Include="when_adding_a_photo_to_an_existing_disaster.cs" />
     <Compile Include="when_checking_if_a_user_exists.cs" />
     <Compile Include="when_creating_an_account.cs" />
     <Compile Include="when_creating_a_new_disaster.cs" />
