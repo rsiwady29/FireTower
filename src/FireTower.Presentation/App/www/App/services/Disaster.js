@@ -13,6 +13,10 @@
         factory.VotePutOut = function (putOutRequest) {
             return $http.post('/votes/putout', putOutRequest);
         };
-        
+
+        factory.CreateDisaster = function (newDisaster) {
+            return $http.post('/disasters', newDisaster);
+        };
+
         return factory;
 }]);
