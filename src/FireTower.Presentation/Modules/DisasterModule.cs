@@ -20,7 +20,10 @@ namespace FireTower.Presentation.Modules
             Post["/Disasters"] =
                 Request =>
                     {
-                        commandDispatcher.Dispatch(this.UserSession(), this.Bind<CreateNewDisaster>());
+                        var req = this.Bind<CreateNewDisasterRequest>();
+                        commandDispatcher.Dispatch(this.UserSession(),
+                                                   new CreateNewDisaster(req.LocationDescription,
+                                                                         req.Latitude, req.Longitude, req.FirstSeverity));
                         return new Response().WithStatusCode(HttpStatusCode.OK);
                     };
 
@@ -30,17 +33,18 @@ namespace FireTower.Presentation.Modules
                         var emailInfo = this.Bind<SendDisasterByEmailRequest>();
                         try
                         {
-                            Disaster _model = new Disaster(DateTime.Parse(emailInfo.CreatedDate),
-                                                           emailInfo.LocationDescription,
-                                                           double.Parse(emailInfo.Latitude),
-                                                           double.Parse(emailInfo.Longitude));
-                            EmailSender sender =
+                            var _model = new Disaster(DateTime.Parse(emailInfo.CreatedDate),
+                                                      emailInfo.LocationDescription,
+                                                      double.Parse(emailInfo.Latitude),
+                                                      double.Parse(emailInfo.Longitude));
+                            var sender =
                                 new EmailSender(
                                     new EmailBodyRenderer(
                                         new TemplateProvider(new List<IEmailTemplate>
-                                            {
-                                                new DisasterEmailTemplate(new DefaultRootPathProvider())
-                                            }),
+                                                                 {
+                                                                     new DisasterEmailTemplate(
+                                                                         new DefaultRootPathProvider())
+                                                                 }),
                                         new DefaultViewEngine())
                                     , new EmailSubjectProvider(new List<IEmailSubject> {new DisasterEmailSubject()}),
                                     new MailgunSmtpClient());

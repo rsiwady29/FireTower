@@ -55,11 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\ControlledVoteAdder.cs" />
+    <Compile Include="CommandHandlers\DisasterImageAdder.cs" />
     <Compile Include="CommandHandlers\NewDisasterCreator.cs" />
     <Compile Include="CommandHandlers\NewUserCreator.cs" />
     <Compile Include="CommandHandlers\PutOutVoteAdder.cs" />
     <Compile Include="CommandHandlers\SeverityVoteAdder.cs" />
     <Compile Include="Commands\ActivateUser.cs" />
+    <Compile Include="Commands\AddImageToDisaster.cs" />
     <Compile Include="Commands\CreateNewDisaster.cs" />
     <Compile Include="Commands\NewUserCommand.cs" />
     <Compile Include="CommandDispatchers\SynchronousCommandDispatcher.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="EventHandlers\NewUserVerificationEventHandler.cs" />
     <Compile Include="Events\ControlledVoteAdded.cs" />
     <Compile Include="Events\NewDisasterCreated.cs" />
+    <Compile Include="Events\NewImageAddedToDisaster.cs" />
     <Compile Include="Events\PutOutVoteAdded.cs" />
     <Compile Include="Events\SeverityVoteAdded.cs" />
     <Compile Include="Events\UserActivated.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="Random4DigitVerificationCodeGenerator.cs" />
     <Compile Include="Services\GuidTokenGenerator.cs" />
     <Compile Include="Services\HashPasswordEncryptor.cs" />
+    <Compile Include="Services\IImageRepository.cs" />
     <Compile Include="Services\SystemTimeProvider.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Services\UserSessionFactory.cs" />

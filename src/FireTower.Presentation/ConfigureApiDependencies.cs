@@ -5,8 +5,10 @@ using AutoMapper;
 using Autofac;
 using FireTower.Domain;
 using FireTower.Domain.CommandDispatchers;
+using FireTower.Domain.Services;
 using FireTower.Infrastructure;
 using FireTower.IronMq;
+using FireTower.S3;
 using FireTower.ViewStore;
 using MongoDB.Driver;
 
@@ -25,7 +27,8 @@ namespace FireTower.Presentation
                                builder.RegisterInstance(Mapper.Engine).As<IMappingEngine>();
                                builder.RegisterType<TokenExpirationProvider>().As<ITokenExpirationProvider>();
                                builder.RegisterType<ApiUserMapper>().As<IApiUserMapper<Guid>>();
-                               
+                               builder.RegisterType<AmazonImageRepository>().As<IImageRepository>();
+
                                ChooseCommandDispatcherBasedOnRoleType(builder);
                                SelfSubscribeWorkerToQueue();
 

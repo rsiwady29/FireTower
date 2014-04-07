@@ -1,4 +1,5 @@
 using System;
+using AcklenAvenue.Testing.Moq;
 using AcklenAvenue.Testing.Moq.ExpectedObjects;
 using BlingBag;
 using FireTower.Domain.Events;
@@ -14,7 +15,7 @@ namespace FireTower.ViewStore.Specs
         static IViewModelRepository _viewModelRepository;
 
         static readonly NewDisasterCreated NewDisasterCreated =
-            new NewDisasterCreated(Guid.NewGuid(),DateTime.Now, "Santa Ana", 1234.43, 12321.43, "img.gif",1);
+            new NewDisasterCreated(Guid.NewGuid(), DateTime.Now, "Santa Ana", 1234.43, 12321.43, 1);
 
         Establish context =
             () =>
@@ -31,12 +32,56 @@ namespace FireTower.ViewStore.Specs
                       .Verify(x =>
                               x.Create(
                                   WithExpected.Object(
-                                      new DisasterViewModel(NewDisasterCreated.DisasterId, 
+                                      new DisasterViewModel(NewDisasterCreated.DisasterId,
                                                             NewDisasterCreated.CreatedDate,
                                                             NewDisasterCreated.LocationDescription,
                                                             NewDisasterCreated.Latitude,
                                                             NewDisasterCreated.Longitude,
-                                                            NewDisasterCreated.FirstImageUrl,
                                                             NewDisasterCreated.FirstSeverityVote))));
+    }
+
+    public class after_creating_adding_an_image_to_an_existing_disaster
+    {
+        static IBlingHandler<NewImageAddedToDisaster> _eventHandler;
+        static IViewModelRepository _viewModelRepository;
+
+        static readonly NewImageAddedToDisaster NewImageAddedToDisaster =
+            new NewImageAddedToDisaster(Guid.NewGuid(), Guid.NewGuid(), "url");
+
+        static DisasterViewModel _disasterViewModel;
+        static DisasterViewModel _expectedDisaster;
+
+        Establish context =
+            () =>
+                {
+                    _viewModelRepository = Mock.Of<IViewModelRepository>();
+                    _eventHandler = new DisasterViewModelImageAdder(_viewModelRepository);
+
+                    _disasterViewModel = new DisasterViewModel
+                                             {
+                                                 DisasterId = NewImageAddedToDisaster.DisasterId,
+                                                 Images = new[] {"existingImage"}
+                                             };
+                    Mock.Get(_viewModelRepository).Setup(x => x.FindOne(ThatHas.AnExpressionFor<DisasterViewModel>()
+                                                                            .ThatMatches(_disasterViewModel)
+                                                                            .ThatDoesNotMatch(new DisasterViewModel())
+                                                                            .Build()))
+                        .Returns(_disasterViewModel);
+
+                    _expectedDisaster = new DisasterViewModel
+                                            {
+                                                DisasterId = NewImageAddedToDisaster.DisasterId,
+                                                Images = new[] {"existingImage", NewImageAddedToDisaster.ImageUrl}
+                                            };
+                };
+
+        Because of =
+            () => _eventHandler.Handle(NewImageAddedToDisaster);
+
+        It should_add_the_disaster_to_the_view_model_store =
+            () => Mock.Get(_viewModelRepository)
+                      .Verify(x =>
+                              x.Update(
+                                  WithExpected.Object(_expectedDisaster)));
     }
 }

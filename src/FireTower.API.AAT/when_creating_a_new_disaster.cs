@@ -1,8 +1,6 @@
 using System;
-using System.Linq;
 using AcklenAvenue.Testing.AAT;
-using FireTower.Domain.Commands;
-using FireTower.Presentation.Responses;
+using FireTower.Presentation.Requests;
 using Machine.Specifications;
 using RestSharp;
 
@@ -25,15 +23,22 @@ namespace FireTower.API.AAT
                 };
 
         Because of =
-            () => _result = Client.Post("/disasters", new CreateNewDisaster(DateTime.Now, "Santa Ana", 123.45, 456.32, _url, 1), _token);
+            () =>
+            _result =
+            Client.Post("/disasters",
+                        new CreateNewDisasterRequest
+                            {
+                                LocationDescription = "Santa Ana",
+                                Latitude = 123.45,
+                                Longitude = 31.32,
+                                FirstSeverity = 1
+                            },
+                        _token);
+
+        It should_put_a_disaster_in_the_view_model_store =
+            () => { };
 
         It should_return_ok =
             () => _result.ShouldBeOk();
-
-        It should_put_a_disaster_in_the_view_model_store =
-            () =>
-                {
-                    
-                };
     }
 }

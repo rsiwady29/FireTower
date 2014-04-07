@@ -1,5 +1,4 @@
-﻿using System;
-using AcklenAvenue.Testing.Moq.ExpectedObjects;
+﻿using AcklenAvenue.Testing.Moq.ExpectedObjects;
 using AcklenAvenue.Testing.Nancy;
 using FireTower.Domain.Commands;
 using Machine.Specifications;
@@ -18,8 +17,7 @@ namespace FireTower.Api.Specs
         const int Severity = 1;
 
         static readonly CreateNewDisaster CreateNewDisaster =
-            new CreateNewDisaster(DateTime.Today.ToLocalTime(), Location, Latitude, Longitude,
-                                  "http://www.thisisaphoto.com", Severity);
+            new CreateNewDisaster(Location, Latitude, Longitude, Severity);
 
         static BrowserResponse _result;
 

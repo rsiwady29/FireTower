@@ -193,10 +193,13 @@
     <Compile Include="JsonCommandDeserializer.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\DisasterModule.cs" />
+    <Compile Include="Modules\ImageModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
     <Compile Include="Modules\VerificationModule.cs" />
     <Compile Include="Modules\VoteModule.cs" />
     <Compile Include="Modules\WorkModule.cs" />
+    <Compile Include="Requests\AddImageRequest.cs" />
+    <Compile Include="Requests\CreateNewDisasterRequest.cs" />
     <Compile Include="Requests\SendDisasterByEmailRequest.cs" />
     <Compile Include="Requests\BasicLoginRequest.cs" />
     <Compile Include="Requests\VerifyAccountRequest.cs" />
@@ -260,6 +263,10 @@
     <ProjectReference Include="..\FireTower.Mailgun\FireTower.Mailgun.csproj">
       <Project>{490DD21F-A2EA-4C01-8A13-458428499EDE}</Project>
       <Name>Replay20.Mailgun</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FireTower.S3\FireTower.S3.csproj">
+      <Project>{0E3CFBA9-09DC-4715-9AB8-63E64E56C63F}</Project>
+      <Name>FireTower.S3</Name>
     </ProjectReference>
     <ProjectReference Include="..\FireTower.ViewStore\FireTower.ViewStore.csproj">
       <Project>{04D4EAD0-0AD7-4A67-998A-EDE597B8F877}</Project>

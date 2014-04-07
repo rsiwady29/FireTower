@@ -9,16 +9,14 @@ namespace FireTower.Domain.Events
         public readonly string LocationDescription;
         public readonly double Latitude;
         public readonly double Longitude;
-        public readonly string FirstImageUrl;
         public readonly int FirstSeverityVote;
 
-        public NewDisasterCreated(Guid disasterId, DateTime createdDate, string locationDescription, double latitude, double longitude, string firstImageUrl, int firstSeverityVote)
+        public NewDisasterCreated(Guid disasterId, DateTime createdDate, string locationDescription, double latitude, double longitude, int firstSeverityVote)
         {
             DisasterId = disasterId;
 
             Latitude = latitude;
             Longitude = longitude;
-            FirstImageUrl = firstImageUrl;
             CreatedDate = createdDate;
             LocationDescription = locationDescription;
             FirstSeverityVote = firstSeverityVote;
