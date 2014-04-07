@@ -22,6 +22,7 @@ namespace FireTower.Domain.Specs
 
         static ITimeProvider _timeProvider;
         static DateTime _now;
+        static readonly User _user = new User();
 
         Establish context =
             () =>
@@ -37,14 +38,15 @@ namespace FireTower.Domain.Specs
 
                     _expectedDisaster =
                         Builder<Disaster>.CreateNew()
+                            .With(x => x.Id, Guid.Empty)
                             .With(disaster => disaster.CreatedDate, _now)
                             .With(disaster => disaster.LocationDescription, _command.LocationDescription)
                             .With(disaster => disaster.Latitude, _command.Latitude)
                             .With(disaster => disaster.Longitude, _command.Longitude)
-                            .With(disaster => disaster.Id, Guid.Empty)
                             .With(disaster => disaster.SeverityVotes,
-                                  Builder<SeverityVote>.CreateListOfSize(1).All().With(severity => severity.Id,
-                                                                                       Guid.Empty)
+                                  Builder<SeverityVote>.CreateListOfSize(1).All()
+                                      .With(x => x.Id, Guid.Empty)
+                                      .And(sev => sev.User, _user)
                                       .With(s => s.Severity, _command.FirstSeverity)
                                       .Build())
                             .Build();
@@ -60,7 +62,7 @@ namespace FireTower.Domain.Specs
 
         Because of =
             () =>
-            _commandHandler.Handle(UserSession.New(new User()), _command);
+            _commandHandler.Handle(UserSession.New(_user), _command);
 
         It should_handle_the_expected_command_type =
             () => _commandHandler.CommandType.ShouldEqual(typeof (CreateNewDisaster));

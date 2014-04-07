@@ -29,8 +29,8 @@ namespace FireTower.Domain.CommandHandlers
             var u = (UserSession) userSessionIssuingCommand;
 
             var itemToCreate = new Disaster(_timeProvider.Now(), c.LocationDescription, c.Latitude, c.Longitude);
-
             itemToCreate.AddSeverityVote(u.User, c.FirstSeverity);
+
             Disaster newDisaster = _writeableRepository.Create(itemToCreate);
 
             NotifyObservers(new NewDisasterCreated(newDisaster.Id, newDisaster.CreatedDate, c.LocationDescription,
