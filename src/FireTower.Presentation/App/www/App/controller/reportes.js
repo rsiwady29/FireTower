@@ -67,19 +67,41 @@ angular.module('firetower')
         
         $scope.reportes = null;
         getAllReports();
-        
-        $scope.takePicture = function () {
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-                quality: 50,
-                destinationType: destinationType.DATA_URL
-            });
 
-            function onPhotoDataSuccess(imageData) {
-                alert(imageData);
+        $scope.data = {};
+        $scope.obj;
+        var pictureSource;   
+        var destinationType; 
+        var url;
+
+        ionic.Platform.ready(function () {
+            console.log("ready get camera types");
+            if (!navigator.camera) {
+                return;
             }
-            
-            function onFail(message) {
-                alert('Failed because: ' + message);
+            pictureSource = navigator.camera.PictureSourceType.CAMERA;
+            destinationType = navigator.camera.DestinationType.FILE_URI;
+        });
+
+        $scope.takePicture = function () {
+            console.log("got camera button click");
+            var options = {
+                quality: 50,
+                destinationType: destinationType,
+                sourceType: pictureSource,
+                encodingType: 0
+            };
+            if (!navigator.camera) {
+                return;
             }
+            navigator.camera.getPicture(
+                function (imageURI) {
+                    console.log("got camera success ", imageURI);
+                    $scope.mypicture = imageURI;                    
+                },
+                function (err) {
+                    console.log("got camera error ", err);
+                },
+                options);
         };
     }]);
