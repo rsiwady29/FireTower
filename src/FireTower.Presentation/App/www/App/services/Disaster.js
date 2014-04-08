@@ -5,7 +5,7 @@
         factory.SaveSeverity = function (severity) {
             return $http.post('/votes/severity', severity);
         };
-
+        
         factory.VoteControlled = function (isControlled) {
             return $http.post('/votes/controlled', isControlled);
         };
@@ -15,7 +15,11 @@
         };
 
         factory.CreateDisaster = function (newDisaster) {
-            return $http.post('/disasters', newDisaster);
+            return $http.post('/Disasters', newDisaster);
+        };
+
+        factory.SaveImageToDisaster = function(disasterId, base64Image) {
+            return $http.post('/disasters/'+ disasterId +'/image', base64Image);
         };
 
         return factory;
