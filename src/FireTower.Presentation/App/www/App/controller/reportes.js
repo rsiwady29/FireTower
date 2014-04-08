@@ -20,8 +20,16 @@ angular.module('firetower')
                     $scope.loading.hide();
                 })
                 .error(function(error) {
-
+                    $scope.loading.hide();
+                    showMessage('Error', 'No hemos podido cargar los reportes. Estas conectado a internet?');
                 });
+        };
+
+        var showMessage = function (title, message) {
+            $ionicPopup.alert({
+                title: title,
+                content: message
+            });
         };
 
         $scope.isValidEmail = function(email) {
@@ -70,6 +78,5 @@ angular.module('firetower')
 
         $scope.crearReporte = function () {
             $location.path('/app/crear-reporte');
-            //$scope.$apply();
         };
     }]);
