@@ -65,9 +65,18 @@
 
                             pubnub.subscribe({
                                 channel: response.userId,
-                                message: function(m) {
-                                    alert(m.Id);
-                                    $location.path('/app/reportes');
+                                message: function(disasterModel) {
+                                    DisasterService.SaveImageToDisaster(disasterModel.Id, { Base64Image: $scope.foto })
+                                        .success(function () {
+                                            showMessage('success', 'Imagen Cargada exitosamente!');
+                                            $location.path('/app/reportes');
+                                        })
+                                        .error(function() {
+                                        });
+                                    
+                                    pubnub.unsubscribe({
+                                        channel: response.userId,
+                                    });
                                 }
                             });
                         })
