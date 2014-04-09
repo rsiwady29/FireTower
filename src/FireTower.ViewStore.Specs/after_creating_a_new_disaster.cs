@@ -15,7 +15,7 @@ namespace FireTower.ViewStore.Specs
         static IViewModelRepository _viewModelRepository;
 
         static readonly NewDisasterCreated NewDisasterCreated =
-            new NewDisasterCreated(Guid.NewGuid(), Guid.NewGuid(), DateTime.Now, "Santa Ana", 1234.43, 12321.43, 1);
+            new NewDisasterCreated(Guid.NewGuid(), Guid.NewGuid(), DateTime.Now, "Santa Ana", 1234.43, 12321.43);
 
         Establish context =
             () =>
@@ -36,8 +36,7 @@ namespace FireTower.ViewStore.Specs
                                                             NewDisasterCreated.CreatedDate,
                                                             NewDisasterCreated.LocationDescription,
                                                             NewDisasterCreated.Latitude,
-                                                            NewDisasterCreated.Longitude,
-                                                            NewDisasterCreated.FirstSeverityVote))));
+                                                            NewDisasterCreated.Longitude))));
     }
 
     public class after_creating_adding_an_image_to_an_existing_disaster

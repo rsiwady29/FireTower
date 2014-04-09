@@ -14,10 +14,9 @@ namespace FireTower.Api.Specs
         const double Latitude = 123.11;
         const double Longitude = 421.11;
         const string Location = "Santa Ana";
-        const int Severity = 1;
-
+        
         static readonly CreateNewDisaster CreateNewDisaster =
-            new CreateNewDisaster(Location, Latitude, Longitude, Severity);
+            new CreateNewDisaster(Location, Latitude, Longitude);
 
         static BrowserResponse _result;
 
