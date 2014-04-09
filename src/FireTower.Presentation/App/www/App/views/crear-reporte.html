@@ -6,21 +6,32 @@
        
         <h1> Crear Reporte </h1> 
         <div class="list card">
-            <div class="item item-image">
-                <img src="{{mypicture}}">
+            <div class="item">
+                {{LocationDescription}}
             </div>
-            
+            <div class="item item-image">
+                <img src="{{foto}}">
+            </div>
             <google-map center="map.center" zoom="map.zoom" draggable="true">
                 <markers>
                     <marker coords="marker.coords" options="marker.options" events="marker.events"></marker>
                 </markers>
             </google-map> 
 
-            <a class="item item-icon-left assertive" ng-click="takePicture()">
+            <a class="item item-icon-left positive" ng-click="takePicture()">
                 <i class="icon ion-camera"></i>              
                 Tomar Foto de nuevo 
             </a>
-            <a class="item item-icon-left assertive" ng-click="createDisaster()">
+            <div class="item item-divider">
+                Que tan Severo es el fuego?
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" ng-repeat="severity in Severities" ng-click="changeSeverity(severity.SeverityScore)">
+                    <i class="icon" ng-show="!severity.IsSelected" >{{severity.SeverityScore}}</i>
+                    <i class="icon energized" ng-show="severity.IsSelected" >{{severity.SeverityScore}}</i>
+                </a>
+            </div>
+            <a class="item item-icon-left balanced" ng-click="createDisaster()">
                 <i class="icon ion-checkmark"></i>              
                 Crear Reporte 
             </a>
