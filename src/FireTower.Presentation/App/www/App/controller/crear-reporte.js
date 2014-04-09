@@ -1,5 +1,5 @@
 ﻿angular.module('firetower')
-    .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService', '$location', 'UserService', function($scope, $ionicPopup, DisasterService, PictureService, $location, UserService) {
+    .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService', '$location', '$ionicLoading', 'UserService', function($scope, $ionicPopup, DisasterService, PictureService, $location, $ionicLoading, UserService) {
 
         $scope.Severities = [];
         $scope.severity = 0;
@@ -16,6 +16,7 @@
                 navigator.geolocation.getCurrentPosition(getCurrentPosition, positionFailure);
             }
             $scope.foto = PictureService.getDefaultPicture();
+            $scope.base64foto = PictureService.getDefaultPictureWithoutDataType();
         };
 
         $scope.data = {};
@@ -43,7 +44,8 @@
                 return;
             }
             navigator.camera.getPicture(
-                function(imageData) {
+                function (imageData) {
+                    $scope.base64foto = imageData;
                     $scope.foto = "data:image/jpeg;base64," + imageData;
                 },
                 function(err) {
@@ -56,6 +58,11 @@
                 showMessage('Severity', '¿Qué tan Severo es el fuego?');
                 return;
             }
+            
+            $scope.loading = $ionicLoading.show({
+                content: 'Guardando reporte...',
+                showBackdrop: false
+            });
 
             UserService.getUser()
                         .success(function (response) {
@@ -66,12 +73,15 @@
                             pubnub.subscribe({
                                 channel: response.userId,
                                 message: function(disasterModel) {
-                                    DisasterService.SaveImageToDisaster(disasterModel.Id, { Base64Image: $scope.foto })
+                                    DisasterService.SaveImageToDisaster(disasterModel.Id, { Base64Image: $scope.base64foto })
                                         .success(function () {
+                                            $scope.loading.hide();
                                             showMessage('success', 'Imagen Cargada exitosamente!');
                                             $location.path('/app/reportes');
                                         })
-                                        .error(function() {
+                                        .error(function () {
+                                            $scope.loading.hide();
+                                            showMessage('Error', 'No hemos podido agregar la foto al reporte. Estas conectado a internet?');
                                         });
                                     
                                     pubnub.unsubscribe({
@@ -81,6 +91,8 @@
                             });
                         })
                         .error(function (error) {
+                            $scope.loading.hide();
+                            showMessage('Error', 'No hemos podido guardar el reporte. Estas conectado a internet?');
                         });
 
             DisasterService.CreateDisaster({
