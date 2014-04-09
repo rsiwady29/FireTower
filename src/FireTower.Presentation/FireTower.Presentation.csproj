@@ -118,6 +118,8 @@
     <Content Include="App\www\App\filters\reverse.js" />
     <Content Include="App\www\App\js\angular\angular-route.js" />
     <Content Include="App\www\App\js\angular\angular.js" />
+    <Content Include="App\www\App\js\pubnub.min.js" />
+    <Content Include="App\www\App\services\UserService.js" />
     <Content Include="App\www\App\services\picture.js" />
     <Content Include="App\www\App\services\Disaster.js" />
     <Content Include="App\www\App\views\crear-reporte.html" />
@@ -265,6 +267,10 @@
     <ProjectReference Include="..\FireTower.Mailgun\FireTower.Mailgun.csproj">
       <Project>{490DD21F-A2EA-4C01-8A13-458428499EDE}</Project>
       <Name>Replay20.Mailgun</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FireTower.PubNub\FireTower.PubNub.csproj">
+      <Project>{50E9378B-3898-4AD9-9063-1F557C0EBAD8}</Project>
+      <Name>FireTower.PubNub</Name>
     </ProjectReference>
     <ProjectReference Include="..\FireTower.S3\FireTower.S3.csproj">
       <Project>{0E3CFBA9-09DC-4715-9AB8-63E64E56C63F}</Project>

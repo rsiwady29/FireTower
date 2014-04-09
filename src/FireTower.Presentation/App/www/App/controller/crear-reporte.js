@@ -1,5 +1,5 @@
 ﻿angular.module('firetower')
-    .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService','$location', function ($scope, $ionicPopup, DisasterService, PictureService,$location) {
+    .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService', '$location', 'UserService', function($scope, $ionicPopup, DisasterService, PictureService, $location, UserService) {
 
         $scope.Severities = [];
         $scope.severity = 0;
@@ -57,29 +57,38 @@
                 return;
             }
 
+            UserService.getUser()
+                        .success(function (response) {
+                            var pubnub = PUBNUB.init({
+                                subscribe_key: 'sub-c-e379a784-bff9-11e3-a219-02ee2ddab7fe'
+                            });
+
+                            pubnub.subscribe({
+                                channel: response.userId,
+                                message: function(m) {
+                                    alert(m.Id);
+                                    $location.path('/app/reportes');
+                                }
+                            });
+                        })
+                        .error(function (error) {
+                        });
+
             DisasterService.CreateDisaster({
                 LocationDescription: $scope.LocationDescription,
                 Latitude: $scope.location.latitude,
                 Longitude: $scope.location.longitude,
                 FirstSeverity: $scope.severity,
             })
-                .success(function (response) {
-                    $location.path('/app/reportes');
-                    /*addImageToDisaster(response.Disaster.DisasterId)
-                        .success(function (response) {
-                            showMessage('exito!', response);
-                            $location.path('/app/reportes');
-                        })
-                        .error(function() {
-                            showMessage('Error', error);
-                        });*/
+                .success(function(response) {
+                                
                 })
                 .error(function(error) {
-                    showMessage('Error', "nein: "+error);
+                    showMessage('Error', "nein: " + error);
                 });
         };
 
-        var addImageToDisaster = function (id) {           
+        var addImageToDisaster = function(id) {
             DisasterService.SaveImageToDisaster(id, $scope.foto);
         };
 

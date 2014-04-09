@@ -32,8 +32,7 @@ namespace FireTower.Domain.CommandHandlers
             itemToCreate.AddSeverityVote(u.User, c.FirstSeverity);
 
             Disaster newDisaster = _writeableRepository.Create(itemToCreate);
-
-            NotifyObservers(new NewDisasterCreated(newDisaster.Id, newDisaster.CreatedDate, c.LocationDescription,
+            NotifyObservers(new NewDisasterCreated(u.User.Id,newDisaster.Id, newDisaster.CreatedDate, c.LocationDescription,
                                                    c.Latitude, c.Longitude, c.FirstSeverity));
         }
 
