@@ -76,12 +76,12 @@
                                     DisasterService.SaveImageToDisaster(disasterModel.Id, { Base64Image: $scope.base64foto })
                                         .success(function () {
                                             $scope.loading.hide();
-                                            showMessage('success', 'Imagen Cargada exitosamente!');
+                                            showMessage('Exito!', 'Reporte creado exitosamente!');
                                             $location.path('/app/reportes');
                                         })
                                         .error(function () {
                                             $scope.loading.hide();
-                                            showMessage('Error', 'No hemos podido agregar la foto al reporte. Estas conectado a internet?');
+                                            showMessage('Error', 'El Reporte fue creado, pero no se ha podido cargar la foto');
                                         });
                                     
                                     pubnub.unsubscribe({
