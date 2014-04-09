@@ -15,10 +15,14 @@
         };
 
         factory.CreateDisaster = function (newDisaster) {
+            var token = localStorage.getItem('firetowertoken');
+            newDisaster.token = token;
             return $http.post('/Disasters', newDisaster);
         };
 
-        factory.SaveImageToDisaster = function(disasterId, base64Image) {
+        factory.SaveImageToDisaster = function (disasterId, base64Image) {
+            var token = localStorage.getItem('firetowertoken');
+            base64Image.token = token;
             return $http.post('/disasters/'+ disasterId +'/image', base64Image);
         };
 

@@ -4,7 +4,7 @@
     </ion-nav-buttons>
     <ion-content>
         
-        <div class="list card" ng-repeat="reporte in reportes">
+        <div class="list card" ng-repeat="reporte in reportes | reverse">
             <div class="item item-avatar">
                 <!--<img src="avatar.jpg">-->
                 <h2>{{reporte.LocationDescription}}</h2>

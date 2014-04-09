@@ -115,6 +115,7 @@
     <Content Include="App\www\App\controller\menu.js" />
     <Content Include="App\www\App\controller\reporte.js" />
     <Content Include="App\www\App\controller\reportes.js" />
+    <Content Include="App\www\App\filters\reverse.js" />
     <Content Include="App\www\App\js\angular\angular-route.js" />
     <Content Include="App\www\App\js\angular\angular.js" />
     <Content Include="App\www\App\services\picture.js" />

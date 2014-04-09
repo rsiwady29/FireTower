@@ -1,5 +1,5 @@
 ﻿angular.module('firetower')
-    .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService', function ($scope, $ionicPopup, DisasterService, PictureService) {
+    .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService','$location', function ($scope, $ionicPopup, DisasterService, PictureService,$location) {
 
         $scope.Severities = [];
         $scope.severity = 0;
@@ -63,11 +63,19 @@
                 Longitude: $scope.location.longitude,
                 FirstSeverity: $scope.severity,
             })
-                .success(function(response) {
-                    addImageToDisaster(response.Disaster.DisasterId);
+                .success(function (response) {
+                    $location.path('/app/reportes');
+                    /*addImageToDisaster(response.Disaster.DisasterId)
+                        .success(function (response) {
+                            showMessage('exito!', response);
+                            $location.path('/app/reportes');
+                        })
+                        .error(function() {
+                            showMessage('Error', error);
+                        });*/
                 })
                 .error(function(error) {
-                    showMessage('Error', error);
+                    showMessage('Error', "nein: "+error);
                 });
         };
 

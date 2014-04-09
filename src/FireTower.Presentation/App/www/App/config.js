@@ -36,8 +36,8 @@ angular.module('firetower', ['ionic', 'google-maps'])
             url: "/reporte/:reporteId",
             views: {
                 'menuContent': {
-                    templateUrl: "App/views/reporte.html",
-                    controller: 'ReporteController'
+                    templateUrl: "App/views/login.html",
+                    controller: 'LoginController'
                 }
             }
         })
