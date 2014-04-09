@@ -18,5 +18,10 @@
         return $http.get(baseUrl + db + '/collections/' + collection + query +'&apiKey=' + apiKey);
     };
 
+    factory.getUser = function () {
+        var token = localStorage.getItem('firetowertoken');       
+        return $http.get('/me?token=' + token);
+    };
+
     return factory;
 }]);

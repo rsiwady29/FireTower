@@ -1,5 +1,5 @@
 ﻿angular.module('firetower')
-    .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService','$location', function ($scope, $ionicPopup, DisasterService, PictureService,$location) {
+    .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService', '$location', '$ionicLoading', 'UserService', function($scope, $ionicPopup, DisasterService, PictureService, $location, $ionicLoading, UserService) {
 
         $scope.Severities = [];
         $scope.severity = 0;
@@ -16,6 +16,7 @@
                 navigator.geolocation.getCurrentPosition(getCurrentPosition, positionFailure);
             }
             $scope.foto = PictureService.getDefaultPicture();
+            $scope.base64foto = PictureService.getDefaultPictureWithoutDataType();
         };
 
         $scope.data = {};
@@ -43,7 +44,8 @@
                 return;
             }
             navigator.camera.getPicture(
-                function(imageData) {
+                function (imageData) {
+                    $scope.base64foto = imageData;
                     $scope.foto = "data:image/jpeg;base64," + imageData;
                 },
                 function(err) {
@@ -56,6 +58,42 @@
                 showMessage('Severity', '¿Qué tan Severo es el fuego?');
                 return;
             }
+            
+            $scope.loading = $ionicLoading.show({
+                content: 'Guardando reporte...',
+                showBackdrop: false
+            });
+
+            UserService.getUser()
+                        .success(function (response) {
+                            var pubnub = PUBNUB.init({
+                                subscribe_key: 'sub-c-e379a784-bff9-11e3-a219-02ee2ddab7fe'
+                            });
+
+                            pubnub.subscribe({
+                                channel: response.userId,
+                                message: function(disasterModel) {
+                                    DisasterService.SaveImageToDisaster(disasterModel.Id, { Base64Image: $scope.base64foto })
+                                        .success(function () {
+                                            $scope.loading.hide();
+                                            showMessage('Exito!', 'Reporte creado exitosamente!');
+                                            $location.path('/app/reportes');
+                                        })
+                                        .error(function () {
+                                            $scope.loading.hide();
+                                            showMessage('Error', 'El Reporte fue creado, pero no se ha podido cargar la foto');
+                                        });
+                                    
+                                    pubnub.unsubscribe({
+                                        channel: response.userId,
+                                    });
+                                }
+                            });
+                        })
+                        .error(function (error) {
+                            $scope.loading.hide();
+                            showMessage('Error', 'No hemos podido guardar el reporte. Estas conectado a internet?');
+                        });
 
             DisasterService.CreateDisaster({
                 LocationDescription: $scope.LocationDescription,
@@ -63,23 +101,15 @@
                 Longitude: $scope.location.longitude,
                 FirstSeverity: $scope.severity,
             })
-                .success(function (response) {
-                    $location.path('/app/reportes');
-                    /*addImageToDisaster(response.Disaster.DisasterId)
-                        .success(function (response) {
-                            showMessage('exito!', response);
-                            $location.path('/app/reportes');
-                        })
-                        .error(function() {
-                            showMessage('Error', error);
-                        });*/
+                .success(function(response) {
+                                
                 })
                 .error(function(error) {
-                    showMessage('Error', "nein: "+error);
+                    showMessage('Error', "nein: " + error);
                 });
         };
 
-        var addImageToDisaster = function (id) {           
+        var addImageToDisaster = function(id) {
             DisasterService.SaveImageToDisaster(id, $scope.foto);
         };
 

@@ -15,7 +15,7 @@ namespace FireTower.ViewStore.Specs
         static IViewModelRepository _viewModelRepository;
 
         static readonly NewDisasterCreated NewDisasterCreated =
-            new NewDisasterCreated(Guid.NewGuid(), DateTime.Now, "Santa Ana", 1234.43, 12321.43, 1);
+            new NewDisasterCreated(Guid.NewGuid(), Guid.NewGuid(), DateTime.Now, "Santa Ana", 1234.43, 12321.43, 1);
 
         Establish context =
             () =>

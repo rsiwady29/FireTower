@@ -11,6 +11,7 @@ using FireTower.IronMq;
 using FireTower.S3;
 using FireTower.ViewStore;
 using MongoDB.Driver;
+using PubNubMessaging.Core;
 
 namespace FireTower.Presentation
 {
@@ -28,6 +29,7 @@ namespace FireTower.Presentation
                                builder.RegisterType<TokenExpirationProvider>().As<ITokenExpirationProvider>();
                                builder.RegisterType<ApiUserMapper>().As<IApiUserMapper<Guid>>();
                                builder.RegisterType<AmazonImageRepository>().As<IImageRepository>();
+                               builder.RegisterType<PubNubNotificationPublisher>().As<INotificationPublisher>();
 
                                ChooseCommandDispatcherBasedOnRoleType(builder);
                                SelfSubscribeWorkerToQueue();
