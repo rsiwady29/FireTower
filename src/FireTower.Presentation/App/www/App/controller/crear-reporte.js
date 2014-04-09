@@ -1,21 +1,14 @@
 ﻿angular.module('firetower')
     .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService', '$location', '$ionicLoading', 'UserService', function($scope, $ionicPopup, DisasterService, PictureService, $location, $ionicLoading, UserService) {
 
-        $scope.Severities = [];
-        $scope.severity = 0;
+       
         var init = function() {
             $scope.takePicture();
-            for (var i = 1; i <= 5; i++) {
-                $scope.Severities.push({
-                    SeverityScore: i,
-                    IsSelected: false
-                });
-            }
-
+            
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(getCurrentPosition, positionFailure);
             }
-            $scope.foto = PictureService.getDefaultPicture();
+            
             $scope.base64foto = PictureService.getDefaultPictureWithoutDataType();
         };
 
@@ -46,19 +39,13 @@
             navigator.camera.getPicture(
                 function (imageData) {
                     $scope.base64foto = imageData;
-                    $scope.foto = "data:image/jpeg;base64," + imageData;
                 },
                 function(err) {
                 },
                 options);
         };
 
-        $scope.createDisaster = function() {
-            if ($scope.severity == 0) {
-                showMessage('Severity', '¿Qué tan Severo es el fuego?');
-                return;
-            }
-            
+        $scope.createDisaster = function() {            
             $scope.loading = $ionicLoading.show({
                 content: 'Guardando reporte...',
                 showBackdrop: false
@@ -77,7 +64,7 @@
                                         .success(function () {
                                             $scope.loading.hide();
                                             showMessage('Exito!', 'Reporte creado exitosamente!');
-                                            $location.path('/app/reportes');
+                                            $location.path('/app/reporte/' + disasterModel.Id);
                                         })
                                         .error(function () {
                                             $scope.loading.hide();
@@ -105,27 +92,12 @@
                                 
                 })
                 .error(function(error) {
-                    showMessage('Error', "nein: " + error);
+                    showMessage('Error', 'Error creando el reporte.');
                 });
         };
 
         var addImageToDisaster = function(id) {
             DisasterService.SaveImageToDisaster(id, $scope.foto);
-        };
-
-        var clearSeveritySelection = function() {
-            for (var i = 0; i < 5; i++) {
-                $scope.Severities[i].IsSelected = false;
-            }
-        };
-
-        $scope.changeSeverity = function(severityScore) {
-            $scope.severity = severityScore;
-            clearSeveritySelection();
-            for (var i = 0; i < 5; i++) {
-                if ($scope.Severities[i].SeverityScore == severityScore)
-                    $scope.Severities[i].IsSelected = true;
-            }
         };
 
         var getCurrentPosition = function(position) {
