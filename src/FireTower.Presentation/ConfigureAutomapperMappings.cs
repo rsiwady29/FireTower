@@ -16,7 +16,8 @@ namespace FireTower.Presentation
             {
                 return container =>
                            {
-                               AutoMapper.Mapper.CreateMap<User, MeResponse>();
+                               AutoMapper.Mapper.CreateMap<User, MeResponse>()
+                                   .ForMember(x=>x.UserId, o => o.MapFrom( x=> x.Id ));
                                
                            };
             }

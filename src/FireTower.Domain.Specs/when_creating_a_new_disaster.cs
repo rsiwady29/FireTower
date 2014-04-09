@@ -22,7 +22,7 @@ namespace FireTower.Domain.Specs
 
         static ITimeProvider _timeProvider;
         static DateTime _now;
-        static readonly User _user = new User();
+        static readonly User _user = new User(){Id = Guid.NewGuid()};
 
         Establish context =
             () =>
@@ -55,7 +55,7 @@ namespace FireTower.Domain.Specs
                         .Returns(_expectedDisaster);
 
                     _commandHandler.NotifyObservers += x => _eventRaised = x;
-                    _expectedEvent = new NewDisasterCreated(_expectedDisaster.Id, _now, _command.LocationDescription,
+                    _expectedEvent = new NewDisasterCreated(_user.Id, _expectedDisaster.Id, _now, _command.LocationDescription,
                                                             _command.Latitude, _command.Longitude,
                                                             _command.FirstSeverity);
                 };

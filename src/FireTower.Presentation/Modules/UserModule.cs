@@ -12,7 +12,10 @@ namespace FireTower.Presentation.Modules
     {
         public UserModule(IMappingEngine mappingEngine, IReadOnlyRepository readOnlyRepository)
         {
-            Get["/me"] = r => mappingEngine.Map<User, MeResponse>(this.UserSession().User);
+            Get["/me"] = r =>
+                             {
+                                 return mappingEngine.Map<User, MeResponse>(this.UserSession().User);
+                             };
 
             Get["/user/exists"] =
                 r =>

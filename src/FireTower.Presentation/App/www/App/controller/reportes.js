@@ -1,12 +1,12 @@
 angular.module('firetower')
-    .controller('ReportesController', ['$scope', '$ionicLoading', 'data', 'Math', '$ionicPopup', '$http', '$location', function ($scope, $ionicLoading, data, Math, $ionicPopup, $http, $location) {
-        
-        var getAllReports = function () {
+    .controller('ReportesController', ['$scope', '$ionicLoading', 'data', 'Math', '$ionicPopup', '$http', '$location', function($scope, $ionicLoading, data, Math, $ionicPopup, $http, $location) {
+
+        var getAllReports = function() {
             $scope.loading = $ionicLoading.show({
                 content: 'Cargando datos de incendios...',
                 showBackdrop: false
             });
-            
+           
             data.getAllReports()
                 .success(function(data) {
                     $scope.reportes = data;
@@ -16,7 +16,7 @@ angular.module('firetower')
                         $scope.reportes[i].CreatedDate.$dateformatted = formattedDate;
                         $scope.reportes[i].SeverityAverage = Math.Average($scope.reportes[i].SeverityVotes);
                     }
-                    
+
                     $scope.loading.hide();
                 })
                 .error(function(error) {
@@ -25,7 +25,7 @@ angular.module('firetower')
                 });
         };
 
-        var showMessage = function (title, message) {
+        var showMessage = function(title, message) {
             $ionicPopup.alert({
                 title: title,
                 content: message
@@ -36,14 +36,14 @@ angular.module('firetower')
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
         };
-        
-        $scope.sendEmail = function (date, locationDescription, latitude, longitude) {
+
+        $scope.sendEmail = function(date, locationDescription, latitude, longitude) {
             $ionicPopup.prompt({
                 title: 'Enviar Correo',
                 subTitle: 'Ingrese un correo para enviar la información del incendio',
                 inputType: 'email',
                 inputPlaceholder: 'Correo'
-            }).then(function (res) {
+            }).then(function(res) {
                 if (res) {
                     if ($scope.isValidEmail(res)) {
                         $http.post('/SendDisasterByEmail', { Email: res, CreatedDate: date, LocationDescription: locationDescription, Latitude: latitude, Longitude: longitude }).success(function(response) {
@@ -72,11 +72,11 @@ angular.module('firetower')
                 }
             });
         };
-        
+
         $scope.reportes = null;
         getAllReports();
 
-        $scope.crearReporte = function () {
+        $scope.crearReporte = function() {
             $location.path('/app/crear-reporte');
         };
     }]);
