@@ -34,7 +34,7 @@ namespace FireTower.Domain.Specs
                     _now = DateTime.Now;
                     Mock.Get(_timeProvider).Setup(x => x.Now()).Returns(_now);
 
-                    _command = new CreateNewDisaster("LocationDescription1", 123.34, 456.32, 1);
+                    _command = new CreateNewDisaster("LocationDescription1", 123.34, 456.32);
 
                     _expectedDisaster =
                         Builder<Disaster>.CreateNew()
@@ -42,13 +42,7 @@ namespace FireTower.Domain.Specs
                             .With(disaster => disaster.CreatedDate, _now)
                             .With(disaster => disaster.LocationDescription, _command.LocationDescription)
                             .With(disaster => disaster.Latitude, _command.Latitude)
-                            .With(disaster => disaster.Longitude, _command.Longitude)
-                            .With(disaster => disaster.SeverityVotes,
-                                  Builder<SeverityVote>.CreateListOfSize(1).All()
-                                      .With(x => x.Id, Guid.Empty)
-                                      .And(sev => sev.User, _user)
-                                      .With(s => s.Severity, _command.FirstSeverity)
-                                      .Build())
+                            .With(disaster => disaster.Longitude, _command.Longitude)                            
                             .Build();
 
                     Mock.Get(_writeableRepository).Setup(x => x.Create(WithExpected.Object(_expectedDisaster)))
@@ -56,8 +50,7 @@ namespace FireTower.Domain.Specs
 
                     _commandHandler.NotifyObservers += x => _eventRaised = x;
                     _expectedEvent = new NewDisasterCreated(_user.Id, _expectedDisaster.Id, _now, _command.LocationDescription,
-                                                            _command.Latitude, _command.Longitude,
-                                                            _command.FirstSeverity);
+                                                            _command.Latitude, _command.Longitude);
                 };
 
         Because of =

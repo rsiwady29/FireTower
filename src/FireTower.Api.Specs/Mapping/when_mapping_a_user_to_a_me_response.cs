@@ -22,7 +22,8 @@ namespace FireTower.Api.Specs.Mapping
 
                     _expected = new MeResponse
                                     {
-                                        FacebookId = _user.FacebookId
+                                        FacebookId = _user.FacebookId,
+                                        UserId = _user.Id
                                     };
                 };
 

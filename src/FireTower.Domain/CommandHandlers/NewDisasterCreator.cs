@@ -7,8 +7,8 @@ namespace FireTower.Domain.CommandHandlers
 {
     public class NewDisasterCreator : ICommandHandler
     {
-        readonly IWriteableRepository _writeableRepository;
         readonly ITimeProvider _timeProvider;
+        readonly IWriteableRepository _writeableRepository;
 
         public NewDisasterCreator(IWriteableRepository writeableRepository, ITimeProvider timeProvider)
         {
@@ -29,11 +29,11 @@ namespace FireTower.Domain.CommandHandlers
             var u = (UserSession) userSessionIssuingCommand;
 
             var itemToCreate = new Disaster(_timeProvider.Now(), c.LocationDescription, c.Latitude, c.Longitude);
-            itemToCreate.AddSeverityVote(u.User, c.FirstSeverity);
 
             Disaster newDisaster = _writeableRepository.Create(itemToCreate);
-            NotifyObservers(new NewDisasterCreated(u.User.Id,newDisaster.Id, newDisaster.CreatedDate, c.LocationDescription,
-                                                   c.Latitude, c.Longitude, c.FirstSeverity));
+            NotifyObservers(new NewDisasterCreated(u.User.Id, newDisaster.Id, newDisaster.CreatedDate,
+                                                   c.LocationDescription,
+                                                   c.Latitude, c.Longitude));
         }
 
         public event DomainEvent NotifyObservers;

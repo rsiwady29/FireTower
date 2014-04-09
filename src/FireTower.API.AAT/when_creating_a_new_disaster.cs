@@ -30,8 +30,7 @@ namespace FireTower.API.AAT
                             {
                                 LocationDescription = "Santa Ana",
                                 Latitude = 123.45,
-                                Longitude = 31.32,
-                                FirstSeverity = 1
+                                Longitude = 31.32
                             },
                         _token);
 
