@@ -54,10 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddedImageUrl.cs" />
     <Compile Include="CommandHandlers\ControlledVoteAdder.cs" />
     <Compile Include="CommandHandlers\DisasterImageAdder.cs" />
+    <Compile Include="CommandHandlers\DisasterImageNotifier.cs" />
     <Compile Include="CreatedDisaster.cs" />
     <Compile Include="DisasterMapper.cs" />
+    <Compile Include="Events\DisasterViewModelCreated.cs" />
     <Compile Include="IDisasterMapping.cs" />
     <Compile Include="CommandHandlers\NewDisasterCreator.cs" />
     <Compile Include="CommandHandlers\NewDisasterNotifier.cs" />

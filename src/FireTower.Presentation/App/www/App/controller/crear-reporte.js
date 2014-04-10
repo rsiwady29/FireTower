@@ -1,15 +1,21 @@
 ﻿angular.module('firetower')
     .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService', '$location', '$ionicLoading', 'UserService', function($scope, $ionicPopup, DisasterService, PictureService, $location, $ionicLoading, UserService) {
 
-       
+        var viewModelId = null;
+        var imageUploadedSuccessfully = false;
+        var viewModelCreatedSuccessfully = false;
+        var userId = null;
+        var pubnub = PUBNUB.init({
+            subscribe_key: 'sub-c-e379a784-bff9-11e3-a219-02ee2ddab7fe'
+        });
         var init = function() {
             $scope.takePicture();
-            
+
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(getCurrentPosition, positionFailure);
             }
-            
-            $scope.base64foto = PictureService.getDefaultPictureWithoutDataType();
+
+            $scope.base64foto = PictureService.getDefaultPictureWithoutDataType();            
         };
 
         $scope.data = {};
@@ -37,7 +43,7 @@
                 return;
             }
             navigator.camera.getPicture(
-                function (imageData) {
+                function(imageData) {
                     $scope.base64foto = imageData;
                 },
                 function(err) {
@@ -45,42 +51,43 @@
                 options);
         };
 
-        $scope.createDisaster = function() {            
+        $scope.createDisaster = function() {
             $scope.loading = $ionicLoading.show({
                 content: 'Guardando reporte...',
                 showBackdrop: false
             });
 
             UserService.getUser()
-                        .success(function (response) {
-                            var pubnub = PUBNUB.init({
-                                subscribe_key: 'sub-c-e379a784-bff9-11e3-a219-02ee2ddab7fe'
-                            });
+                .success(function(response) {                    
+                    userId = response.userId;
 
-                            pubnub.subscribe({
-                                channel: response.userId,
-                                message: function(disasterModel) {
-                                    DisasterService.SaveImageToDisaster(disasterModel.Id, { Base64Image: $scope.base64foto })
-                                        .success(function () {
-                                            $scope.loading.hide();
-                                            showMessage('Exito!', 'Reporte creado exitosamente!');
-                                            $location.path('/app/reporte/' + disasterModel.Id);
-                                        })
-                                        .error(function () {
-                                            $scope.loading.hide();
-                                            showMessage('Error', 'El Reporte fue creado, pero no se ha podido cargar la foto');
-                                        });
-                                    
-                                    pubnub.unsubscribe({
-                                        channel: response.userId,
+                    pubnub.subscribe({
+                        channel: response.userId,
+                        message: function(model) {
+                            if (viewModelCreatedSuccessfully && imageUploadedSuccessfully) return;
+                            
+                            if (model.ViewModelId !== undefined && model.ViewModelId !== null) {
+                                viewModelCreatedSuccessfully = true;
+                                viewModelId = model.ViewModelId;
+                                showDetails();
+                            } else {
+                                DisasterService.SaveImageToDisaster(model.Id, { Base64Image: $scope.base64foto })
+                                    .success(function () {
+                                        imageUploadedSuccessfully = true;
+                                        showDetails();
+                                    })
+                                    .error(function() {
+                                        $scope.loading.hide();
+                                        showMessage('Error', 'El Reporte fue creado, pero no se ha podido cargar la foto');
                                     });
-                                }
-                            });
-                        })
-                        .error(function (error) {
-                            $scope.loading.hide();
-                            showMessage('Error', 'No hemos podido guardar el reporte. Estas conectado a internet?');
-                        });
+                            }
+                        }
+                    });
+                })
+                .error(function(error) {
+                    $scope.loading.hide();
+                    showMessage('Error', 'No hemos podido guardar el reporte. Estas conectado a internet?');
+                });
 
             DisasterService.CreateDisaster({
                 LocationDescription: $scope.LocationDescription,
@@ -89,11 +96,22 @@
                 FirstSeverity: $scope.severity,
             })
                 .success(function(response) {
-                                
+
                 })
                 .error(function(error) {
                     showMessage('Error', 'Error creando el reporte.');
                 });
+        };
+
+        var showDetails = function () {
+            if (viewModelCreatedSuccessfully && imageUploadedSuccessfully) {
+                pubnub.unsubscribe({
+                    channel: userId,
+                });
+                $scope.loading.hide();
+                showMessage('Exito!', 'Reporte creado exitosamente!');
+                $location.path('/app/reporte/' + viewModelId);
+            }
         };
 
         var addImageToDisaster = function(id) {
