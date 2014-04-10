@@ -114,6 +114,22 @@
             }
         };
 
+        var getLocationAddress = function(latLng) {
+            var geocoder = new google.maps.Geocoder();
+            
+            geocoder.geocode({ 'latLng': latLng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        $scope.LocationDescription = results[1].formatted_address;
+                    } else {
+                        alert('No results found');
+                    }
+                } else {
+                    alert('Geocoder failed due to: ' + status);
+                }
+            });
+        };
+
         var addImageToDisaster = function(id) {
             DisasterService.SaveImageToDisaster(id, $scope.foto);
         };
@@ -134,23 +150,11 @@
                 zoom: 17
             };
 
-            var geocoder = new google.maps.Geocoder();
-            var address = '';
-
             var lat = $scope.location.latitude;
             var lng = $scope.location.longitude;
             var latlng = new google.maps.LatLng(lat, lng);
-            geocoder.geocode({ 'latLng': latlng }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[1]) {
-                        $scope.LocationDescription = results[1].formatted_address;
-                    } else {
-                        alert('No results found');
-                    }
-                } else {
-                    alert('Geocoder failed due to: ' + status);
-                }
-            });
+
+            getLocationAddress(latlng);
         };
 
         var positionFailure = function(error) {
@@ -165,6 +169,8 @@
                 dragend: function(marker, eventName, args) {
                     this.coords.latitude = marker.getPosition().lat();
                     this.coords.longitude = marker.getPosition().lng();
+
+                    getLocationAddress(marker.getPosition());
                 }
             }
         };
