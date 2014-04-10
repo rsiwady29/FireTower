@@ -19,8 +19,10 @@ namespace FireTower.ViewStore
 
         public void Handle(NewDisasterCreated @event)
         {
-            var vm = _repository.Create(new DisasterViewModel(@event.DisasterId, @event.CreatedDate, @event.LocationDescription,
-                                                     @event.Latitude, @event.Longitude, @event.FirstSeverityVote));
+            var vm =_repository.Create(new DisasterViewModel(@event.DisasterId, @event.CreatedDate, @event.LocationDescription,
+                                                     @event.Latitude, @event.Longitude));
+            if(vm != null)
+                _notificationPublisher.Publish(@event.UserId, new DisasterViewModelId() { ViewModelId = vm.Id.AsBsonValue.ToString() });
             _notificationPublisher.Publish(@event.UserId, new DisasterViewModelId() { ViewModelId = vm.Id.AsBsonValue.ToString() });
 
         }

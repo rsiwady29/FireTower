@@ -28,7 +28,7 @@ namespace FireTower.ViewStore.Specs
                     _random = new Random();
 
                     _viewModel = new DisasterViewModel(Guid.NewGuid(), DateTime.Today.ToLocalTime(), "Santa Ana",
-                                                       _random.NextDouble(), _random.NextDouble(), 1);
+                                                       _random.NextDouble(), _random.NextDouble());
                 };
 
         Because of =

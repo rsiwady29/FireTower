@@ -11,13 +11,13 @@ namespace FireTower.ViewStore
         }
 
         public DisasterViewModel(Guid disasterId, DateTime createdDate, string locationDescription, double latitude,
-                                 double longitude, int firstSeverityVote)
+                                 double longitude)
         {
             DisasterId = disasterId;
             CreatedDate = createdDate;
             LocationDescription = locationDescription;
             Location = new[] {longitude, latitude};
-            SeverityVotes = new[] {firstSeverityVote};
+            SeverityVotes = new int[] {};
             Images = new string[] {};
         }
 

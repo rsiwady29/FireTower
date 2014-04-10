@@ -92,8 +92,7 @@
             DisasterService.CreateDisaster({
                 LocationDescription: $scope.LocationDescription,
                 Latitude: $scope.location.latitude,
-                Longitude: $scope.location.longitude,
-                FirstSeverity: $scope.severity,
+                Longitude: $scope.location.longitude
             })
                 .success(function(response) {
 

@@ -2,6 +2,7 @@ using System;
 using AcklenAvenue.Testing.Moq;
 using AcklenAvenue.Testing.Moq.ExpectedObjects;
 using BlingBag;
+using FireTower.Domain;
 using FireTower.Domain.Events;
 using Machine.Specifications;
 using Moq;
@@ -15,13 +16,16 @@ namespace FireTower.ViewStore.Specs
         static IViewModelRepository _viewModelRepository;
 
         static readonly NewDisasterCreated NewDisasterCreated =
-            new NewDisasterCreated(Guid.NewGuid(), Guid.NewGuid(), DateTime.Now, "Santa Ana", 1234.43, 12321.43, 1);
+            new NewDisasterCreated(Guid.NewGuid(), Guid.NewGuid(), DateTime.Now, "Santa Ana", 1234.43, 12321.43);
+
+        static INotificationPublisher _notificationPublisher;
 
         Establish context =
             () =>
                 {
                     _viewModelRepository = Mock.Of<IViewModelRepository>();
-                    _eventHandler = new DisasterViewModelCreator(_viewModelRepository);
+                    _notificationPublisher = Mock.Of<INotificationPublisher>();
+                    _eventHandler = new DisasterViewModelCreator(_viewModelRepository, _notificationPublisher);
                 };
 
         Because of =
@@ -36,8 +40,7 @@ namespace FireTower.ViewStore.Specs
                                                             NewDisasterCreated.CreatedDate,
                                                             NewDisasterCreated.LocationDescription,
                                                             NewDisasterCreated.Latitude,
-                                                            NewDisasterCreated.Longitude,
-                                                            NewDisasterCreated.FirstSeverityVote))));
+                                                            NewDisasterCreated.Longitude))));
     }
 
     public class after_creating_adding_an_image_to_an_existing_disaster
@@ -63,9 +66,9 @@ namespace FireTower.ViewStore.Specs
                                                  Images = new[] {"existingImage"}
                                              };
                     Mock.Get(_viewModelRepository).Setup(x => x.FindOne(ThatHas.AnExpressionFor<DisasterViewModel>()
-                                                                            .ThatMatches(_disasterViewModel)
-                                                                            .ThatDoesNotMatch(new DisasterViewModel())
-                                                                            .Build()))
+                                                                               .ThatMatches(_disasterViewModel)
+                                                                               .ThatDoesNotMatch(new DisasterViewModel())
+                                                                               .Build()))
                         .Returns(_disasterViewModel);
 
                     _expectedDisaster = new DisasterViewModel
