@@ -6,6 +6,13 @@
             <img src="Content/firelogo.png" />
         </div>
         <div style="height: 20%"></div>
+        
+        <div style="text-align: center; margin: auto 0px; width: 250px;">
+            <input type="text" ng-model="data.email" placeholder="Correo Electronico" />
+            <input type="password" ng-model="data.password" placeholder="Contrasena" />
+            <button ng-click="basicLogin()">Login</button>
+        </div>
+
         <div style=" text-align: center">
             <img style="cursor: pointer; width: 320px;height: 150px;" data-ng-click="login()" src="Content/login_1.png" />
         </div>   
