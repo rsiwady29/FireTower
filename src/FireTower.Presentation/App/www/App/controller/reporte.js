@@ -46,13 +46,17 @@
                 .error(function(error) {
                     console.log(error);
                 });
-            
+
+            $scope.marker = {
+                coords: { latitude: 15.22, longitude: -89.88 }
+            };
+
             $scope.map = {
                 center: {
                     latitude: 0,
                     longitude: 1
                 },
-                zoom: 12,
+                zoom: 15,
                 refresh: false
             };
         };
@@ -68,13 +72,11 @@
             $scope.blankStars = getArray(5 - data.SeverityAverage, 1 + data.SeverityAverage);
 
             $scope.reporte = data;
+            $scope.marker.coords = { latitude: data.Location[1], longitude: data.Location[0] };
             
             $scope.map = {
-                center: {
-                    latitude: data.Location[0],
-                    longitude: data.Location[1]
-                },
-                zoom: 12,
+                center: $scope.marker.coords,
+                zoom: 15,
                 refresh: true
             };
             $scope.loading.hide();
