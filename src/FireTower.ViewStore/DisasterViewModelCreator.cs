@@ -1,4 +1,5 @@
 using BlingBag;
+using FireTower.Domain;
 using FireTower.Domain.Events;
 
 namespace FireTower.ViewStore
@@ -6,20 +7,29 @@ namespace FireTower.ViewStore
     public class DisasterViewModelCreator : IBlingHandler<NewDisasterCreated>
     {
         readonly IViewModelRepository _repository;
+        readonly INotificationPublisher _notificationPublisher;
 
-        public DisasterViewModelCreator(IViewModelRepository repository)
+        public DisasterViewModelCreator(IViewModelRepository repository, INotificationPublisher notificationPublisher)
         {
             _repository = repository;
+            _notificationPublisher = notificationPublisher;
         }
 
         #region IBlingHandler<NewDisasterCreated> Members
 
         public void Handle(NewDisasterCreated @event)
         {
-            _repository.Create(new DisasterViewModel(@event.DisasterId, @event.CreatedDate, @event.LocationDescription,
+            var vm =_repository.Create(new DisasterViewModel(@event.DisasterId, @event.CreatedDate, @event.LocationDescription,
                                                      @event.Latitude, @event.Longitude));
+            if(vm != null)
+                _notificationPublisher.Publish(@event.UserId, new DisasterViewModelId() { ViewModelId = vm.Id.AsBsonValue.ToString() });
         }
 
         #endregion
+    }
+
+    public class DisasterViewModelId
+    {
+        public string ViewModelId { get; set; }
     }
 }

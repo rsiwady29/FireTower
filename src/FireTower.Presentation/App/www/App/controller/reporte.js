@@ -2,6 +2,7 @@
     .controller('ReporteController', ['$scope', '$stateParams', '$ionicLoading', 'data', 'Math', 'DisasterService', '$ionicPopup', '$http', function ($scope, $stateParams, $ionicLoading, data, Math, DisasterService, $ionicPopup, $http) {
 
         $scope.startCount = 5;
+        var disasterId = -1;
 
         $scope.test = function() {
             alert('');
@@ -20,7 +21,7 @@
 
         $scope.saveSeverity = function (severityScore) {
             DisasterService.SaveSeverity({
-                DisasterId: $stateParams.reporteId,
+                DisasterId: disasterId,
                 Severity: severityScore
             })
                 .success(function (response) {
@@ -40,41 +41,47 @@
             
             data.getReportById($stateParams.reporteId)
                 .success(function(data) {
-                    data = data[0];
-                    var formattedDate = data.CreatedDate.$date;
-                    formattedDate = moment((new Date()).toLocaleDateString()).fromNow();
-                    data.CreatedDate.$dateformatted = formattedDate;
-                    data.SeverityAverage = Math.Average(data.SeverityVotes);
-
-                    $scope.filedStars = getArray(data.SeverityAverage,1);
-                    $scope.blankStars = getArray(5 - data.SeverityAverage, 1+data.SeverityAverage);
-
-                    $scope.reporte = data;
-
-                    $scope.map = {
-                        center: {
-                            latitude: data.Location[0],
-                            longitude: data.Location[1]
-                        },
-                        zoom: 12,
-                        refresh: true
-                    };
-                    $scope.loading.hide();
+                    formatAndBindData (data[0]);                   
                 })
                 .error(function(error) {
                     console.log(error);
                 });
-            
+
+            $scope.marker = {
+                coords: { latitude: 15.22, longitude: -89.88 }
+            };
+
             $scope.map = {
                 center: {
                     latitude: 0,
                     longitude: 1
                 },
-                zoom: 12,
+                zoom: 15,
                 refresh: false
             };
         };
-        
+
+        var formatAndBindData = function (data) {
+            disasterId = data.DisasterId.$uuid;
+            var formattedDate = data.CreatedDate.$date;
+            formattedDate = moment((new Date()).toLocaleDateString()).fromNow();
+            data.CreatedDate.$dateformatted = formattedDate;
+            data.SeverityAverage = Math.Average(data.SeverityVotes);
+
+            $scope.filedStars = getArray(data.SeverityAverage, 1);
+            $scope.blankStars = getArray(5 - data.SeverityAverage, 1 + data.SeverityAverage);
+
+            $scope.reporte = data;
+            $scope.marker.coords = { latitude: data.Location[1], longitude: data.Location[0] };
+            
+            $scope.map = {
+                center: $scope.marker.coords,
+                zoom: 15,
+                refresh: true
+            };
+            $scope.loading.hide();
+        };
+
         $scope.isValidEmail = function (email) {
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
@@ -124,7 +131,7 @@
             else
                 $scope.isControlled = true;
 
-            DisasterService.VoteControlled({ DisasterId: $stateParams.reporteId, IsControlled: $scope.isControlled })
+            DisasterService.VoteControlled({ DisasterId: disasterId, IsControlled: $scope.isControlled })
                 .success(function(response) {
                     console.log(response);
                 })
@@ -144,7 +151,7 @@
             else
                 $scope.hasBeenPutOut = true;
 
-            DisasterService.VotePutOut({ DisasterId: $stateParams.reporteId, IsPutOut: $scope.hasBeenPutOut })
+            DisasterService.VotePutOut({ DisasterId: disasterId, IsPutOut: $scope.hasBeenPutOut })
                 .success(function (response) {
                     console.log(response);
                 })
