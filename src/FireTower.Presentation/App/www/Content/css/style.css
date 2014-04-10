@@ -2,10 +2,6 @@
     height: 81%
 }
 
-.angular-google-map-container{
-    height: 80% !important
-}
-
 .card-image {
     height: 200px;
 }
@@ -34,8 +30,4 @@
 
     cursor: pointer;
 
-}
-
-.bar-footer{
-    height:12%;
 }
