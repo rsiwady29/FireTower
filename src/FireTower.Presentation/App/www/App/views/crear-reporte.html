@@ -1,40 +1,19 @@
-<ion-view title="Inicio">
+<ion-view title="Donde es el incendio?">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
-       
-        <h1> Crear Reporte </h1> 
-        <div class="list card">
-            <div class="item">
+        Arrastra el pin con tu dedo hacia la ubicacion del incendio.
+            <div class="item item-text-wrap">
                 {{LocationDescription}}
-            </div>
-            <div class="item item-image">
-                <img src="{{foto}}">
             </div>
             <google-map center="map.center" zoom="map.zoom" draggable="true">
                 <markers>
                     <marker coords="marker.coords" options="marker.options" events="marker.events"></marker>
                 </markers>
-            </google-map> 
-
-            <a class="item item-icon-left positive" ng-click="takePicture()">
-                <i class="icon ion-camera"></i>              
-                Tomar Foto de nuevo 
-            </a>
-            <div class="item item-divider">
-                Que tan Severo es el fuego?
-            </div>
-            <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item" ng-repeat="severity in Severities" ng-click="changeSeverity(severity.SeverityScore)">
-                    <i class="icon" ng-show="!severity.IsSelected" >{{severity.SeverityScore}}</i>
-                    <i class="icon energized" ng-show="severity.IsSelected" >{{severity.SeverityScore}}</i>
-                </a>
-            </div>
-            <a class="item item-icon-left balanced" ng-click="createDisaster()">
-                <i class="icon ion-checkmark"></i>              
-                Crear Reporte 
-            </a>
-        </div>
+            </google-map>
     </ion-content>
+    <div ng-click="createDisaster()" class="bar bar-footer bar-positive">
+        <h1 class="title">Reportalo!</h1>
+    </div>   
 </ion-view>

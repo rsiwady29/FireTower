@@ -5,6 +5,28 @@ using FireTower.Domain.Events;
 
 namespace FireTower.Domain.CommandHandlers
 {
+    public class NewDisasterViewModelNotifier : IBlingHandler<DisasterViewModelCreated>
+    {
+        readonly INotificationPublisher _notificationPublisher;
+        readonly IReadOnlyRepository _readOnlyRepository;
+
+        public NewDisasterViewModelNotifier(INotificationPublisher notificationPublisher, IReadOnlyRepository readOnlyRepository)
+        {
+            _notificationPublisher = notificationPublisher;
+            _readOnlyRepository = readOnlyRepository;
+        }
+
+        public void Handle(DisasterViewModelCreated @event)
+        {
+            _notificationPublisher.Publish(@event.UserId, new DisasterViewModel(){oid = @event.BsonValue});
+        }
+    }
+
+    public class DisasterViewModel
+    {
+        public string oid { get; set; }
+    }
+
     public class NewDisasterNotifier : IBlingHandler<NewDisasterCreated>
     {
         private readonly INotificationPublisher _notificationPublisher;

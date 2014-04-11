@@ -14,7 +14,7 @@ namespace FireTower.ViewStore
 
         public void Handle(NewImageAddedToDisaster @event)
         {
-            var disasterViewModel = _viewModelRepository.FindOne<DisasterViewModel>(x => x.DisasterId == @event.DisasterId);
+            var disasterViewModel = _viewModelRepository.FindOne<DisasterViewModel>(x => x.DisasterId == @event.DisasterId.ToString());
             disasterViewModel.AddImage(@event.ImageUrl);
             _viewModelRepository.Update(disasterViewModel);
         }

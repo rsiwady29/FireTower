@@ -13,7 +13,7 @@ namespace FireTower.API.AAT
     public class when_adding_a_photo_to_an_existing_disaster : given_an_api_server_context<CurrentlyDeveloping>
     {
         static Guid _token;
-        static Guid _disasterId;
+        static string _disasterId;
         static IRestResponse _result;
         static string _locationDescription;
         static string _imageString;
@@ -28,7 +28,7 @@ namespace FireTower.API.AAT
                     _locationDescription = "Santa Ana " + rnd;
                     _imageString = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAABLElEQVR42qSTQStFURSFP7f3XygyoAwoYSYMPCIpk2egMFSmUvwCRpSRDIwYGbwyVuYykB9y914m951z7nHe6J26dc9u77XXWmdvJLF7/audqx9JYuvyW92LL0li8K2df2r17CPEVk7ftXTclyQqAMmRCwC5I3fS42a4W7y74VYDNAAuJA8AaXIsSACsDgAdAJeFrnnyoMBygKZJJ3b1It0AmsTMDPdEgrujJqHEwCxqznMaD2KgyCDRnEuo8qJhHvx/hcQDbzGoix5Yi4G1TcwZWNEDKwJU+WDkhg2ToDaD+M65YcVB8jg3Y5IY5VQAyyf9gLJw+CqAuYNnAczsPQpgevtBU937kDexcdssj8Ti0ZskMd97CRs3u//U2sjJzbtwH1+/Cf8jS/gbAMmWc42HzdIjAAAAAElFTkSuQmCC";
                     Client.Post("/disasters",
-                                new CreateNewDisaster(_locationDescription, 123.45, 456.32, 1),
+                                new CreateNewDisaster(_locationDescription, 123.45, 456.32),
                                 _token);
 
                     IQueryable<DisasterViewModel> disasterViewModelCollection =

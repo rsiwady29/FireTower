@@ -10,9 +10,8 @@ namespace FireTower.Domain.Events
         public readonly string LocationDescription;
         public readonly double Latitude;
         public readonly double Longitude;
-        public readonly int FirstSeverityVote;
-
-        public NewDisasterCreated(Guid userId, Guid disasterId, DateTime createdDate, string locationDescription, double latitude, double longitude, int firstSeverityVote)
+        
+        public NewDisasterCreated(Guid userId, Guid disasterId, DateTime createdDate, string locationDescription, double latitude, double longitude)
         {
             UserId = userId;
             DisasterId = disasterId;
@@ -20,8 +19,7 @@ namespace FireTower.Domain.Events
             Latitude = latitude;
             Longitude = longitude;
             CreatedDate = createdDate;
-            LocationDescription = locationDescription;
-            FirstSeverityVote = firstSeverityVote;
+            LocationDescription = locationDescription;         
         }
     }
 }

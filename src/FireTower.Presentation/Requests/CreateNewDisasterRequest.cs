@@ -6,8 +6,6 @@ namespace FireTower.Presentation.Requests
 
         public double Latitude { get; set; }
 
-        public double Longitude { get; set; }
-
-        public int FirstSeverity { get; set; }
+        public double Longitude { get; set; }        
     }
 }
