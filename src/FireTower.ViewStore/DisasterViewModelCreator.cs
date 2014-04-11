@@ -21,8 +21,6 @@ namespace FireTower.ViewStore
         {
             var vm =_repository.Create(new DisasterViewModel(@event.DisasterId, @event.CreatedDate, @event.LocationDescription,
                                                      @event.Latitude, @event.Longitude));
-            if(vm != null)
-                _notificationPublisher.Publish(@event.UserId, new DisasterViewModelId() { ViewModelId = vm.Id.AsBsonValue.ToString() });
         }
 
         #endregion
