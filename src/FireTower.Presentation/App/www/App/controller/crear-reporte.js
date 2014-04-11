@@ -1,9 +1,7 @@
 ﻿angular.module('firetower')
     .controller('NewReportController', ['$scope', '$ionicPopup', 'DisasterService', 'PictureService', '$location', '$ionicLoading', 'UserService', function($scope, $ionicPopup, DisasterService, PictureService, $location, $ionicLoading, UserService) {
 
-        var viewModelId = null;
-        var imageUploadedSuccessfully = false;
-        var viewModelCreatedSuccessfully = false;
+        var modelId = null;
         var userId = null;
         var pubnub = PUBNUB.init({
             subscribe_key: 'sub-c-e379a784-bff9-11e3-a219-02ee2ddab7fe'
@@ -15,7 +13,7 @@
                 navigator.geolocation.getCurrentPosition(getCurrentPosition, positionFailure);
             }
 
-            $scope.base64foto = PictureService.getDefaultPictureWithoutDataType();            
+            $scope.base64foto = PictureService.getDefaultPictureWithoutDataType();
         };
 
         $scope.data = {};
@@ -58,29 +56,24 @@
             });
 
             UserService.getUser()
-                .success(function(response) {                    
+                .success(function(response) {
                     userId = response.userId;
 
                     pubnub.subscribe({
                         channel: response.userId,
                         message: function(model) {
-                            if (viewModelCreatedSuccessfully && imageUploadedSuccessfully) return;
-                            
-                            if (model.ViewModelId !== undefined && model.ViewModelId !== null) {
-                                viewModelCreatedSuccessfully = true;
-                                viewModelId = model.ViewModelId;
-                                showDetails();
-                            } else {
-                                DisasterService.SaveImageToDisaster(model.Id, { Base64Image: $scope.base64foto })
-                                    .success(function () {
-                                        imageUploadedSuccessfully = true;
-                                        showDetails();
-                                    })
-                                    .error(function() {
-                                        $scope.loading.hide();
-                                        showMessage('Error', 'El Reporte fue creado, pero no se ha podido cargar la foto');
-                                    });
-                            }
+                            DisasterService.SaveImageToDisaster(model.Id, { Base64Image: $scope.base64foto })
+                                .success(function() {
+                                    modelId = model.Id;
+                                    showDetails();
+                                })
+                                .error(function() {
+                                    $scope.loading.hide();
+                                    showMessage('Error', 'El Reporte fue creado, pero no se ha podido cargar la foto');
+                                });                            
+                            pubnub.unsubscribe({
+                                channel: userId,
+                            });
                         }
                     });
                 })
@@ -102,21 +95,16 @@
                 });
         };
 
-        var showDetails = function () {
-            if (viewModelCreatedSuccessfully && imageUploadedSuccessfully) {
-                pubnub.unsubscribe({
-                    channel: userId,
-                });
-                $scope.loading.hide();
-                showMessage('Exito!', 'Reporte creado exitosamente!');
-                $location.path('/app/reporte/' + viewModelId);
-            }
+        var showDetails = function() {
+            $scope.loading.hide();
+            showMessage('Exito!', 'Reporte creado exitosamente!');
+            $location.path('/app/reporte/' + modelId);
         };
 
         var getLocationAddress = function(latLng) {
             var geocoder = new google.maps.Geocoder();
-            
-            geocoder.geocode({ 'latLng': latLng }, function (results, status) {
+
+            geocoder.geocode({ 'latLng': latLng }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[1]) {
                         $scope.LocationDescription = results[1].formatted_address;

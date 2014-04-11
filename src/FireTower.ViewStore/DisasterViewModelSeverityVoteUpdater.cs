@@ -23,7 +23,7 @@ namespace FireTower.ViewStore
 
         public void Handle(SeverityVoteAdded @event)
         {
-            var disasterModel = _viewModelRepository.FindOne<DisasterViewModel>(x => @event.DisasterId == x.DisasterId);
+            var disasterModel = _viewModelRepository.FindOne<DisasterViewModel>(x => @event.DisasterId.ToString() == x.DisasterId);
             var disaster = _readOnlyRepository.GetById<Disaster>(@event.DisasterId);
             disasterModel.SeverityVotes = disaster.SeverityVotes.Select(x => x.Severity).ToArray();
             _viewModelRepository.Update(disasterModel);

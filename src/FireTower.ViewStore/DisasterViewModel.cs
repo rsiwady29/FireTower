@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace FireTower.ViewStore
 {
@@ -13,7 +14,7 @@ namespace FireTower.ViewStore
         public DisasterViewModel(Guid disasterId, DateTime createdDate, string locationDescription, double latitude,
                                  double longitude)
         {
-            DisasterId = disasterId;
+            DisasterId = disasterId.ToString();
             CreatedDate = createdDate;
             LocationDescription = locationDescription;
             Location = new[] {longitude, latitude};
@@ -21,7 +22,7 @@ namespace FireTower.ViewStore
             Images = new string[] {};
         }
 
-        public Guid DisasterId { get; set; }
+        public string DisasterId { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public string LocationDescription { get; set; }
