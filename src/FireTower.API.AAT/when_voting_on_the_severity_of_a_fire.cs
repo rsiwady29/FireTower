@@ -14,7 +14,7 @@ namespace FireTower.API.AAT
 {
     public class when_voting_on_the_severity_of_a_fire : given_an_api_server_context<CurrentlyDeveloping>
     {
-        static Guid _disasterId;
+        static string _disasterId;
         static IRestResponse _result;
         static Guid _token;
         static string _locationName;
