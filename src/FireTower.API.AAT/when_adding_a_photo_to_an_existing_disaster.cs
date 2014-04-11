@@ -13,7 +13,7 @@ namespace FireTower.API.AAT
     public class when_adding_a_photo_to_an_existing_disaster : given_an_api_server_context<CurrentlyDeveloping>
     {
         static Guid _token;
-        static Guid _disasterId;
+        static string _disasterId;
         static IRestResponse _result;
         static string _locationDescription;
         static string _imageString;

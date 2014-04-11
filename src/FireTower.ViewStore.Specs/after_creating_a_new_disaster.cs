@@ -62,7 +62,7 @@ namespace FireTower.ViewStore.Specs
 
                     _disasterViewModel = new DisasterViewModel
                                              {
-                                                 DisasterId = NewImageAddedToDisaster.DisasterId,
+                                                 DisasterId = NewImageAddedToDisaster.DisasterId.ToString(),
                                                  Images = new[] {"existingImage"}
                                              };
                     Mock.Get(_viewModelRepository).Setup(x => x.FindOne(ThatHas.AnExpressionFor<DisasterViewModel>()
@@ -73,7 +73,7 @@ namespace FireTower.ViewStore.Specs
 
                     _expectedDisaster = new DisasterViewModel
                                             {
-                                                DisasterId = NewImageAddedToDisaster.DisasterId,
+                                                DisasterId = NewImageAddedToDisaster.DisasterId.ToString(),
                                                 Images = new[] {"existingImage", NewImageAddedToDisaster.ImageUrl}
                                             };
                 };

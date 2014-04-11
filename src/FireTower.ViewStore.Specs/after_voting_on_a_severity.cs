@@ -36,7 +36,7 @@ namespace FireTower.ViewStore.Specs
                     _disaster = Builder<Disaster>.CreateNew().With(x => x.Id = _disasterId).Build();
 
                     _oneDisasterViewModel =
-                        Builder<DisasterViewModel>.CreateNew().With(x => x.DisasterId = _disasterId).Build();
+                        Builder<DisasterViewModel>.CreateNew().With(x => x.DisasterId = _disasterId.ToString()).Build();
 
                     Mock.Get(_readOnlyRepository).Setup(x => x.GetById<Disaster>(_disasterId)).Returns(_disaster);
 
